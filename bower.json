@@ -1,0 +1,25 @@
+{
+    "name": "px-calendar",
+    "version": "0.0.1",
+    "main": [
+        "px-calendar.html"
+    ],
+    "ignore": [
+        ".*",
+        "npm-debug.log",
+        "Gruntfile.js",
+        "sass",
+        "bower_components",
+        "node_modules",
+        "test"
+    ],
+    "dependencies": {
+        "polymer": "~1.2.3",
+        "px-theme": "https://github.com/PredixDev/px-theme.git#~0.4.0"
+    },
+    "devDependencies": {
+        "iron-component-page" : "PolymerElements/iron-component-page#~v1.1.0",
+        "px-meta-buttons-design": "https://github.com/PredixDev/px-meta-buttons-design.git#~0.5.2",
+        "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.9"
+    }
+}
