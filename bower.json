@@ -14,12 +14,14 @@
         "test"
     ],
     "dependencies": {
+        "moment": "~2.10.6",
         "polymer": "~1.2.3",
         "px-theme": "https://github.com/PredixDev/px-theme.git#~0.4.0"
     },
     "devDependencies": {
         "iron-component-page" : "PolymerElements/iron-component-page#~v1.1.0",
-        "px-meta-buttons-design": "https://github.com/PredixDev/px-meta-buttons-design.git#~0.5.2",
+        "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.20",
+        "px-tables-design": "https://github.com/PredixDev/px-tables-design.git#~0.3.0",
         "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.9"
     }
 }
