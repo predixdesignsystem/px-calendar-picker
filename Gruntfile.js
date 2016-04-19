@@ -21,10 +21,16 @@ module.exports = function (grunt) {
                   bower: true
                 }
             },
-            dist: {
+            calendar: {
                 files: {
                     'css/noprefix/px-calendar-sketch.css': 'sass/px-calendar-sketch.scss',
                     'css/noprefix/px-calendar.css': 'sass/px-calendar-predix.scss'
+                }
+            },
+            dateRangePicker: {
+                files: {
+                    'css/noprefix/px-date-rangepicker-sketch.css': 'sass/px-date-rangepicker-sketch.scss',
+                    'css/noprefix/px-date-rangepicker.css': 'sass/px-date-rangepicker-predix.scss'
                 }
             }
         },
