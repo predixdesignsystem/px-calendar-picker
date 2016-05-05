@@ -10,6 +10,15 @@
         <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
         <link rel="import" href="px-calendar.html"/>
         <link rel="import" href="../px-theme/px-theme.html"/>
+
+        <style>
+          .container {
+            width: 380px;
+            height: 100px;
+            float:left;
+            margin: 20px;
+          }
+        </style>
     </head>
 
     <body>
@@ -25,11 +34,23 @@
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
 
-        <p>
-            Click on the counter to make it increment:
-        </p>
-
-        <!-- instance 1, "predix" theme -->
-        <px-calendar counter-value="1">&hearts;</px-calendar>
+        <!-- <div class="container">
+          <h><strong>Choose a range</strong></h>
+          <br>
+          <br>
+          <px-calendar></px-calendar>
+        </div>
+        <div class="container">
+          <h><strong>Choose a single date</strong></h>
+          <br>
+          <br>
+          <px-calendar prevent-range-selection></px-calendar>
+        </div> -->
+        <div class="container">
+          <h><strong>allow futur dates</strong></h>
+          <br>
+          <br>
+          <px-calendar allow-future-dates></px-calendar>
+        </div>
     </body>
 </html>

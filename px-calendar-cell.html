@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
 
 <script src="../moment/moment.js"></script>
 
@@ -17,7 +18,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
   <link rel="import" type="css" href="css/px-calendar.css"/>
   <template>
     <div class$="{{cellStyles}}">
-      <button class$="{{btnStyles}}" value="{{day}}" on-click="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{day}}</button>
+      <button class$="{{btnStyles}}" value="{{displayedValue}}" on-tap="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{displayedValue}}</button>
     </div>
   </template>
 </dom-module>
@@ -26,6 +27,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
   Polymer({
 
     is: 'px-calendar-cell',
+    behaviors: [pxDatetimeRangeBehavior],
 
     properties: {
 
@@ -33,61 +35,45 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        * Moment object with date to display in this cell
        */
       displayDate: Object,
-
       /**
-       * Moment object with first selected date of the range (start or end of range), used for determining styling of this cell
-       */
-      firstRangeDate: {
-        type: Object,
-        notify: true
-      },
-
-      /**
-       * Moment object with second selected date of the range (start or end of range) or null if only one date is selected, used for determining styling of this cell
-       */
-      secondRangeDate: {
-        type: Object,
-        notify: true
-      },
-
-      /**
-       * (optional)
+       *  What the calendar should display:
+       *  'day': day number
+       *  'month': month
+       *  'year': year
        *
-       * Set this attribute when you do want to allow future dates in the date range picker.
-       *
-       * If not set, then future dates will be disabled and unclickable in the date picker.
-       *
-       * Note: this only affects the visual calendar date picker, users can always type in dates/times or choose times that are in the future.
+       *  @default 'day'
        */
-      allowFutureDates: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-      * (optional)
-      *
-      * By default, the rangepicker will display the time in your browser's timezone.  If you add
-      * the is-utc attribute on px-rangepicker, it will display the time as a UTC (GMT timezone) time.
-      *
-      * @default false
-      */
-      isUtc: {
-        type: Boolean,
-        value: false
+      displayMode: {
+        type: String,
+        value: 'day'
       }
     },
 
     observers: [
-      '_updateDate(displayDate, firstRangeDate, secondRangeDate)'
+      '_updateDate(displayDate, firstRangeDate, secondRangeDate, displayMode)'
     ],
+
+    ready: function() {
+      this._updateDate(this.displayDate, this.firstRangeDate, this.secondRangeDate, this.displayMode, true);
+    },
     /**
      *
      * Go through each cell and decide if it has a day in that month, is it selected, inbetween selected, etc.
      *
      */
-    _updateDate: function() {
+    _updateDate: function(displayDate, firstRangeDate, secondRangeDate, displayMode, init) {
 
+      if(this.displayMode === 'day') {
+        this._displayDay(init);
+      } else if(this.displayMode === 'month') {
+        this._displayMonth();
+      } else {
+        this._displayYear();
+      }
+
+    },
+
+    _displayDay: function(init) {
       var cellStyles = 'calendar-cell';
       var btnStyles = 'btn btn--bare';
       var isDisabled = false;
@@ -97,28 +83,28 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       if (!this.isValidDate) {
         // if the cell is a blank cell of calendar (before/after start of month)
         cellStyles += ' is-empty';
-        this.set('day', '');
+        this.set('displayedValue', '');
       }
       else {
-        this.set('day', this.displayDate.format('D'));
+        this.set('displayedValue', this.displayDate.format('D'));
 
-        if (this._isStartOfRange() || this._isEndOfRange()) {
+        if (!init && (this._isStartOfRange() || this._isEndOfRange())) {
           cellStyles += ' is-selected';
         }
 
-        if (this._isFirstClick()) {
+        if (!init && this._isFirstClick()) {
           cellStyles += ' is-selected-only';
         }
 
-        if (this._isStartOfWeekOrMonth() || this._isStartOfRange()) {
+        if (this._isStartOfWeekOrMonth() || (!init && this._isStartOfRange())) {
           cellStyles += ' is-start';
         }
 
-        if (this._isEndOfWeekOrMonth() || this._isEndOfRange()) {
+        if (this._isEndOfWeekOrMonth() || (!init && this._isEndOfRange())) {
           cellStyles += ' is-end';
         }
 
-        if (this._isWithinRange()) {
+        if (!init && this._isWithinRange()) {
           cellStyles += ' is-between';
         }
 
@@ -135,11 +121,38 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       this.set('btnStyles', btnStyles);
       this.set('isDisabled', isDisabled);
       this.set('cellStyles', cellStyles);
+    },
 
+
+    _displayMonth: function() {
+      var cellStyles = 'calendar-cell';
+      var btnStyles = 'btn btn--bare btn--larger';
+      var isDisabled = false;
+
+      this.set('isValidDate', true);
+      this.set('displayedValue', this.displayDate.format('MMM'));
+
+      this.set('btnStyles', btnStyles);
+      this.set('isDisabled', isDisabled);
+      this.set('cellStyles', cellStyles);
+    },
+
+
+    _displayYear: function() {
+      var cellStyles = 'calendar-cell';
+      var btnStyles = 'btn btn--bare btn--larger';
+      var isDisabled = false;
+
+      this.set('isValidDate', true);
+      this.set('displayedValue', this.displayDate.format('YYYY'));
+
+      this.set('btnStyles', btnStyles);
+      this.set('isDisabled', isDisabled);
+      this.set('cellStyles', cellStyles);
     },
 
     _selectDate: function(e) {
-      this.fire('px-date-selected', this.day);
+      this.fire('px-date-selected', this.displayDate);
     },
 
     _isStartOfRange: function() {

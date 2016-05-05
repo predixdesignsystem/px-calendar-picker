@@ -64,18 +64,28 @@ button[hidden] {
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
-  display: table-caption;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.caption_btn {
+  color: $primary-blue;
+}
+
+.caption_text {
+  cursor: pointer;
+}
+
+.tr {
+  display: flex;
+  justify-content: space-between;
 }
 
 .th {
   @extend th;
   display: table-cell;
   font-weight: bold;
-}
-
-.tr {
-  @extend tr;
-  display: table-row;
 }
 
 .td {
@@ -99,6 +109,7 @@ button[hidden] {
   margin-bottom: 2px;
   padding-right: $inuit-base-spacing-unit--tiny;
   padding-left: $inuit-base-spacing-unit--tiny;
+  text-transform: uppercase;
 }
 
 .is-selected, .is-start.is-end, .is-selected.is-selected-only {
@@ -128,6 +139,11 @@ button[hidden] {
   padding-left: #{$cell-border-radius / 9};
   border-radius: $cell-border-radius;
   line-height: calculateRem(26px);
+  text-transform: uppercase;
+}
+
+.btn--larger {
+  width: $cell-border-radius;
 }
 
 // Trumps

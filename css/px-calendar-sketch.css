@@ -543,14 +543,33 @@ button[hidden] {
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
-  display: table-caption; }
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.caption_btn {
+  color: #3e87e8; }
+
+.caption_text {
+  cursor: pointer; }
+
+.tr {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
 
 .th {
   display: table-cell;
   font-weight: bold; }
-
-.tr {
-  display: table-row; }
 
 .td {
   display: table-cell; }
@@ -568,7 +587,8 @@ button[hidden] {
   margin-top: 2px;
   margin-bottom: 2px;
   padding-right: 0.3333333333rem;
-  padding-left: 0.3333333333rem; }
+  padding-left: 0.3333333333rem;
+  text-transform: uppercase; }
 
 .is-selected, .is-start.is-end, .is-selected.is-selected-only {
   border-top-left-radius: 2.4rem;
@@ -598,7 +618,11 @@ button[hidden] {
   padding-right: 0.2666666667rem;
   padding-left: 0.2666666667rem;
   border-radius: 2.4rem;
-  line-height: 1.7333333333rem; }
+  line-height: 1.7333333333rem;
+  text-transform: uppercase; }
+
+.btn--larger {
+  width: 2.4rem; }
 
 /**
  * Margin and padding helper classes. Use these to tweak layout on a micro
