@@ -73,6 +73,13 @@ button[hidden] {
   color: $primary-blue;
 }
 
+.fa-angle {
+  --iron-icon-width: $cell-border-radius / 2;
+  --iron-icon-height: $cell-border-radius / 2;
+  margin-right: -#{$cell-border-radius / 9};
+  margin-left: -#{$cell-border-radius / 9};
+}
+
 .caption_text {
   cursor: pointer;
 }
@@ -86,11 +93,13 @@ button[hidden] {
   @extend th;
   display: table-cell;
   font-weight: bold;
+  text-align: center;
 }
 
 .td {
   @extend td;
   display: table-cell;
+  flex: 1;
 }
 
 .table {
@@ -109,7 +118,6 @@ button[hidden] {
   margin-bottom: 2px;
   padding-right: $inuit-base-spacing-unit--tiny;
   padding-left: $inuit-base-spacing-unit--tiny;
-  text-transform: uppercase;
 }
 
 .is-selected, .is-start.is-end, .is-selected.is-selected-only {
@@ -118,6 +126,18 @@ button[hidden] {
   border-bottom-right-radius: $cell-border-radius;
   border-bottom-left-radius: $cell-border-radius;
 }
+
+.is-selected-only, .is-selected.is-start {
+  border-top-left-radius: 500px;
+  border-bottom-left-radius:500px;
+}
+
+.is-selected-only, .is-selected.is-end {
+  border-top-right-radius: 500px;
+  border-bottom-right-radius:500px;
+}
+
+
 
 .is-start {
   @include cell-rounded-left($cell-border-radius, $cell-border-radius)

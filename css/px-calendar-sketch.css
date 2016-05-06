@@ -556,6 +556,12 @@ button[hidden] {
 .caption_btn {
   color: #3e87e8; }
 
+.fa-angle {
+  --iron-icon-width: 1.2rem;
+  --iron-icon-height: 1.2rem;
+  margin-right: -0.2666666667rem;
+  margin-left: -0.2666666667rem; }
+
 .caption_text {
   cursor: pointer; }
 
@@ -569,10 +575,14 @@ button[hidden] {
 
 .th {
   display: table-cell;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: center; }
 
 .td {
-  display: table-cell; }
+  display: table-cell;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
 
 .table {
   margin-bottom: 0; }
@@ -587,14 +597,21 @@ button[hidden] {
   margin-top: 2px;
   margin-bottom: 2px;
   padding-right: 0.3333333333rem;
-  padding-left: 0.3333333333rem;
-  text-transform: uppercase; }
+  padding-left: 0.3333333333rem; }
 
 .is-selected, .is-start.is-end, .is-selected.is-selected-only {
   border-top-left-radius: 2.4rem;
   border-top-right-radius: 2.4rem;
   border-bottom-right-radius: 2.4rem;
   border-bottom-left-radius: 2.4rem; }
+
+.is-selected-only, .is-selected.is-start {
+  border-top-left-radius: 500px;
+  border-bottom-left-radius: 500px; }
+
+.is-selected-only, .is-selected.is-end {
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px; }
 
 .is-start {
   border-top-left-radius: 2.4rem;

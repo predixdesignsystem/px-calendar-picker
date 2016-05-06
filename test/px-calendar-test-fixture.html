@@ -23,6 +23,45 @@
 
   <body>
     <h3>Web Component Test : Fixture for px-calendar</h3>
-    <px-calendar id="px_calendar_1"></px-calendar>
+    <div class="bigContainer">
+      <div class="container">
+        <h><strong>Choose a day range</strong></h>
+        <br>
+        <br>
+        <px-calendar id="calendar1"></px-calendar>
+      </div>
+      <div class="container">
+        <h><strong>Choose a month range + allow-future-dates</strong></h>
+        <br>
+        <br>
+        <px-calendar id="calendar2" display-mode='month' allow-future-dates hide-previous-button></px-calendar>
+      </div>
+      <div class="container">
+        <h><strong>choose a year range + allow-future-dates</strong></h>
+        <br>
+        <br>
+        <px-calendar id="calendar3" display-mode='year' allow-future-dates hide-next-button></px-calendar>
+      </div>
+    </div>
+    <div class="bigContainer">
+      <div class="container">
+        <h><strong>Choose a single day + allow-future-dates</strong></h>
+        <br>
+        <br>
+        <px-calendar id="calendar4" prevent-range-selection allow-future-dates></px-calendar>
+      </div>
+      <div class="container">
+        <h><strong>Choose a range day+ allow-future-dates</strong></h>
+        <br>
+        <br>
+        <px-calendar id="calendar5" allow-future-dates></px-calendar>
+      </div>
+      <div class="container">
+        <h><strong>Choose a single year + allow-future-dates</strong></h>
+        <br>
+        <br>
+        <px-calendar id="calendar6" prevent-range-selection display-mode='year' allow-future-dates></px-calendar>
+      </div>
+    </div>
   </body>
 </html>

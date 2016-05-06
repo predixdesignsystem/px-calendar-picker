@@ -1,9 +1,10 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="px-calendar-cell.html"/>
-<link rel="import" href="../px-datetime-common/px-datetime-range-behavior"/>
-<link rel="import" href="../px-datetime-common/px-datetime-behavior"/>
+<link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
+<link rel="import" href="../polymer-font-awesome/polymer-font-awesome.html"/>
 
-<script src="../moment/moment.js"></script>
+<link rel="import" href="../moment/moment.js" />
 
 <!--
 Element that renders a calendar for the given year and month, and highlights/selects the dates within the range given by the first/second range date.
@@ -24,12 +25,16 @@ The first range date may be before, after, or equal to the second range date, de
     <div class="table table--no-cells text--center" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">
-        <button on-tap="_onPrevious" class="btn btn--bare u--mr- btn-arrow caption_btn">
-          <i class="fa fa-angle-left"></i>
+        <button on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
+          <template is="dom-if" if="{{!hidePreviousButton}}">
+            <iron-icon icon="polymer-font-awesome:fa-angle-left" class="fa-angle"></iron-icon>
+          </template>
         </button>
         <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, _momentBaseDate)}}</span>
-        <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- btn-arrow caption_btn">
-          <i class="fa fa-angle-right"></i>
+        <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
+          <template is="dom-if" if="{{!hideNextButton}}">
+            <iron-icon icon="polymer-font-awesome:fa-angle-right" class="fa-angle"></iron-icon>
+          </template>
         </button>
       </div>
       <!-- Actual Calendar -->
@@ -48,8 +53,8 @@ The first range date may be before, after, or equal to the second range date, de
             <template is="dom-repeat" items="{{week}}" as="date">
                 <div class="td">
                   <px-calendar-cell display-date="{{date}}"
-                                    first-range-date="{{firstRangeDate}}"
-                                    second-range-date="{{secondRangeDate}}"
+                                    from-moment="{{fromMoment}}"
+                                    to-moment="{{toMoment}}"
                                     allow-future-dates="{{allowFutureDates}}"
                                     is-utc="{{isUtc}}"
                                     display-mode="{{_currentDisplayMode}}">
@@ -58,7 +63,6 @@ The first range date may be before, after, or equal to the second range date, de
             </template>
           </div>
         </template>
-
     </div>
   </template>
 </dom-module>
@@ -78,7 +82,7 @@ The first range date may be before, after, or equal to the second range date, de
       _momentBaseDate: {
         type: Object,
         notify: true,
-        observer: '_renderCurrent',
+        observer: '_momentBaseDateChanged',
         value: function() {
           return moment();
         }
@@ -108,7 +112,7 @@ The first range date may be before, after, or equal to the second range date, de
        */
       _currentDisplayMode: {
         type: String,
-        observer: '_renderCurrent',
+        observer: '_currentDisplayModeChanged',
         value: 'day'
       },
       /**
@@ -116,11 +120,61 @@ The first range date may be before, after, or equal to the second range date, de
        *
        * By default, the calendar will allow the user to select a range by clicking on 2
        * different date. If set this will only allow the user select a single date
-       * each time he clicks
+       * each time he clicks.
+       *
+       * If set then the 'singleSelectedDate' property will refelect the selected date. Otherwise
+       * the 'range' property should be observed
        *
        * @default false
        */
       preventRangeSelection: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * (optional)
+       *
+       * Reflects the selected date in ISO8601 string if the calendar is preventing range selection.
+       * Otherwise the 'range' property should be observed
+       *
+       * @default ''
+       */
+      singleSelectedDate: {
+        type: String,
+        value: ''
+      },
+      /**
+       * (optional)
+       *
+       * Reflects the date currently used by the calendar to determine what it should
+       * be showing, i.e what month, year or year range. ISO8601 string
+       *
+       * @default now
+       */
+      baseDate: {
+        type: String,
+        value: '',
+        observer: '_baseDateChanged'
+      },
+      /**
+       * (optional)
+       *
+       * hides the 'previous' button on the caption
+       *
+       * @default false
+       */
+      hidePreviousButton: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * (optional)
+       *
+       * hides the 'next' button on the caption
+       *
+       * @default false
+       */
+      hideNextButton: {
         type: Boolean,
         value: false
       },
@@ -149,7 +203,7 @@ The first range date may be before, after, or equal to the second range date, de
       if(this._currentDisplayMode === 'year') {
         if(this.displayMode === 'year') {
           //we want to select this year.
-          this._selectYear();
+          this._selectDate(momentDate);
         }
         else {
           //go to 'month' mode
@@ -159,7 +213,7 @@ The first range date may be before, after, or equal to the second range date, de
       }else if(this._currentDisplayMode === 'month') {
         if(this.displayMode === 'month') {
           //we want to select this month.
-          this._selectMonth();
+          this._selectDate(momentDate);
         }
         else {
           //go to 'day' mode
@@ -173,6 +227,37 @@ The first range date may be before, after, or equal to the second range date, de
 
     _displayModeChanged: function() {
       this.set('_currentDisplayMode', this.displayMode);
+    },
+
+    _currentDisplayModeChanged: function() {
+
+      if(this._currentDisplayMode === 'year') {
+        //make sure we display the beginning of the decade
+        var year = this._momentBaseDate.year();
+        for(var i=0; i<10; i++) {
+          if(((year-i) % 10) ===1) {
+            break;
+          }
+        }
+
+        this.set('_momentBaseDate', this._momentBaseDate.clone().subtract(i, 'years'));
+      } else {
+        this._renderCurrent();
+      }
+    },
+
+    _momentBaseDateChanged: function() {
+      //make sure the ISO string is kept in sync
+      this.set('baseDate', this._momentBaseDate.toISOString());
+      this._renderCurrent();
+    },
+
+    _baseDateChanged: function() {
+      //make sure the ISO string is kept in sync
+      var newDate = this._convertISOtoMoment(this.baseDate);
+      if(!newDate.isSame(this._momentBaseDate, 'day')) {
+        this.set('_momentBaseDate', newDate);
+      }
     },
 
     _isDayMode: function(_currentDisplayMode) {
@@ -198,7 +283,7 @@ The first range date may be before, after, or equal to the second range date, de
       }else if(_currentDisplayMode === 'month') {
         return _momentBaseDate.format('YYYY');
       }else {
-        return _momentBaseDate.format('YYYY') + ' - ' + _momentBaseDate.clone().add(10, 'years').format('YYYY');
+        return _momentBaseDate.format('YYYY') + ' - ' + _momentBaseDate.clone().add(9, 'years').format('YYYY');
       }
     },
 
@@ -228,14 +313,17 @@ The first range date may be before, after, or equal to the second range date, de
 
     _selectDate: function(newSelectedDate) {
 
-      if (!this.preventRangeSelection && this.firstRangeDate && !this.secondRangeDate) {
+      if (!this.preventRangeSelection && this.fromMoment && !this.toMoment) {
         // treat the click as the second date - the range is selected!
-        this.set('secondRangeDate', newSelectedDate);
-        this.fire('range-selected');
+        this.set('toMoment', newSelectedDate);
+        this._setRangeFromMoment();
       }
       else {
-        this.set('secondRangeDate', null);
-        this.set('firstRangeDate', newSelectedDate);
+        this.set('toMoment', null);
+        this.set('fromMoment', newSelectedDate);
+        if(this.preventRangeSelection) {
+          this.set('singleSelectedDate', this.fromMoment.toISOString());
+        }
       }
     },
 

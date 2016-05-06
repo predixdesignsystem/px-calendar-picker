@@ -13,12 +13,19 @@
 
         <style>
           .container {
-            width: 380px;
-            height: 100px;
+            width: 250px;
+            height: 100%;
             float:left;
             margin: 20px;
+            resize: both;
+          }
+          .bigContainer {
+            float: left;
+            width:auto;
+            height:100%;
           }
         </style>
+
     </head>
 
     <body>
@@ -34,23 +41,48 @@
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
 
-        <!-- <div class="container">
-          <h><strong>Choose a range</strong></h>
+      <div class="bigContainer">
+        <div class="container">
+          <h><strong>Choose a day range</strong></h>
           <br>
           <br>
           <px-calendar></px-calendar>
         </div>
         <div class="container">
-          <h><strong>Choose a single date</strong></h>
+          <h><strong>Choose a month range + allow-future-dates</strong></h>
           <br>
           <br>
-          <px-calendar prevent-range-selection></px-calendar>
-        </div> -->
-        <div class="container">
-          <h><strong>allow futur dates</strong></h>
-          <br>
-          <br>
-          <px-calendar allow-future-dates></px-calendar>
+          <px-calendar display-mode='month' allow-future-dates></px-calendar>
         </div>
+        <div class="container">
+          <h><strong>choose a year range + allow-future-dates</strong></h>
+          <br>
+          <br>
+          <px-calendar display-mode='year' allow-future-dates></px-calendar>
+        </div>
+      </div>
+      <div class="bigContainer">
+        <div class="container">
+          <h><strong>Choose a single day + allow-future-dates</strong></h>
+          <br>
+          <br>
+          <px-calendar prevent-range-selection allow-future-dates></px-calendar>
+        </div>
+        <div class="container">
+          <h><strong>Choose a single month + allow-future-dates + hide previous button</strong></h>
+          <br>
+          <br>
+          <px-calendar prevent-range-selection display-mode='month' allow-future-dates hide-previous-button></px-calendar>
+        </div>
+        <div class="container">
+          <h><strong>Choose a single year + allow-future-dates + hide next button</strong></h>
+          <br>
+          <br>
+          <px-calendar prevent-range-selection display-mode='year' allow-future-dates hide-next-button></px-calendar>
+        </div>
+      </div>
+      <br>
+      <br>
+
     </body>
 </html>

@@ -34,7 +34,10 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       /**
        * Moment object with date to display in this cell
        */
-      displayDate: Object,
+      displayDate: {
+        Object,
+        observer: '_updateDate'
+      },
       /**
        *  What the calendar should display:
        *  'day': day number
@@ -50,33 +53,29 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     observers: [
-      '_updateDate(displayDate, firstRangeDate, secondRangeDate, displayMode)'
+      '_updateNeeded(displayDate, fromMoment, toMoment, displayMode)'
     ],
 
     ready: function() {
-      this._updateDate(this.displayDate, this.firstRangeDate, this.secondRangeDate, this.displayMode, true);
+      this._updateDate();
+    },
+    _updateNeeded: function() {
+      this._updateDate();
     },
     /**
      *
      * Go through each cell and decide if it has a day in that month, is it selected, inbetween selected, etc.
      *
      */
-    _updateDate: function(displayDate, firstRangeDate, secondRangeDate, displayMode, init) {
+    _updateDate: function() {
 
-      if(this.displayMode === 'day') {
-        this._displayDay(init);
-      } else if(this.displayMode === 'month') {
-        this._displayMonth();
-      } else {
-        this._displayYear();
-      }
-
-    },
-
-    _displayDay: function(init) {
       var cellStyles = 'calendar-cell';
       var btnStyles = 'btn btn--bare';
       var isDisabled = false;
+
+      if(this.displayMode === 'month' || this.displayMode === 'year') {
+        btnStyles += ' btn--larger'
+      }
 
       this.set('isValidDate', this.displayDate.isValid());
 
@@ -86,25 +85,35 @@ Element that renders a calendar cell for a given date (and for non-date cells in
         this.set('displayedValue', '');
       }
       else {
-        this.set('displayedValue', this.displayDate.format('D'));
+        switch(this.displayMode) {
+          case 'day':
+            this.set('displayedValue', this.displayDate.format('D'));
+            break;
+          case 'month':
+            this.set('displayedValue', this.displayDate.format('MMM'));
+            break;
+          case 'year':
+          this.set('displayedValue', this.displayDate.format('YYYY'));
+          break;
+        }
 
-        if (!init && (this._isStartOfRange() || this._isEndOfRange())) {
+        if (this._isStartOfRange() || this._isEndOfRange()) {
           cellStyles += ' is-selected';
         }
 
-        if (!init && this._isFirstClick()) {
+        if (this._isFirstClick()) {
           cellStyles += ' is-selected-only';
         }
 
-        if (this._isStartOfWeekOrMonth() || (!init && this._isStartOfRange())) {
+        if (this._isStartOfWeekOrMonth() || this._isStartOfRange()) {
           cellStyles += ' is-start';
         }
 
-        if (this._isEndOfWeekOrMonth() || (!init && this._isEndOfRange())) {
+        if (this._isEndOfWeekOrMonth() || this._isEndOfRange()) {
           cellStyles += ' is-end';
         }
 
-        if (!init && this._isWithinRange()) {
+        if (this._isWithinRange()) {
           cellStyles += ' is-between';
         }
 
@@ -123,76 +132,63 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       this.set('cellStyles', cellStyles);
     },
 
-
-    _displayMonth: function() {
-      var cellStyles = 'calendar-cell';
-      var btnStyles = 'btn btn--bare btn--larger';
-      var isDisabled = false;
-
-      this.set('isValidDate', true);
-      this.set('displayedValue', this.displayDate.format('MMM'));
-
-      this.set('btnStyles', btnStyles);
-      this.set('isDisabled', isDisabled);
-      this.set('cellStyles', cellStyles);
-    },
-
-
-    _displayYear: function() {
-      var cellStyles = 'calendar-cell';
-      var btnStyles = 'btn btn--bare btn--larger';
-      var isDisabled = false;
-
-      this.set('isValidDate', true);
-      this.set('displayedValue', this.displayDate.format('YYYY'));
-
-      this.set('btnStyles', btnStyles);
-      this.set('isDisabled', isDisabled);
-      this.set('cellStyles', cellStyles);
-    },
-
     _selectDate: function(e) {
       this.fire('px-date-selected', this.displayDate);
     },
 
     _isStartOfRange: function() {
-      return this.displayDate.isSame(this._getStartDate(), 'day');
+        return this.fromMoment &&  this.displayDate.isSame(this._getStartDate(), this.displayMode);
     },
 
     _isEndOfRange: function() {
-      return this.displayDate.isSame(this._getEndDate(), 'day');
+      return this.toMoment && this.displayDate.isSame(this._getEndDate(), this.displayMode);
     },
 
     _isWithinRange: function() {
-      return this.displayDate.isBetween(this._getStartDate(), this._getEndDate(), 'day');
+      return this.fromMoment && this.toMoment &&
+              this.displayDate.isBetween(this._getStartDate(), this._getEndDate(), this.displayMode);
     },
 
     _getStartDate: function() {
-      var startDate = this.firstRangeDate;
-      if (this.firstRangeDate.isAfter(this.secondRangeDate, 'day')) {
-        startDate = this.secondRangeDate;
+      var startDate = this.fromMoment;
+      if (this.fromMoment.isAfter(this.toMoment, this.displayMode)) {
+        startDate = this.toMoment;
       }
       return startDate;
     },
 
     _getEndDate: function() {
-      var endDate = this.secondRangeDate;
-      if (this.firstRangeDate.isAfter(this.secondRangeDate, 'day')) {
-        endDate = this.firstRangeDate;
+      var endDate = this.toMoment;
+      if (this.fromMoment.isAfter(this.toMoment, this.displayMode)) {
+        endDate = this.fromMoment;
       }
       return endDate;
     },
 
     _isFirstClick: function() {
-      return this.secondRangeDate === null && this.displayDate.isSame(this.firstRangeDate, 'day');
+      return this.fromMoment && this.toMoment === null && this.displayDate.isSame(this.fromMoment, this.displayMode);
     },
 
     _isStartOfWeekOrMonth: function() {
-      return this.day == 1 || this.displayDate.weekday() == 0;
+      switch(this.displayMode) {
+        case 'day':
+          return this.day == 1 || this.displayDate.weekday() == 0;
+        case 'month':
+          return this.displayDate.month() === 0 || this.displayDate.month() === 4 || this.displayDate.month() === 8
+        case 'year':
+          return false;
+      }
     },
 
     _isEndOfWeekOrMonth: function() {
-      return this.day == this.displayDate.daysInMonth() || this.displayDate.weekday() == 6;
+      switch(this.displayMode) {
+        case 'day':
+          return this.day == this.displayDate.daysInMonth() || this.displayDate.weekday() == 6;
+        case 'month':
+          return this.displayDate.month() === 3 || this.displayDate.month() === 7 || this.displayDate.month() === 11
+        case 'year':
+          return false;
+      }
     },
 
     _isPastTodaysDate: function() {
