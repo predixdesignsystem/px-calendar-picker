@@ -605,14 +605,6 @@ button[hidden] {
   border-bottom-right-radius: 2.4rem;
   border-bottom-left-radius: 2.4rem; }
 
-.is-selected-only, .is-selected.is-start {
-  border-top-left-radius: 500px;
-  border-bottom-left-radius: 500px; }
-
-.is-selected-only, .is-selected.is-end {
-  border-top-right-radius: 500px;
-  border-bottom-right-radius: 500px; }
-
 .is-start {
   border-top-left-radius: 2.4rem;
   border-top-right-radius: 0;
@@ -639,7 +631,7 @@ button[hidden] {
   text-transform: uppercase; }
 
 .btn--larger {
-  width: 2.4rem; }
+  width: 100%; }
 
 /**
  * Margin and padding helper classes. Use these to tweak layout on a micro

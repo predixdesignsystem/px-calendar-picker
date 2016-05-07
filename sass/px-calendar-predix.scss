@@ -49,3 +49,15 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
 .is-selected-only {
   background-color: inherit;
 }
+
+.is-selected.is-end:not(.is-selected-only) {
+  background-image: linear-gradient(left, $gray3, $gray3 50%, transparent 50%, transparent 100%);
+  background-image: -webkit-linear-gradient(left, $gray3, $gray3 50%, transparent 50%, transparent 100%);
+  background-color: inherit;
+}
+
+.is-selected.is-start:not(.is-selected-only) {
+  background-image: linear-gradient(right, $gray3, $gray3 50%, transparent 50%, transparent 100%);
+  background-image: -webkit-linear-gradient(right, $gray3, $gray3 50%, transparent 50%, transparent 100%);
+  background-color: inherit;
+}

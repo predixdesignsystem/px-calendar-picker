@@ -176,7 +176,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
         case 'month':
           return this.displayDate.month() === 0 || this.displayDate.month() === 4 || this.displayDate.month() === 8
         case 'year':
-          return false;
+          return this.displayDate.year() % 10 === 1 || this.displayDate.year() % 10 === 6;
       }
     },
 
@@ -187,7 +187,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
         case 'month':
           return this.displayDate.month() === 3 || this.displayDate.month() === 7 || this.displayDate.month() === 11
         case 'year':
-          return false;
+          return this.displayDate.year() % 10 === 5 || this.displayDate.year() % 10 === 0;
       }
     },
 

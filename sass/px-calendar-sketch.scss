@@ -127,18 +127,6 @@ button[hidden] {
   border-bottom-left-radius: $cell-border-radius;
 }
 
-.is-selected-only, .is-selected.is-start {
-  border-top-left-radius: 500px;
-  border-bottom-left-radius:500px;
-}
-
-.is-selected-only, .is-selected.is-end {
-  border-top-right-radius: 500px;
-  border-bottom-right-radius:500px;
-}
-
-
-
 .is-start {
   @include cell-rounded-left($cell-border-radius, $cell-border-radius)
 }
@@ -163,7 +151,7 @@ button[hidden] {
 }
 
 .btn--larger {
-  width: $cell-border-radius;
+  width: 100%;
 }
 
 // Trumps

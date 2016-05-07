@@ -618,14 +618,6 @@ button[hidden] {
   border-bottom-right-radius: 2.4rem;
   border-bottom-left-radius: 2.4rem; }
 
-.is-selected-only, .is-selected.is-start {
-  border-top-left-radius: 500px;
-  border-bottom-left-radius: 500px; }
-
-.is-selected-only, .is-selected.is-end {
-  border-top-right-radius: 500px;
-  border-bottom-right-radius: 500px; }
-
 .is-start {
   border-top-left-radius: 2.4rem;
   border-top-right-radius: 0;
@@ -652,7 +644,7 @@ button[hidden] {
   text-transform: uppercase; }
 
 .btn--larger {
-  width: 2.4rem; }
+  width: 100%; }
 
 /**
  * Margin and padding helper classes. Use these to tweak layout on a micro
@@ -706,4 +698,14 @@ button[hidden] {
   background-color: #e4e4ea; }
 
 .is-selected-only {
+  background-color: inherit; }
+
+.is-selected.is-end:not(.is-selected-only) {
+  background-image: linear-gradient(left, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
+  background-image: -webkit-linear-gradient(left, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
+  background-color: inherit; }
+
+.is-selected.is-start:not(.is-selected-only) {
+  background-image: linear-gradient(right, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
+  background-image: -webkit-linear-gradient(right, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
   background-color: inherit; }
