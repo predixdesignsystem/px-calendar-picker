@@ -701,11 +701,9 @@ button[hidden] {
   background-color: inherit; }
 
 .is-selected.is-end:not(.is-selected-only) {
-  background-image: linear-gradient(left, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
-  background-image: -webkit-linear-gradient(left, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
+  background-image: linear-gradient(to right, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
   background-color: inherit; }
 
 .is-selected.is-start:not(.is-selected-only) {
-  background-image: linear-gradient(right, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
-  background-image: -webkit-linear-gradient(right, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
+  background-image: linear-gradient(to left, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
   background-color: inherit; }
