@@ -49,11 +49,25 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       displayMode: {
         type: String,
         value: 'day'
+      },
+      /**
+       * blocks the selection/navigation for any dates after this one.
+       *
+       */
+      blockDatesAfter: {
+        type:Object
+      },
+      /**
+       * blocks the selection/navigation for any dates before this one.
+       *
+       */
+      blockDatesBefore: {
+        type:Object
       }
     },
 
     observers: [
-      '_updateNeeded(displayDate, fromMoment, toMoment, displayMode)'
+      '_updateNeeded(displayDate, fromMoment, toMoment, displayMode, blockDatesAfter, blockDatesBefore)'
     ],
 
     ready: function() {
@@ -121,7 +135,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
           cellStyles += ' is-today';
         }
 
-        if (!this.allowFutureDates && this._isPastTodaysDate()) {
+        if ((!this.allowFutureDates && this._isPastTodaysDate()) ||
+            (this.blockDatesAfter && this.displayDate.isAfter(this.blockDatesAfter, 'day')) ||
+            (this.blockDatesBefore && this.displayDate.isBefore(this.blockDatesBefore, 'day'))) {
           btnStyles += ' btn--disabled';
           isDisabled = true;
         }

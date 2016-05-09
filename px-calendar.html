@@ -56,7 +56,9 @@ The first range date may be before, after, or equal to the second range date, de
                                     to-moment="{{toMoment}}"
                                     allow-future-dates="{{allowFutureDates}}"
                                     is-utc="{{isUtc}}"
-                                    display-mode="{{_currentDisplayMode}}">
+                                    display-mode="{{_currentDisplayMode}}"
+                                    block-dates-after="[[_momentBlockDatesAfter]]"
+                                    block-dates-before="[[_momentBlockDatesBefore]]">
                   </px-calendar-cell>
                 </div>
             </template>
@@ -176,6 +178,44 @@ The first range date may be before, after, or equal to the second range date, de
       hideNextButton: {
         type: Boolean,
         value: false
+      },
+      /**
+       * (optional)
+       *
+       * blocks the selection/navigation for any dates before this one.
+       * Does not apply if empty. ISO8601 string
+       *
+       * @default ''
+       */
+      blockDatesBefore: {
+        type: String,
+        value: ''
+      },
+      /**
+       * Internal moment reprensentation of blockDatesBefore
+       */
+      _momentBlockDatesBefore: {
+        type: Object,
+        computed: '_convertISOtoMoment(blockDatesBefore)'
+      },
+      /**
+       * (optional)
+       *
+       * blocks the selection/navigation for any dates before this one.
+       * Does not apply if empty. ISO8601 string
+       *
+       * @default ''
+       */
+      blockDatesAfter: {
+        type:String,
+        value: ''
+      },
+      /**
+       * Internal moment reprensentation of blockDatesAfter
+       */
+      _momentBlockDatesAfter: {
+        type:Object,
+        computed: '_convertISOtoMoment(blockDatesAfter)'
       },
       /**
        *  The values currently displayed in the calendar cells, days, months or years

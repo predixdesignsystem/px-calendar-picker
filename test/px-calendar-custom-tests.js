@@ -8,6 +8,8 @@ function runCustomTests() {
       cal4 = document.getElementById('calendar4'),
       cal5 = document.getElementById('calendar5'),
       cal6 = document.getElementById('calendar6'),
+      calBlockBefore = document.getElementById('calendarBlockBefore'),
+      calBlockAfter = document.getElementById('calendarBlockAfter'),
       now = moment();
 
   // This is the placeholder suite to place custom tests in
@@ -223,6 +225,46 @@ function runCustomTests() {
         if(i===11) {
           btn.addEventListener('click', listener);
           btn.click();
+        }
+      });
+    });
+  });
+
+  suite('Block dates', function() {
+
+    test('block before 9th may 2016', function(){
+
+      //make sure 1st and 11th are selected, the one between are styled and the other not
+      var allCells = Polymer.dom(calBlockBefore.root).querySelectorAll('px-calendar-cell'),
+          i = 0,
+          firstFound = false;
+      allCells.forEach(function(cell, index) {
+        var btn = Polymer.dom(cell.root).querySelector('div button');
+
+        if(index < 8) {
+          assert.isTrue(btn.disabled);
+          firstFound = true;
+        } else {
+          assert.isTrue(!btn.disabled || btn.hidden);
+        }
+      });
+    });
+
+    test('block after 9th may 2016', function(){
+
+      //make sure 1st and 11th are selected, the one between are styled and the other not
+      var allCells = Polymer.dom(calBlockAfter.root).querySelectorAll('px-calendar-cell'),
+          i = 0,
+          firstFound = false;
+      allCells.forEach(function(cell, index) {
+        var btn = Polymer.dom(cell.root).querySelector('div button');
+
+        if(index < 9) {
+          assert.isFalse(btn.disabled);
+          firstFound = true;
+        }
+        else {
+          assert.isTrue(btn.disabled || btn.hidden);
         }
       });
     });

@@ -46,7 +46,7 @@
           <h><strong>Choose a day range</strong></h>
           <br>
           <br>
-          <px-calendar></px-calendar>
+          <px-calendar block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar>
         </div>
         <div class="container">
           <h><strong>Choose a month range + allow-future-dates</strong></h>
@@ -66,7 +66,7 @@
           <h><strong>Choose a single day + allow-future-dates</strong></h>
           <br>
           <br>
-          <px-calendar prevent-range-selection allow-future-dates></px-calendar>
+          <px-calendar prevent-range-selection allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar>
         </div>
         <div class="container">
           <h><strong>Choose a single month + allow-future-dates + hide previous button</strong></h>
@@ -79,6 +79,20 @@
           <br>
           <br>
           <px-calendar prevent-range-selection display-mode='year' allow-future-dates hide-next-button></px-calendar>
+        </div>
+      </div>
+      <div class="bigContainer">
+        <div class="container">
+          <h><strong>Block dates before 9 may 2016</strong></h>
+          <br>
+          <br>
+          <px-calendar prevent-range-selection allow-future-dates block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar>
+        </div>
+        <div class="container">
+          <h><strong>Block dates after 9 may 2016</strong></h>
+          <br>
+          <br>
+          <px-calendar prevent-range-selection allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar>
         </div>
       </div>
       <br>
