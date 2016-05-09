@@ -28,6 +28,6 @@ module.exports = {
     }
   },
   suites: [
-    'test/px-calendar-test-fixture.html'
+    'test/px-calendar-picker-test-fixture.html'
   ]
 };

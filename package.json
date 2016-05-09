@@ -1,7 +1,7 @@
 {
-    "name": "px-calendar",
+    "name": "px-calendar-picker",
     "author": "General Electric",
-    "description": "A Px component",
+    "description": "A Px component allowing to pick a date from a calendar",
     "version": "0.1.0",
     "private": true,
     "extName" : null,

@@ -1,6 +1,6 @@
-#THIS COMPONENT IS NOT YET RELEASED. 
+#THIS COMPONENT IS NOT YET RELEASED.
 
-Px-Calendar
+Px-Calendar-picker
 -----------------------------------------------
 
 ## Overview
