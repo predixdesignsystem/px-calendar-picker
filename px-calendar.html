@@ -46,10 +46,10 @@ The first range date may be before, after, or equal to the second range date, de
             </template>
           </div>
         </template>
-        <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week">
+        <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week" strip-whitespace>
           <!-- 1 week per row -->
           <div class="tr">
-            <template is="dom-repeat" items="{{week}}" as="date">
+            <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
                 <div class="td">
                   <px-calendar-cell display-date="{{date}}"
                                     from-moment="{{fromMoment}}"
