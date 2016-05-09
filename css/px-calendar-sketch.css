@@ -553,8 +553,12 @@ button[hidden] {
       -ms-flex-align: center;
           align-items: center; }
 
-.caption_btn {
-  color: #3e87e8; }
+.caption_btn.px-calendar {
+  color: #3e87e8;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0; }
 
 .fa-angle {
   --iron-icon-width: 1.2rem;
@@ -573,13 +577,14 @@ button[hidden] {
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
-.th {
-  display: table-cell;
+.th.th.th {
   font-weight: bold;
-  text-align: center; }
+  text-align: center;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
 
 .td {
-  display: table-cell;
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1; }

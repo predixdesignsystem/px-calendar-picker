@@ -69,8 +69,12 @@ button[hidden] {
   align-items: center;
 }
 
-.caption_btn {
+.caption_btn.px-calendar {
   color: $primary-blue;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .fa-angle {
@@ -89,16 +93,15 @@ button[hidden] {
   justify-content: space-between;
 }
 
-.th {
+.th.th.th {
   @extend th;
-  display: table-cell;
   font-weight: bold;
   text-align: center;
+  flex:1;
 }
 
 .td {
   @extend td;
-  display: table-cell;
   flex: 1;
 }
 

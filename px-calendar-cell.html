@@ -35,7 +35,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        * Moment object with date to display in this cell
        */
       displayDate: {
-        Object,
+        type: Object,
         observer: '_updateDate'
       },
       /**
@@ -69,9 +69,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
      */
     _updateDate: function() {
 
-      var cellStyles = 'calendar-cell';
-      var btnStyles = 'btn btn--bare';
-      var isDisabled = false;
+      var cellStyles = 'calendar-cell',
+          btnStyles = 'btn btn--bare',
+          isDisabled = false;
 
       if(this.displayMode === 'month' || this.displayMode === 'year') {
         btnStyles += ' btn--larger'
