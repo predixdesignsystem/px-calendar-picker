@@ -1,3 +1,7 @@
+v0.1.1
+==================
+* rework. renamed to px-calendar-picker
+
 v0.1.0
 ==================
 * Upgrade to Polymer 1.4.0
