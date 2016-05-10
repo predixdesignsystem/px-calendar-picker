@@ -42,8 +42,16 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
   }
 }
 
-.caption_btn.px-calendar-picker {
+.caption_btn {
   color: $primary-blue;
+  &:hover {
+    background-color: inherit;
+    color: $primary-blue-hover;
+  }
+  &:active {
+    background-color: inherit;
+    color: $primary-blue-pressed;
+  }
 }
 
 .is-between, .is-selected {

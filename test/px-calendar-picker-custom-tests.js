@@ -17,6 +17,7 @@ function runCustomTests() {
   suite('Custom Automation Tests for px-calendar', function() {
 
     test('by default calendar uses current month', function(){
+
       assert.isTrue(cal1._momentBaseDate.isSame(now, 'month'));
     });
 
@@ -48,7 +49,7 @@ function runCustomTests() {
         //all cells should be empty or disabled
         var allCells = Polymer.dom(cal1.root).querySelectorAll('px-calendar-cell');
         allCells.forEach(function(cell, index) {
-          var btn = Polymer.dom(cell.root).querySelector('div button');
+          var btn = Polymer.dom(cell.root).querySelector('div .btn');
 
           assert.isTrue(btn.hidden || btn.disabled);
         });
@@ -68,7 +69,7 @@ function runCustomTests() {
         //all non empty cells should not be disabled
         var allCells = Polymer.dom(cal2.root).querySelectorAll('px-calendar-cell');
         allCells.forEach(function(cell, index) {
-          var btn = Polymer.dom(cell.root).querySelector('div button');
+          var btn = Polymer.dom(cell.root).querySelector('div .btn');
 
           assert.isTrue(!btn.disabled);
         });
@@ -149,7 +150,7 @@ function runCustomTests() {
           i = 0,
           firstFound = false;
       allCells.forEach(function(cell, index) {
-        var btn = Polymer.dom(cell.root).querySelector('div button');
+        var btn = Polymer.dom(cell.root).querySelector('div .btn');
 
         if(!btn.hidden && !firstFound) {
           btn.click();
@@ -211,7 +212,7 @@ function runCustomTests() {
           i = 0,
           firstFound = false;
       allCells.forEach(function(cell, index) {
-        var btn = Polymer.dom(cell.root).querySelector('div button');
+        var btn = Polymer.dom(cell.root).querySelector('div .btn');
 
         if(!btn.hidden && !firstFound) {
           btn.click();
@@ -239,7 +240,7 @@ function runCustomTests() {
           i = 0,
           firstFound = false;
       allCells.forEach(function(cell, index) {
-        var btn = Polymer.dom(cell.root).querySelector('div button');
+        var btn = Polymer.dom(cell.root).querySelector('div .btn');
 
         if(index < 8) {
           assert.isTrue(btn.disabled);
@@ -257,7 +258,7 @@ function runCustomTests() {
           i = 0,
           firstFound = false;
       allCells.forEach(function(cell, index) {
-        var btn = Polymer.dom(cell.root).querySelector('div button');
+        var btn = Polymer.dom(cell.root).querySelector('div .btn');
 
         if(index < 9) {
           assert.isFalse(btn.disabled);

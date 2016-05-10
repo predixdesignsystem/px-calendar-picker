@@ -24,17 +24,17 @@ The first range date may be before, after, or equal to the second range date, de
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">
-        <button on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
+        <div on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
             <iron-icon icon="polymer-font-awesome:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
-        </button>
+        </div>
         <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, _momentBaseDate)}}</span>
-        <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
+        <div id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="polymer-font-awesome:fa-angle-right" class="fa-angle"></iron-icon>
           </template>
-        </button>
+        </div>
       </div>
       <!-- Actual Calendar -->
 
@@ -260,7 +260,7 @@ The first range date may be before, after, or equal to the second range date, de
     _getTableClass: function(shrink) {
       var base = "table table--no-cells text--center ";
 
-      if(shrink) {
+      if(!shrink) {
         base += "constantsize "
       }
       return base;

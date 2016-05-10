@@ -702,8 +702,14 @@ button[hidden] {
   .is-selected .btn--bare:active {
     background-color: #086e87; }
 
-.caption_btn.px-calendar-picker {
+.caption_btn {
   color: #3e87e8; }
+  .caption_btn:hover {
+    background-color: inherit;
+    color: #3573c5; }
+  .caption_btn:active {
+    background-color: inherit;
+    color: #2b5ea2; }
 
 .is-between, .is-selected {
   background-color: #e4e4ea; }

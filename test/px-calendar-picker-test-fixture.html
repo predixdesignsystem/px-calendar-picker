@@ -16,9 +16,9 @@
     <!-- px-theme is needed for WCT to run without errors -->
     <link rel="import" href="../../px-theme/px-theme.html"/>
     <!-- This script link will contain the generated script for basic wct test cases -->
-    <script src="px-calendar-base-tests.js"></script>
+    <script src="px-calendar-picker-base-tests.js"></script>
     <!-- This script link will contain the generated script stub for custom, developer-added test cases -->
-    <script src="px-calendar-custom-tests.js"></script>
+    <script src="px-calendar-picker-custom-tests.js"></script>
   </head>
 
   <body>
@@ -28,19 +28,19 @@
         <h><strong>Choose a day range</strong></h>
         <br>
         <br>
-        <px-calendar id="calendar1"></px-calendar>
+        <px-calendar-picker id="calendar1"></px-calendar-picker>
       </div>
       <div class="container">
         <h><strong>Choose a month range + allow-future-dates</strong></h>
         <br>
         <br>
-        <px-calendar id="calendar2" display-mode='month' allow-future-dates hide-previous-button></px-calendar>
+        <px-calendar-picker id="calendar2" display-mode='month' allow-future-dates hide-previous-button></px-calendar-picker>
       </div>
       <div class="container">
         <h><strong>choose a year range + allow-future-dates</strong></h>
         <br>
         <br>
-        <px-calendar id="calendar3" display-mode='year' allow-future-dates hide-next-button></px-calendar>
+        <px-calendar-picker id="calendar3" display-mode='year' allow-future-dates hide-next-button></px-calendar-picker>
       </div>
     </div>
     <div class="bigContainer">
@@ -48,32 +48,32 @@
         <h><strong>Choose a single day + allow-future-dates</strong></h>
         <br>
         <br>
-        <px-calendar id="calendar4" prevent-range-selection allow-future-dates></px-calendar>
+        <px-calendar-picker id="calendar4" prevent-range-selection allow-future-dates></px-calendar-picker>
       </div>
       <div class="container">
         <h><strong>Choose a range day+ allow-future-dates</strong></h>
         <br>
         <br>
-        <px-calendar id="calendar5" allow-future-dates></px-calendar>
+        <px-calendar-picker id="calendar5" allow-future-dates></px-calendar-picker>
       </div>
       <div class="container">
         <h><strong>Choose a single year + allow-future-dates</strong></h>
         <br>
         <br>
-        <px-calendar id="calendar6" prevent-range-selection display-mode='year' allow-future-dates></px-calendar>
+        <px-calendar-picker id="calendar6" prevent-range-selection display-mode='year' allow-future-dates></px-calendar-picker>
       </div>
       <div class="bigContainer">
         <div class="container">
           <h><strong>Block dates before 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar id="calendarBlockBefore" allow-future-dates block-dates-before='2016-05-09T19:25:57.966Z' baseDate='2016-05-09T19:25:57.966Z'></px-calendar>
+          <px-calendar-picker id="calendarBlockBefore" allow-future-dates block-dates-before='2016-05-09T19:25:57.966Z' baseDate='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Block dates after 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar id="calendarBlockAfter" allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z' baseDate='2016-05-09T19:25:57.966Z'></px-calendar>
+          <px-calendar-picker id="calendarBlockAfter" allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z' baseDate='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
     </div>
   </body>
