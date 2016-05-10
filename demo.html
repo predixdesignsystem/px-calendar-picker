@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>px-calendar Demo</title>
+        <title>px-calendar-picker Demo</title>
         <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
         <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
         <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
@@ -46,19 +46,19 @@
           <h><strong>Choose a day range</strong></h>
           <br>
           <br>
-          <px-calendar></px-calendar>
+          <px-calendar-picker></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Choose a month range + allow-future-dates</strong></h>
           <br>
           <br>
-          <px-calendar display-mode='month' allow-future-dates></px-calendar>
+          <px-calendar-picker display-mode='month' allow-future-dates></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>choose a year range + allow-future-dates</strong></h>
           <br>
           <br>
-          <px-calendar display-mode='year' allow-future-dates></px-calendar>
+          <px-calendar-picker display-mode='year' allow-future-dates></px-calendar-picker>
         </div>
       </div>
       <div class="bigContainer">
@@ -66,19 +66,19 @@
           <h><strong>Choose a single day + allow-future-dates</strong></h>
           <br>
           <br>
-          <px-calendar prevent-range-selection allow-future-dates></px-calendar>
+          <px-calendar-picker prevent-range-selection allow-future-dates></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Choose a single month + allow-future-dates + hide previous button</strong></h>
           <br>
           <br>
-          <px-calendar prevent-range-selection display-mode='month' allow-future-dates hide-previous-button></px-calendar>
+          <px-calendar-picker prevent-range-selection display-mode='month' allow-future-dates hide-previous-button></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Choose a single year + allow-future-dates + hide next button</strong></h>
           <br>
           <br>
-          <px-calendar id='test' prevent-range-selection display-mode='year' allow-future-dates hide-next-button></px-calendar>
+          <px-calendar-picker id='test' prevent-range-selection display-mode='year' allow-future-dates hide-next-button></px-calendar-picker>
         </div>
       </div>
       <div class="bigContainer">
@@ -86,13 +86,13 @@
           <h><strong>Block dates before 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar prevent-range-selection allow-future-dates block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar>
+          <px-calendar-picker prevent-range-selection allow-future-dates block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Block dates after 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar prevent-range-selection allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar>
+          <px-calendar-picker prevent-range-selection allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
       </div>
       <br>

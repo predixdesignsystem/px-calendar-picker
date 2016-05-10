@@ -18,8 +18,8 @@ The first range date may be before, after, or equal to the second range date, de
     </px-calendar>
 
 -->
-<dom-module id="px-calendar">
-  <link rel="import" type="css" href="css/px-calendar.css"/>
+<dom-module id="px-calendar-picker">
+  <link rel="import" type="css" href="css/px-calendar-picker.css"/>
   <template>
     <div class="table table--no-cells text--center" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
@@ -71,7 +71,7 @@ The first range date may be before, after, or equal to the second range date, de
 <script>
   Polymer({
 
-    is: 'px-calendar',
+    is: 'px-calendar-picker',
     behaviors: [pxDatetimeBehavior,
     pxDatetimeRangeBehavior],
 
@@ -233,7 +233,7 @@ The first range date may be before, after, or equal to the second range date, de
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
       var handler = this._cellClicked.bind(this);
-      this.$.calendar.addEventListener('px-date-selected', handler);
+      this.addEventListener('px-date-selected', handler);
     },
 
     _cellClicked: function(e) {
