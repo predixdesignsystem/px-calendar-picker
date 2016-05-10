@@ -57,6 +57,8 @@ button[hidden] {
 .table {
   @extend table;
   display: table;
+  min-width: calculateRem(210px);
+  min-height: calculateRem(230px);
 }
 
 .caption {
