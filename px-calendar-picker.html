@@ -24,17 +24,17 @@ The first range date may be before, after, or equal to the second range date, de
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">
-        <div on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
+        <button on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
             <iron-icon icon="polymer-font-awesome:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
-        </div>
+        </button>
         <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, _momentBaseDate)}}</span>
-        <div id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
+        <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="polymer-font-awesome:fa-angle-right" class="fa-angle"></iron-icon>
           </template>
-        </div>
+        </button>
       </div>
       <!-- Actual Calendar -->
 

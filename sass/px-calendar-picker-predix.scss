@@ -52,13 +52,17 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
     background-color: inherit;
     color: $primary-blue-pressed;
   }
+  &:focus {
+    background-color: inherit;
+    color: $primary-blue;
+  }
 }
 
 .is-between, .is-selected {
   background-color: $gray3;
 }
 
-.is-selected-only, .is-start.is-end {
+.is-selected-only, .is-start.is-end.is-selected {
   background-color: inherit;
 }
 

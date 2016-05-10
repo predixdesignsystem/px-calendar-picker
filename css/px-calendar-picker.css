@@ -710,11 +710,14 @@ button[hidden] {
   .caption_btn:active {
     background-color: inherit;
     color: #2b5ea2; }
+  .caption_btn:focus {
+    background-color: inherit;
+    color: #3e87e8; }
 
 .is-between, .is-selected {
   background-color: #e4e4ea; }
 
-.is-selected-only, .is-start.is-end {
+.is-selected-only, .is-start.is-end.is-selected {
   background-color: inherit; }
 
 .is-selected.is-end:not(.is-selected-only):not(.is-start) {
