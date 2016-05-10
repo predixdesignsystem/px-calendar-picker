@@ -15,7 +15,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
 -->
 <dom-module id="px-calendar-cell">
-  <link rel="import" type="css" href="css/px-calendar.css"/>
+  <link rel="import" type="css" href="css/px-calendar-picker.css"/>
   <template>
     <div class$="{{cellStyles}}">
       <button class$="{{btnStyles}}" value="{{displayedValue}}" on-tap="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{displayedValue}}</button>
@@ -115,7 +115,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
           cellStyles += ' is-selected';
         }
 
-        if (this._isFirstClick()) {
+        if (this._isSingleSelected()) {
           cellStyles += ' is-selected-only';
         }
 
@@ -149,7 +149,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     _selectDate: function(e) {
-      this.fire('px-date-selected', this.displayDate);
+      this.fire('px-cell-date-selected', this.displayDate);
     },
 
     _isStartOfRange: function() {
@@ -181,8 +181,13 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       return endDate;
     },
 
-    _isFirstClick: function() {
-      return this.fromMoment && this.toMoment === null && this.displayDate.isSame(this.fromMoment, this.displayMode);
+    _isSingleSelected: function() {
+
+      var singleFrom = this.fromMoment && (this.toMoment === null || !this.toMoment.isValid())
+       && this.displayDate.isSame(this.fromMoment, this.displayMode),
+          singleTo = this.toMoment && (this.fromMoment === null || !this.fromMoment.isValid())
+       && this.displayDate.isSame(this.toMoment, this.displayMode);
+      return singleFrom || singleTo;
     },
 
     _isStartOfWeekOrMonth: function() {

@@ -536,7 +536,9 @@ button[hidden] {
   visibility: hidden; }
 
 .table {
-  display: table;
+  display: table; }
+
+.constantsize {
   min-width: 14rem;
   min-height: 15.3333333333rem; }
 
@@ -555,8 +557,7 @@ button[hidden] {
       -ms-flex-align: center;
           align-items: center; }
 
-.caption_btn.px-calendar {
-  color: #3e87e8;
+.caption_btn.px-calendar-picker {
   margin-right: 0;
   margin-left: 0;
   padding-right: 0;

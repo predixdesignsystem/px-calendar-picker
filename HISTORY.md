@@ -1,3 +1,7 @@
+v0.1.3
+==================
+* various improvements
+
 v0.1.1
 ==================
 * rework. renamed to px-calendar-picker

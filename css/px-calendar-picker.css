@@ -549,7 +549,9 @@ button[hidden] {
   visibility: hidden; }
 
 .table {
-  display: table;
+  display: table; }
+
+.constantsize {
   min-width: 14rem;
   min-height: 15.3333333333rem; }
 
@@ -568,8 +570,7 @@ button[hidden] {
       -ms-flex-align: center;
           align-items: center; }
 
-.caption_btn.px-calendar {
-  color: #3e87e8;
+.caption_btn.px-calendar-picker {
   margin-right: 0;
   margin-left: 0;
   padding-right: 0;
@@ -701,16 +702,19 @@ button[hidden] {
   .is-selected .btn--bare:active {
     background-color: #086e87; }
 
+.caption_btn.px-calendar-picker {
+  color: #3e87e8; }
+
 .is-between, .is-selected {
   background-color: #e4e4ea; }
 
-.is-selected-only {
+.is-selected-only, .is-start.is-end {
   background-color: inherit; }
 
-.is-selected.is-end:not(.is-selected-only) {
+.is-selected.is-end:not(.is-selected-only):not(.is-start) {
   background-image: linear-gradient(to right, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
   background-color: inherit; }
 
-.is-selected.is-start:not(.is-selected-only) {
+.is-selected.is-start:not(.is-selected-only):not(.is-end) {
   background-image: linear-gradient(to left, #e4e4ea, #e4e4ea 50%, transparent 50%, transparent 100%);
   background-color: inherit; }

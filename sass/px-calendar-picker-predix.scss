@@ -42,20 +42,24 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
   }
 }
 
+.caption_btn.px-calendar-picker {
+  color: $primary-blue;
+}
+
 .is-between, .is-selected {
   background-color: $gray3;
 }
 
-.is-selected-only {
+.is-selected-only, .is-start.is-end {
   background-color: inherit;
 }
 
-.is-selected.is-end:not(.is-selected-only) {
+.is-selected.is-end:not(.is-selected-only):not(.is-start) {
   background-image: linear-gradient(to right, $gray3, $gray3 50%, transparent 50%, transparent 100%);
   background-color: inherit;
 }
 
-.is-selected.is-start:not(.is-selected-only) {
+.is-selected.is-start:not(.is-selected-only):not(.is-end) {
   background-image: linear-gradient(to left, $gray3, $gray3 50%, transparent 50%, transparent 100%);
   background-color: inherit;
 }

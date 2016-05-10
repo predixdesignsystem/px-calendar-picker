@@ -57,6 +57,9 @@ button[hidden] {
 .table {
   @extend table;
   display: table;
+}
+
+.constantsize {
   min-width: calculateRem(210px);
   min-height: calculateRem(230px);
 }
@@ -71,8 +74,7 @@ button[hidden] {
   align-items: center;
 }
 
-.caption_btn.px-calendar {
-  color: $primary-blue;
+.caption_btn.px-calendar-picker {
   margin-right: 0;
   margin-left: 0;
   padding-right: 0;

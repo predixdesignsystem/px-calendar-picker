@@ -21,7 +21,7 @@ The first range date may be before, after, or equal to the second range date, de
 <dom-module id="px-calendar-picker">
   <link rel="import" type="css" href="css/px-calendar-picker.css"/>
   <template>
-    <div class="table table--no-cells text--center" id="calendar">
+    <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">
         <button on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
@@ -155,6 +155,7 @@ The first range date may be before, after, or equal to the second range date, de
       baseDate: {
         type: String,
         value: '',
+        notify: true,
         observer: '_baseDateChanged'
       },
       /**
@@ -182,7 +183,7 @@ The first range date may be before, after, or equal to the second range date, de
       /**
        * (optional)
        *
-       * blocks the selection/navigation for any dates before this one.
+       * blocks the selection/drill down navigation for any dates before this one.
        * Does not apply if empty. ISO8601 string
        *
        * @default ''
@@ -201,7 +202,7 @@ The first range date may be before, after, or equal to the second range date, de
       /**
        * (optional)
        *
-       * blocks the selection/navigation for any dates before this one.
+       * blocks the selection/drill down navigation for any dates before this one.
        * Does not apply if empty. ISO8601 string
        *
        * @default ''
@@ -209,6 +210,26 @@ The first range date may be before, after, or equal to the second range date, de
       blockDatesAfter: {
         type:String,
         value: ''
+      },
+      /**
+       * (optional)
+       *
+       * if set allows the calendar picker to shrink rather than have a constant size,
+       * typically the height would shrink when choosing months or years
+       *
+       */
+      shrink: {
+        type: Boolean,
+        value: false
+      },
+      /*
+      * Whether the calendar picker is currently at the selection level: showing days
+      * in day mode, choosing month in month mode or showing years in year mode.
+      *
+      */
+      isAtSelectionLevel: {
+        type: Boolean,
+        computed: '_isAtSelectionLevel(_currentDisplayMode, displayMode)'
       },
       /**
        * Internal moment reprensentation of blockDatesAfter
@@ -233,7 +254,16 @@ The first range date may be before, after, or equal to the second range date, de
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
       var handler = this._cellClicked.bind(this);
-      this.addEventListener('px-date-selected', handler);
+      this.addEventListener('px-cell-date-selected', handler);
+    },
+
+    _getTableClass: function(shrink) {
+      var base = "table table--no-cells text--center ";
+
+      if(shrink) {
+        base += "constantsize "
+      }
+      return base;
     },
 
     _cellClicked: function(e) {
@@ -243,24 +273,29 @@ The first range date may be before, after, or equal to the second range date, de
         if(this.displayMode === 'year') {
           //we want to select this year.
           this._selectDate(momentDate);
+          this.fire('px-date-selected', momentDate)
         }
         else {
           //go to 'month' mode
           this.set('_momentBaseDate', momentDate);
           this.set('_currentDisplayMode', 'month');
+          e.stopPropagation();
         }
       }else if(this._currentDisplayMode === 'month') {
         if(this.displayMode === 'month') {
           //we want to select this month.
           this._selectDate(momentDate);
+          this.fire('px-date-selected', momentDate)
         }
         else {
           //go to 'day' mode
           this.set('_momentBaseDate', momentDate);
           this.set('_currentDisplayMode', 'day');
+          e.stopPropagation();
         }
       }else {
         this._selectDate(momentDate);
+        this.fire('px-date-selected', momentDate)
       }
     },
 
@@ -354,7 +389,15 @@ The first range date may be before, after, or equal to the second range date, de
 
       if (!this.preventRangeSelection && this.fromMoment && !this.toMoment) {
         // treat the click as the second date - the range is selected!
-        this.set('toMoment', newSelectedDate);
+
+        if(newSelectedDate.isBefore(this.fromMoment)) {
+          //swap
+          this.set('toMoment', this.fromMoment);
+          this.set('fromMoment', newSelectedDate);
+        } else {
+          this.set('toMoment', newSelectedDate);
+        }
+
         this._setRangeFromMoment();
       }
       else {
@@ -462,6 +505,10 @@ The first range date may be before, after, or equal to the second range date, de
       }
 
       this.set('_momentBaseDate', newMoment);
+    },
+
+    _isAtSelectionLevel: function(currentDisplayMode, displayMode) {
+      return currentDisplayMode === displayMode;
     }
 
   });
