@@ -110,38 +110,37 @@ Element that renders a calendar cell for a given date (and for non-date cells in
           break;
         }
 
-        if (this._isStartOfRange() || this._isEndOfRange()) {
-          cellStyles += ' is-selected';
-        }
-
-        if (this._isSingleSelected()) {
-          cellStyles += ' is-selected-only';
-        }
-
-        if (this._isStartOfWeekOrMonth() || this._isStartOfRange()) {
-          cellStyles += ' is-start';
-        }
-
-        if (this._isEndOfWeekOrMonth() || this._isEndOfRange()) {
-          cellStyles += ' is-end';
-        }
-
-        if (this._isWithinRange()) {
-          cellStyles += ' is-between';
-        }
-
-        if (this._isTodaysDate()) {
-          cellStyles += ' is-today';
-        }
-
         if ((!this.allowFutureDates && this._isPastTodaysDate()) ||
             (this.blockDatesAfter && this.displayDate.isAfter(this.blockDatesAfter, 'day')) ||
             (this.blockDatesBefore && this.displayDate.isBefore(this.blockDatesBefore, 'day'))) {
           btnStyles += ' btn--disabled';
           isDisabled = true;
+        }else {
+          if (this._isStartOfRange() || this._isEndOfRange()) {
+            cellStyles += ' is-selected';
+          }
+
+          if (this._isSingleSelected()) {
+            cellStyles += ' is-selected-only';
+          }
+
+          if (this._isStartOfWeekOrMonth() || this._isStartOfRange()) {
+            cellStyles += ' is-start';
+          }
+
+          if (this._isEndOfWeekOrMonth() || this._isEndOfRange()) {
+            cellStyles += ' is-end';
+          }
+
+          if (this._isWithinRange()) {
+            cellStyles += ' is-between';
+          }
+
+          if (this._isTodaysDate()) {
+            cellStyles += ' is-today';
+          }
         }
       }
-
       this.set('btnStyles', btnStyles);
       this.set('isDisabled', isDisabled);
       this.set('cellStyles', cellStyles);
@@ -182,9 +181,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
     _isSingleSelected: function() {
 
-      var singleFrom = this.fromMoment && (this.toMoment === null || !this.toMoment.isValid())
+      var singleFrom = this.fromMoment && (!this.toMoment || !this.toMoment.isValid())
        && this.displayDate.isSame(this.fromMoment, this.displayMode),
-          singleTo = this.toMoment && (this.fromMoment === null || !this.fromMoment.isValid())
+          singleTo = this.toMoment && (!this.fromMoment || !this.fromMoment.isValid())
        && this.displayDate.isSame(this.toMoment, this.displayMode);
       return singleFrom || singleTo;
     },
