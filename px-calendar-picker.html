@@ -54,7 +54,7 @@ The first range date may be before, after, or equal to the second range date, de
                   <px-calendar-cell display-date="{{date}}"
                                     from-moment="{{fromMoment}}"
                                     to-moment="{{toMoment}}"
-                                    allow-future-dates="{{allowFutureDates}}"
+                                    block-future-dates="{{blockFutureDates}}"
                                     is-utc="{{isUtc}}"
                                     display-mode="{{_currentDisplayMode}}"
                                     block-dates-after="[[_momentBlockDatesAfter]]"
@@ -387,22 +387,23 @@ The first range date may be before, after, or equal to the second range date, de
 
     _selectDate: function(newSelectedDate) {
 
+
       if (!this.preventRangeSelection && this.fromMoment && !this.toMoment) {
         // treat the click as the second date - the range is selected!
 
         if(newSelectedDate.isBefore(this.fromMoment)) {
           //swap
           this.set('toMoment', this.fromMoment);
-          this.set('fromMoment', newSelectedDate);
+          this.set('fromMoment', this._preserveTime(this.fromMoment, newSelectedDate));
         } else {
-          this.set('toMoment', newSelectedDate);
+          this.set('toMoment', this._preserveTime(this.toMoment, newSelectedDate));
         }
 
         this._setRangeFromMoment();
       }
       else {
         this.set('toMoment', null);
-        this.set('fromMoment', newSelectedDate);
+        this.set('fromMoment', this._preserveTime(this.fromMoment, newSelectedDate));
         if(this.preventRangeSelection) {
           this.set('singleSelectedDate', this.fromMoment.toISOString());
         }

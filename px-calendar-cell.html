@@ -110,7 +110,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
           break;
         }
 
-        if ((!this.allowFutureDates && this._isPastTodaysDate()) ||
+        if ((this.blockFutureDates && this._isPastTodaysDate()) ||
             (this.blockDatesAfter && this.displayDate.isAfter(this.blockDatesAfter, 'day')) ||
             (this.blockDatesBefore && this.displayDate.isBefore(this.blockDatesBefore, 'day'))) {
           btnStyles += ' btn--disabled';
@@ -165,7 +165,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
     _getStartDate: function() {
       var startDate = this.fromMoment;
-      if (this.fromMoment.isAfter(this.toMoment, this.displayMode)) {
+      if (this.toMoment && this.fromMoment.isAfter(this.toMoment, this.displayMode)) {
         startDate = this.toMoment;
       }
       return startDate;
@@ -211,24 +211,12 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     _isPastTodaysDate: function() {
-      var todaysDate;
-      if(this.isUtc) {
-        todaysDate = moment.utc();
-      }
-      else {
-        todaysDate = moment();
-      }
+      var todaysDate = moment().tz(this.timeZone);
       return this.displayDate.isAfter(todaysDate);
     },
 
     _isTodaysDate: function() {
-      var todaysDate;
-      if(this.isUtc) {
-        todaysDate = moment.utc();
-      }
-      else {
-        todaysDate = moment();
-      }
+      var todaysDate = moment().tz(this.timeZone);
       return this.displayDate.isSame(todaysDate, 'day');
     }
   });

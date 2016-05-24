@@ -42,39 +42,40 @@
 
       <div class="bigContainer">
         <div class="container" >
-          <px-calendar-picker></px-calendar-picker>
+          <h><strong>Choose a day range + block future dates</strong></h>
+          <px-calendar-picker block-future-dates></px-calendar-picker>
         </div>
         <div class="container">
-          <h><strong>Choose a month range + allow-future-dates</strong></h>
+          <h><strong>Choose a month range</strong></h>
           <br>
           <br>
-          <px-calendar-picker display-mode='month' allow-future-dates></px-calendar-picker>
+          <px-calendar-picker display-mode='month'></px-calendar-picker>
         </div>
         <div class="container">
-          <h><strong>choose a year range + allow-future-dates</strong></h>
+          <h><strong>choose a year range </strong></h>
           <br>
           <br>
-          <px-calendar-picker display-mode='year' allow-future-dates></px-calendar-picker>
+          <px-calendar-picker display-mode='year'></px-calendar-picker>
         </div>
       </div>
       <div class="bigContainer">
         <div class="container">
-          <h><strong>Choose a single day + allow-future-dates</strong></h>
+          <h><strong>Choose a single day</strong></h>
           <br>
           <br>
-          <px-calendar-picker prevent-range-selection allow-future-dates></px-calendar-picker>
+          <px-calendar-picker prevent-range-selection></px-calendar-picker>
         </div>
         <div class="container">
-          <h><strong>Choose a single month + allow-future-dates + hide previous button</strong></h>
+          <h><strong>Choose a single month + hide previous button</strong></h>
           <br>
           <br>
-          <px-calendar-picker prevent-range-selection display-mode='month' allow-future-dates hide-previous-button></px-calendar-picker>
+          <px-calendar-picker prevent-range-selection display-mode='month' hide-previous-button></px-calendar-picker>
         </div>
         <div class="container">
-          <h><strong>Choose a single year + allow-future-dates + hide next button</strong></h>
+          <h><strong>Choose a single year ++ hide next button</strong></h>
           <br>
           <br>
-          <px-calendar-picker id='test' prevent-range-selection display-mode='year' allow-future-dates hide-next-button></px-calendar-picker>
+          <px-calendar-picker id='test' prevent-range-selection display-mode='year' hide-next-button></px-calendar-picker>
         </div>
       </div>
       <div class="bigContainer">
@@ -82,13 +83,13 @@
           <h><strong>Block dates before 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar-picker prevent-range-selection allow-future-dates block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar-picker>
+          <px-calendar-picker prevent-range-selection block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Block dates after 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar-picker prevent-range-selection allow-future-dates block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar-picker>
+          <px-calendar-picker prevent-range-selection block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
       </div>
       <br>
