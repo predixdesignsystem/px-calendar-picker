@@ -72,8 +72,7 @@ The first range date may be before, after, or equal to the second range date, de
   Polymer({
 
     is: 'px-calendar-picker',
-    behaviors: [pxDatetimeBehavior,
-    pxDatetimeRangeBehavior],
+    behaviors: [pxDatetimeRangeBehavior],
 
     properties: {
 
@@ -510,7 +509,21 @@ The first range date may be before, after, or equal to the second range date, de
 
     _isAtSelectionLevel: function(currentDisplayMode, displayMode) {
       return currentDisplayMode === displayMode;
-    }
+    },
+    /**
+     * Takes an ISO 8601 String and returns a moment object
+     *
+     *
+     * @param {String} timeString
+     */
+    _convertISOtoMoment: function(timeString) {
+      if(this.isUtc) {
+        return moment.utc(timeString, moment.ISO_8601);
+      }
+      else {
+        return moment(timeString, moment.ISO_8601);
+      }
+    },
 
   });
 </script>
