@@ -29,7 +29,7 @@ The first range date may be before, after, or equal to the second range date, de
             <iron-icon icon="polymer-font-awesome:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, _momentBaseDate)}}</span>
+        <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, baseDate)}}</span>
         <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="polymer-font-awesome:fa-angle-right" class="fa-angle"></iron-icon>
@@ -52,10 +52,9 @@ The first range date may be before, after, or equal to the second range date, de
             <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
                 <div class="td">
                   <px-calendar-cell display-date="{{date}}"
-                                    from-moment="{{fromMoment}}"
-                                    to-moment="{{toMoment}}"
+                                    from-moment="[[fromMoment]]"
+                                    to-moment="[[toMoment]]"
                                     block-future-dates="{{blockFutureDates}}"
-                                    is-utc="{{isUtc}}"
                                     display-mode="{{_currentDisplayMode}}"
                                     block-dates-after="[[_momentBlockDatesAfter]]"
                                     block-dates-before="[[_momentBlockDatesBefore]]">
@@ -79,13 +78,13 @@ The first range date may be before, after, or equal to the second range date, de
       /**
        * Moment object used as the base for the calendar (to decide which month to display)
        */
-      _momentBaseDate: {
+      baseDate: {
         type: Object,
         notify: true,
-        observer: '_momentBaseDateChanged',
         value: function() {
-          return moment();
-        }
+          return moment.tz(moment(), this.timeZone);
+        },
+        observer: '_baseDateChanged'
       },
       /**
        *  What the calendar should display:
@@ -142,20 +141,6 @@ The first range date may be before, after, or equal to the second range date, de
       singleSelectedDate: {
         type: String,
         value: ''
-      },
-      /**
-       * (optional)
-       *
-       * Reflects the date currently used by the calendar to determine what it should
-       * be showing, i.e what month, year or year range. ISO8601 string
-       *
-       * @default now
-       */
-      baseDate: {
-        type: String,
-        value: '',
-        notify: true,
-        observer: '_baseDateChanged'
       },
       /**
        * (optional)
@@ -245,15 +230,18 @@ The first range date may be before, after, or equal to the second range date, de
       _valuesDisplayed: {
         type: Array,
         value: function() { return [];}
-      },
-      observers: ['_renderCurrent(_currentDisplayMode, _momentBaseDate)']
+      }
     },
-
+    observers: ['_renderCurrent(_currentDisplayMode)'],
     ready: function() {
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
       var handler = this._cellClicked.bind(this);
       this.addEventListener('px-cell-date-selected', handler);
+    },
+
+    _timeZoneChanged: function() {
+      this.set('baseDate', moment.tz(this.baseDate, this.timeZone));
     },
 
     _getTableClass: function(shrink) {
@@ -276,7 +264,7 @@ The first range date may be before, after, or equal to the second range date, de
         }
         else {
           //go to 'month' mode
-          this.set('_momentBaseDate', momentDate);
+          this.set('baseDate', momentDate);
           this.set('_currentDisplayMode', 'month');
           e.stopPropagation();
         }
@@ -288,7 +276,7 @@ The first range date may be before, after, or equal to the second range date, de
         }
         else {
           //go to 'day' mode
-          this.set('_momentBaseDate', momentDate);
+          this.set('baseDate', momentDate);
           this.set('_currentDisplayMode', 'day');
           e.stopPropagation();
         }
@@ -306,30 +294,16 @@ The first range date may be before, after, or equal to the second range date, de
 
       if(this._currentDisplayMode === 'year') {
         //make sure we display the beginning of the decade
-        var year = this._momentBaseDate.year();
+        var year = this.baseDate.year();
         for(var i=0; i<10; i++) {
           if(((year-i) % 10) ===1) {
             break;
           }
         }
 
-        this.set('_momentBaseDate', this._momentBaseDate.clone().subtract(i, 'years'));
+        this.set('baseDate', this.baseDate.clone().subtract(i, 'years'));
       } else {
         this._renderCurrent();
-      }
-    },
-
-    _momentBaseDateChanged: function() {
-      //make sure the ISO string is kept in sync
-      this.set('baseDate', this._momentBaseDate.toISOString());
-      this._renderCurrent();
-    },
-
-    _baseDateChanged: function() {
-      //make sure the ISO string is kept in sync
-      var newDate = this._convertISOtoMoment(this.baseDate);
-      if(!newDate.isSame(this._momentBaseDate, 'day')) {
-        this.set('_momentBaseDate', newDate);
       }
     },
 
@@ -350,13 +324,14 @@ The first range date may be before, after, or equal to the second range date, de
       //else year already, do nothing
     },
 
-    _getCurrentTitle: function(_currentDisplayMode, _momentBaseDate) {
+    _getCurrentTitle: function(_currentDisplayMode, baseDate) {
+
       if(_currentDisplayMode === 'day') {
-        return _momentBaseDate.format('MMMM') + ' ' + _momentBaseDate.format('YYYY');
+        return baseDate.format('MMMM') + ' ' + baseDate.format('YYYY');
       }else if(_currentDisplayMode === 'month') {
-        return _momentBaseDate.format('YYYY');
+        return baseDate.format('YYYY');
       }else {
-        return _momentBaseDate.format('YYYY') + ' - ' + _momentBaseDate.clone().add(9, 'years').format('YYYY');
+        return baseDate.format('YYYY') + ' - ' + baseDate.clone().add(9, 'years').format('YYYY');
       }
     },
 
@@ -370,7 +345,7 @@ The first range date may be before, after, or equal to the second range date, de
       return daysOfWeek;
     },
 
-    _renderCurrent: function(_currentDisplayMode, _momentBaseDate) {
+    _renderCurrent: function(_currentDisplayMode) {
 
       var newValues;
       if(this._currentDisplayMode === 'day') {
@@ -397,8 +372,6 @@ The first range date may be before, after, or equal to the second range date, de
         } else {
           this.set('toMoment', this._preserveTime(this.toMoment, newSelectedDate));
         }
-
-        this._setRangeFromMoment();
       }
       else {
         this.set('toMoment', null);
@@ -411,7 +384,7 @@ The first range date may be before, after, or equal to the second range date, de
 
     _constructYear: function() {
       //3 rows of 4 months
-      var current = this._momentBaseDate.clone().month(0),
+      var current = this.baseDate.clone().month(0),
           months = [];
 
       for(var i=0; i<3; i++) {
@@ -427,7 +400,7 @@ The first range date may be before, after, or equal to the second range date, de
 
     _constructYearRange: function() {
       //2 rows of 5 years
-      var current = this._momentBaseDate.clone(),
+      var current = this.baseDate.clone(),
           years = [];
 
       for(var i=0; i<2; i++) {
@@ -443,8 +416,8 @@ The first range date may be before, after, or equal to the second range date, de
 
     _constructMonth: function() {
 
-      var numberOfDaysInMonth = this._momentBaseDate.daysInMonth(),
-          dayBeginningOfMonth = this._momentBaseDate.startOf('month').day(),
+      var numberOfDaysInMonth = this.baseDate.daysInMonth(),
+          dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
           numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
           daysBeforeMonthStartsCount = 0,
           date = 1,
@@ -461,7 +434,7 @@ The first range date may be before, after, or equal to the second range date, de
 
         while (week.length < 7) {
           if (date <= numberOfDaysInMonth) {
-            week.push(this._momentBaseDate.clone().date(date));
+            week.push(this.baseDate.clone().date(date));
             date++;
           }
           else {
@@ -479,15 +452,16 @@ The first range date may be before, after, or equal to the second range date, de
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
       if(this._currentDisplayMode === 'day') {
-        newMoment = moment(this._momentBaseDate.add(1, 'months'));
+        newMoment = moment.tz(this.baseDate.add(1, 'months'), this.timeZone);
       }else if(this._currentDisplayMode === 'month') {
-        newMoment = moment(this._momentBaseDate.add(1, 'years'));
+        newMoment = moment.tz(this.baseDate.add(1, 'years'), this.timeZone);
       }
       else {
-        newMoment = moment(this._momentBaseDate.add(10, 'years'));
+        newMoment = moment.tz(this.baseDate.add(10, 'years'), this.timeZone);
       }
 
-      this.set('_momentBaseDate', newMoment);
+      this.set('baseDate', newMoment);
+      this._renderCurrent();
     },
     /**
      * Called when clicking the 'previous' arrow
@@ -496,34 +470,31 @@ The first range date may be before, after, or equal to the second range date, de
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
       if(this._currentDisplayMode === 'day') {
-        newMoment = moment(this._momentBaseDate.subtract(1, 'months'));
+        newMoment = moment.tz(this.baseDate.subtract(1, 'months'), this.timeZone);
       }else if(this._currentDisplayMode === 'month') {
-        newMoment = moment(this._momentBaseDate.subtract(1, 'years'));
+        newMoment = moment.tz(this.baseDate.subtract(1, 'years'), this.timeZone);
       }
       else {
-        newMoment = moment(this._momentBaseDate.subtract(10, 'years'));
+        newMoment = moment.tz(this.baseDate.subtract(10, 'years'), this.timeZone);
       }
 
-      this.set('_momentBaseDate', newMoment);
+      this.set('baseDate', newMoment);
+      this._renderCurrent();
     },
 
     _isAtSelectionLevel: function(currentDisplayMode, displayMode) {
       return currentDisplayMode === displayMode;
     },
-    /**
-     * Takes an ISO 8601 String and returns a moment object
-     *
-     *
-     * @param {String} timeString
-     */
-    _convertISOtoMoment: function(timeString) {
-      if(this.isUtc) {
-        return moment.utc(timeString, moment.ISO_8601);
-      }
-      else {
-        return moment(timeString, moment.ISO_8601);
-      }
-    },
 
+    _baseDateChanged: function(newDate, oldDate) {
+
+      //rerender if we're in day mode and changed month or if we changed year
+      if(this._currentDisplayMode === 'day' &&
+         (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
+        this._renderCurrent();
+      } else if(newDate.isAfter(oldDate, 'year') || newDate.isBefore(oldDate, 'year')) {
+        this._renderCurrent();
+      }
+    }
   });
 </script>
