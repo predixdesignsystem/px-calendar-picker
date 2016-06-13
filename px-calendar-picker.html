@@ -239,6 +239,7 @@ The first range date may be before, after, or equal to the second range date, de
       var handler = this._cellClicked.bind(this);
       this.addEventListener('px-cell-date-selected', handler);
       this.toMoment = null;
+      this.fromMoment = null;
     },
 
     _timeZoneChanged: function() {

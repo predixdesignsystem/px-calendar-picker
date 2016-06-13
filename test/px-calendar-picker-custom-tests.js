@@ -17,7 +17,7 @@ function runCustomTests() {
   suite('Custom Automation Tests for px-calendar', function() {
 
     test('by default calendar uses current month', function(){
-      assert.isTrue(cal1._momentBaseDate.isSame(now, 'month'));
+      assert.isTrue(cal1.baseDate.isSame(now, 'month'));
     });
 
     test('previous/next buttons', function(){
@@ -32,7 +32,6 @@ function runCustomTests() {
       assert.equal(cal2Buttons[0].icon, 'polymer-font-awesome:fa-angle-right');
       assert.equal(cal3Buttons[0].icon, 'polymer-font-awesome:fa-angle-left');
     });
-
   });
 
   suite('test different displayModes', function() {
@@ -41,7 +40,7 @@ function runCustomTests() {
 
       //get next month
       cal1._onNext();
-      assert.isTrue(cal1._momentBaseDate.isAfter(now, 'month'));
+      assert.isTrue(cal1.baseDate.isAfter(now, 'month'));
 
       //wait for calendar to udpate cells
       setTimeout(function() {
@@ -58,10 +57,10 @@ function runCustomTests() {
 
     test('cal2 works in month and allows future dates', function(done){
 
-      assert.isTrue(cal2._momentBaseDate.isSame(now, 'month'));
+      assert.isTrue(cal2.baseDate.isSame(now, 'month'));
       //get next year
       cal2._onNext();
-      assert.isTrue(cal2._momentBaseDate.isAfter(now, 'year'));
+      assert.isTrue(cal2.baseDate.isAfter(now, 'year'));
 
       //wait for calendar to udpate cells
       setTimeout(function() {
@@ -80,28 +79,28 @@ function runCustomTests() {
 
       //get next 10 years
       cal3._onNext();
-      assert.isTrue(cal3._momentBaseDate.isAfter(now.clone().add(1, 'years'), 'year'));
+      assert.isTrue(cal3.baseDate.isAfter(now.clone().add(1, 'years'), 'year'));
     });
 
     test('change display mode', function(){
 
       //reset cal
-      cal1._momentBaseDate = now.clone();
+      cal1.baseDate = now.clone();
 
       assert.equal(cal1.displayMode, 'day');
       cal1.displayMode = 'month';
 
       //get next year
       cal1._onNext();
-      assert.isTrue(cal1._momentBaseDate.isAfter(now, 'year'));
+      assert.isTrue(cal1.baseDate.isAfter(now, 'year'));
 
       //reset cal
-      cal1._momentBaseDate = now.clone();
+      cal1.baseDate = now.clone();
       cal1.displayMode = 'year';
 
       //get next 10 year
       cal1._onNext();
-      assert.isTrue(cal1._momentBaseDate.isAfter(now.clone().add(1, 'years'), 'year'));
+      assert.isTrue(cal1.baseDate.isAfter(now.clone().add(1, 'years'), 'year'));
     });
   });
 
@@ -113,35 +112,35 @@ function runCustomTests() {
         //we have selected first and 11th day
         var cal5 = document.getElementById('calendar5');
         assert.equal(cal5.singleSelectedDate, '');
-        assert.equal(moment(cal5.range.from).date(),1);
-        assert.equal(moment(cal5.range.to).date(),11);
         assert.equal(cal5.fromMoment.date(),1);
         assert.equal(cal5.toMoment.date(),11);
 
-        //make sure 1st and 11th are selected, the one between are styled and the other not
-        var allCells = Polymer.dom(cal5.root).querySelectorAll('px-calendar-cell'),
-            i = 0,
-            firstFound = false;
-        allCells.forEach(function(cell, index) {
-          var btn = Polymer.dom(cell.root).querySelector('div');
+        flush(function() {
+          //make sure 1st and 11th are selected, the one between are styled and the other not
+          var allCells = Polymer.dom(cal5.root).querySelectorAll('px-calendar-cell'),
+              i = 0,
+              firstFound = false;
+          allCells.forEach(function(cell, index) {
+            var btn = Polymer.dom(cell.root).querySelector('div');
 
-          if((!btn.classList.contains('is-empty') && !firstFound) || i===10) {
-            assert.isTrue(btn.classList.contains('is-selected'));
-            firstFound = true;
-          } else if(i>0 && i<10) {
-            assert.isTrue(btn.classList.contains('is-between'));
-          }
-          else {
-            assert.isFalse(btn.classList.contains('is-between'));
-            assert.isFalse(btn.classList.contains('is-selected'));
-          }
+            if((!btn.classList.contains('is-empty') && !firstFound) || i===10) {
+              assert.isTrue(btn.classList.contains('is-selected'));
+              firstFound = true;
+            } else if(i>0 && i<10) {
+              assert.isTrue(btn.classList.contains('is-between'));
+            }
+            else {
+              assert.isFalse(btn.classList.contains('is-between'));
+              assert.isFalse(btn.classList.contains('is-selected'));
+            }
 
-          if(firstFound) {
-            i++;
-          }
+            if(firstFound) {
+              i++;
+            }
+          });
+
+          done();
         });
-
-        done();
       };
 
       //select first and first +10 cell
@@ -177,33 +176,34 @@ function runCustomTests() {
         assert.equal(selectedDate.month(), now.month());
         assert.equal(selectedDate.year(), now.year());
 
+        flush(function() {
+          //make sure only 11th is selected
+          var allCells = Polymer.dom(cal4.root).querySelectorAll('px-calendar-cell'),
+              i = 0,
+              firstFound = false;
+          allCells.forEach(function(cell, index) {
+            var btn = Polymer.dom(cell.root).querySelector('div');
 
-        //make sure only 11th is selected
-        var allCells = Polymer.dom(cal4.root).querySelectorAll('px-calendar-cell'),
-            i = 0,
-            firstFound = false;
-        allCells.forEach(function(cell, index) {
-          var btn = Polymer.dom(cell.root).querySelector('div');
+            if(!btn.classList.contains('is-empty') && !firstFound) {
+              firstFound = true;
+            }
 
-          if(!btn.classList.contains('is-empty') && !firstFound) {
-            firstFound = true;
-          }
+            if(i===10) {
+              assert.isTrue(btn.classList.contains('is-selected'));
+              firstFound = true;
+            }
+            else {
+              assert.isFalse(btn.classList.contains('is-between'));
+              assert.isFalse(btn.classList.contains('is-selected'));
+            }
 
-          if(i===10) {
-            assert.isTrue(btn.classList.contains('is-selected'));
-            firstFound = true;
-          }
-          else {
-            assert.isFalse(btn.classList.contains('is-between'));
-            assert.isFalse(btn.classList.contains('is-selected'));
-          }
+            if(firstFound) {
+              i++;
+            }
+          });
 
-          if(firstFound) {
-            i++;
-          }
+          done();
         });
-
-        done();
       };
 
       //select first and first +10 cell
@@ -232,38 +232,48 @@ function runCustomTests() {
 
   suite('Block dates', function() {
 
-    test('block before 9th may 2016', function(){
-
-
+    test('block before 9th may 2016', function(done){
       //make sure 1st and 11th are selected, the one between are styled and the other not
       var allCells = Polymer.dom(calBlockBefore.root).querySelectorAll('px-calendar-cell');
 
-      allCells.forEach(function(cell, index) {
-        var btn = Polymer.dom(cell.root).querySelector('div button');
+      //make sure we're showing the right month
+      calBlockBefore.baseDate = moment('2016-05-09T19:25:57.966Z');
 
-        if(index < 8) {
-          assert.isTrue(btn.disabled);
-        } else {
-          assert.isTrue(!btn.disabled || btn.hidden);
-        }
+      flush(function() {
+        allCells.forEach(function(cell, index) {
+          var btn = Polymer.dom(cell.root).querySelector('div button');
+
+          if(index < 8) {
+            assert.isTrue(btn.disabled);
+          } else {
+            assert.isTrue(!btn.disabled || btn.hidden);
+          }
+        });
+        done();
       });
     });
 
-    test('block after 9th may 2016', function(){
+    test('block after 9th may 2016', function(done){
 
       //make sure 1st and 11th are selected, the one between are styled and the other not
       var allCells = Polymer.dom(calBlockAfter.root).querySelectorAll('px-calendar-cell');
 
-      allCells.forEach(function(cell, index) {
-        var btn = Polymer.dom(cell.root).querySelector('div button');
+      //make sure we're showing the right month
+      calBlockAfter.baseDate = moment('2016-05-09T19:25:57.966Z');
 
-        if(index < 9) {
-          assert.isFalse(btn.disabled);
+      flush(function() {
+        allCells.forEach(function(cell, index) {
+          var btn = Polymer.dom(cell.root).querySelector('div button');
 
-        }
-        else {
-          assert.isTrue(btn.disabled || btn.hidden);
-        }
+          if(index < 9) {
+            assert.isFalse(btn.disabled);
+
+          }
+          else {
+            assert.isTrue(btn.disabled || btn.hidden);
+          }
+        });
+        done();
       });
     });
   });
