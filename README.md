@@ -1,6 +1,6 @@
 #THIS COMPONENT IS NOT YET RELEASED.
 
-Px-Calendar-picker
+Px-Calendar-picker [![Build Status](https://travis-ci.org/PredixDev/px-calendar-picker.svg?branch=master)](https://travis-ci.org/PredixDev/px-calendar-picker)
 -----------------------------------------------
 
 ## Overview
