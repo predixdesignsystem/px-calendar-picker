@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -15,8 +15,8 @@
   ],
   "dependencies": {
     "polymer": "^1.5.0",
-    "px-theme": "~0.7.0",
-    "px-datetime-common": "~0.3.0",
+    "px-theme": "~0.8.0",
+    "px-datetime-common": "~0.4.0",
     "polymer-font-awesome": "polymer-font-awesome#~v0.1.0"
   },
   "devDependencies": {
@@ -24,8 +24,5 @@
     "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.20",
     "px-tables-design": "https://github.com/PredixDev/px-tables-design.git#~0.3.0",
     "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.9"
-  },
-  "resolutions": {
-    "polymer": "^1.5.0"
   }
 }

@@ -2,7 +2,7 @@
     "name": "px-calendar-picker",
     "author": "General Electric",
     "description": "A Px component allowing to pick a date from a calendar",
-    "version": "0.1.6",
+    "version": "0.2.0",
     "private": true,
     "extName" : null,
     "repository" :
