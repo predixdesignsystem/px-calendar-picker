@@ -1,3 +1,7 @@
+v0.2.1
+==================
+* Added auto build of github pages
+
 v0.2.0
 ==================
 * Upgrade to Polymer 1.5.0
