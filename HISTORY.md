@@ -1,3 +1,7 @@
+v0.2.3
+==================
+* Added demo link in px-calendar-picker.html
+
 v0.2.2
 ==================
 * Use local copy of moment.js
