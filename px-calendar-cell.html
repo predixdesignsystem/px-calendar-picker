@@ -214,12 +214,12 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     _isPastTodaysDate: function() {
-      var todaysDate = moment().tz(this.timeZone);
+      var todaysDate = Px.moment().tz(this.timeZone);
       return this.displayDate.isAfter(todaysDate);
     },
 
     _isTodaysDate: function() {
-      var todaysDate = moment().tz(this.timeZone);
+      var todaysDate = Px.moment().tz(this.timeZone);
       return this.displayDate.isSame(todaysDate, 'day');
     }
   });

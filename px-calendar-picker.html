@@ -82,7 +82,7 @@ The first range date may be before, after, or equal to the second range date, de
         type: Object,
         notify: true,
         value: function() {
-          return moment.tz(moment(), this.timeZone);
+          return Px.moment.tz(Px.moment(), this.timeZone);
         },
         observer: '_baseDateChanged'
       },
@@ -243,7 +243,7 @@ The first range date may be before, after, or equal to the second range date, de
     },
 
     _timeZoneChanged: function() {
-      this.set('baseDate', moment.tz(this.baseDate, this.timeZone));
+      this.set('baseDate', Px.moment.tz(this.baseDate, this.timeZone));
     },
 
     _getTableClass: function(shrink) {
@@ -338,7 +338,7 @@ The first range date may be before, after, or equal to the second range date, de
     },
 
     _getDaysOfTheWeek: function() {
-      var day = moment().startOf('week');
+      var day = Px.moment().startOf('week');
       var daysOfWeek = [];
       for (var i = 0; i < 7; i++) {
         daysOfWeek.push(day.format('dd'));
@@ -430,7 +430,7 @@ The first range date may be before, after, or equal to the second range date, de
         var week = [];
 
         while (daysBeforeMonthStartsCount < dayBeginningOfMonth) {
-          week.push(moment(null)); // push empty cells on before the 1st of the month
+          week.push(Px.moment(null)); // push empty cells on before the 1st of the month
           daysBeforeMonthStartsCount++;
         }
 
@@ -440,7 +440,7 @@ The first range date may be before, after, or equal to the second range date, de
             date++;
           }
           else {
-            week.push(moment(null)); // push empty cells on after the last day of the month (to fill the week, extra weeks)
+            week.push(Px.moment(null)); // push empty cells on after the last day of the month (to fill the week, extra weeks)
           }
         }
         month.push(week);
@@ -454,12 +454,12 @@ The first range date may be before, after, or equal to the second range date, de
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
       if(this._currentDisplayMode === 'day') {
-        newMoment = moment.tz(this.baseDate.add(1, 'months'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate.add(1, 'months'), this.timeZone);
       }else if(this._currentDisplayMode === 'month') {
-        newMoment = moment.tz(this.baseDate.add(1, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate.add(1, 'years'), this.timeZone);
       }
       else {
-        newMoment = moment.tz(this.baseDate.add(10, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate.add(10, 'years'), this.timeZone);
       }
 
       this.set('baseDate', newMoment);
@@ -472,12 +472,12 @@ The first range date may be before, after, or equal to the second range date, de
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
       if(this._currentDisplayMode === 'day') {
-        newMoment = moment.tz(this.baseDate.subtract(1, 'months'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate.subtract(1, 'months'), this.timeZone);
       }else if(this._currentDisplayMode === 'month') {
-        newMoment = moment.tz(this.baseDate.subtract(1, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate.subtract(1, 'years'), this.timeZone);
       }
       else {
-        newMoment = moment.tz(this.baseDate.subtract(10, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate.subtract(10, 'years'), this.timeZone);
       }
 
       this.set('baseDate', newMoment);
