@@ -216,7 +216,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
     _isPastTodaysDate: function() {
       var todaysDate = Px.moment().tz(this.timeZone);
-      return this.displayDate.isAfter(todaysDate,'day');
+      return this.displayDate.isAfter(todaysDate, 'day');
     },
 
     _isBeforeTodaysDate: function() {
