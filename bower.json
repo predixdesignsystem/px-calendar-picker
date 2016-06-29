@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -16,7 +16,7 @@
   "dependencies": {
     "polymer": "^1.5.0",
     "px-theme": "~0.8.0",
-    "px-datetime-common": "~0.4.0",
+    "px-datetime-common": "~0.5.0",
     "polymer-font-awesome": "polymer-font-awesome#~v0.1.0"
   },
   "devDependencies": {

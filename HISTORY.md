@@ -1,3 +1,7 @@
+v0.3.0
+==================
+* Added BlockPastDates
+
 v0.2.3
 ==================
 * Added demo link in px-calendar-picker.html
