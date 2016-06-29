@@ -66,7 +66,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     observers: [
-      '_updateNeeded(displayDate, fromMoment, toMoment, displayMode, blockDatesAfter, blockDatesBefore, blockFutureDates)'
+      '_updateNeeded(displayDate, fromMoment, toMoment, displayMode, blockDatesAfter, blockDatesBefore, blockFutureDates, blockPastDates)'
     ],
 
     ready: function() {
@@ -113,6 +113,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
           }
 
           if ((_this.blockFutureDates && _this._isPastTodaysDate()) ||
+              (_this.blockPastDates && _this._isBeforeTodaysDate()) ||
               (_this.blockDatesAfter && _this.displayDate.isAfter(_this.blockDatesAfter, 'day')) ||
               (_this.blockDatesBefore && _this.displayDate.isBefore(_this.blockDatesBefore, 'day'))) {
             btnStyles += ' btn--disabled';
@@ -215,7 +216,12 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
     _isPastTodaysDate: function() {
       var todaysDate = Px.moment().tz(this.timeZone);
-      return this.displayDate.isAfter(todaysDate);
+      return this.displayDate.isAfter(todaysDate, 'day');
+    },
+
+    _isBeforeTodaysDate: function() {
+      var todaysDate = Px.moment().tz(this.timeZone);
+      return this.displayDate.isBefore(todaysDate, 'day');
     },
 
     _isTodaysDate: function() {
