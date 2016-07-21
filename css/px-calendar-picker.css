@@ -659,6 +659,7 @@ button[hidden] {
   font-weight: bold; }
 
 .btn--bare {
+  height: auto;
   width: 1.2rem;
   margin-right: -0.2666666667rem;
   margin-left: -0.2666666667rem;
