@@ -99,7 +99,7 @@
               </div>
               <div class="u-mb-">Display mode:
                 <div style="width: 100%;">
-                  <px-dropdown id="displayMode" value="{{item.displayMode}}" display-value="{{item.displayMode}}" bound-target="properties">
+                  <px-dropdown id="displayMode{{indexPlusOne(index)}}" value="{{item.displayMode}}" display-value="{{item.displayMode}}" bound-target="properties">
                     <px-dropdown-content
                       items='[
                         {"key":"one", "val": "day"},
@@ -224,7 +224,7 @@ window.addEventListener('WebComponentsReady', function() {
     };
 
     year = year.getFullYear();
-    
+
     template.selected = "0";
     template.optionsArray = optionsArray;
     template.indexPlusOne = indexPlusOne;
