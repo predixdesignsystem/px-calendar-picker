@@ -1,3 +1,7 @@
+v0.3.3
+==================
+* Fixed footer
+
 v0.3.2
 ==================
 * Added height:auto to .btn--bare
