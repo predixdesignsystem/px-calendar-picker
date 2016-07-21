@@ -24,7 +24,8 @@ module.exports = function (grunt) {
             calendar: {
                 files: {
                     'css/noprefix/px-calendar-picker-sketch.css': 'sass/px-calendar-picker-sketch.scss',
-                    'css/noprefix/px-calendar-picker.css': 'sass/px-calendar-picker-predix.scss'
+                    'css/noprefix/px-calendar-picker.css': 'sass/px-calendar-picker-predix.scss',
+                    'css/noprefix/px-calendar-picker-demo.css': 'sass/px-calendar-picker-demo.scss'
                 }
             }
         },
