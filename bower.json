@@ -37,6 +37,7 @@
     "px-actionable-text-icons-design": "^0.0.3",
     "px-toggle-design": "^0.2.12",
     "px-list-inline-design": "^0.2.11",
-    "px-code-design": "^0.2.11"
+    "px-code-design": "^0.2.11",
+    "px-dropdown": "https://github.com/PredixDev/px-dropdown.git#^0.10.1"
   }
 }

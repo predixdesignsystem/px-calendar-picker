@@ -10,6 +10,7 @@
   <link rel="import" href="../px-theme/px-theme.html"/>
   <link rel="import" href="../px-api-viewer/px-api-viewer.html" />
   <link rel="import" href="../px-tabs/px-tab-set.html" />
+  <link rel="import" href="../px-dropdown/px-dropdown.html" />
   <link rel="import" href="../iron-component-page/iron-component-page.html"/>
   <link rel="import" href="px-calendar-picker.html"/>
   <link rel="icon" href="favicon.ico" type="image/x-icon"/>
@@ -72,24 +73,44 @@
             <div class="properties u-ph+ u-pb+ u-mt++ u-mh++" id="properties">
               <p class="epsilon">Properties</p>
               <div class="flex u-mb-">
-                <input id="toggleTime{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.hideTime::change}}">
-                <label for$="toggleTime{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Hide time</div>
+                <input id="togglePreventRange{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.preventRangeSelection::change}}">
+                <label for$="togglePreventRange{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Prevent Range Selection</div>
+              </div>
+              <div class="flex u-mb-">
+                <input id="toggleFutureDates{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.blockFutureDates::change}}">
+                <label for$="toggleFutureDates{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Block future dates</div>
+              </div>
+              <div class="flex u-mb-">
+                <input id="togglePastDates{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.blockPastDates::change}}">
+                <label for$="togglePastDates{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Block past dates</div>
+              </div>
+              <div class="flex u-mb-">
+                <input id="toggleHideNext{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.hideNextButton::change}}">
+                <label for$="toggleHideNext{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Hide next button</div>
+              </div>
+              <div class="flex u-mb-">
+                <input id="toggleHidePrevious{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.hidePreviousButton::change}}">
+                <label for$="toggleHidePrevious{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Hide previous button</div>
               </div>
               <div class="u-mb-">Display mode:
                 <div style="width: 100%;">
-                  <px-dropdown id="displayMode" value="day" display-value="month" bound-target="properties">
+                  <px-dropdown id="displayMode" value="{{item.displayMode}}" display-value="{{item.displayMode}}" bound-target="properties">
                     <px-dropdown-content
                       items='[
-                        {"key":"one", "val": "none"},
-                        {"key":"two", "val": "dropdown"},
-                        {"key":"three", "val": "extendedDropdown"},
-                        {"key":"four", "val": "text"},
-                        {"key":"five", "val": "abbreviatedText"}]'>
+                        {"key":"one", "val": "day"},
+                        {"key":"two", "val": "month"},
+                        {"key":"three", "val": "year"}]'>
                     </px-dropdown-content>
                   </px-dropdown>
                 </div>
               </div>
+              <div class="u-mb-">Block dates before: <input id="blockDatesAfter" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesBefore::input}}" /></div>
+              <div class="u-mb-">Block dates after: <input id="blockDatesAfter" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesAfter::input}}" /></div>
               <div>More info on date and time format at <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank" class="actionable">momentjs</a></div>
             </div>
 
@@ -106,7 +127,13 @@
                   <div class="container">
                     <px-calendar-picker
                       display-mode="{{item.displayMode}}"
-
+                      block-future-dates="{{item.blockFutureDates}}"
+                      block-past-dates="{{item.blockPastDates}}"
+                      prevent-range-selection="{{item.preventRangeSelection}}"
+                      block-dates-before="{{item.blockDatesBefore}}"
+                      block-dates-after="{{item.blockDatesAfter}}"
+                      hide-next-button="{{item.hideNextButton}}"
+                      hide-previous-button="{{item.hidePreviousButton}}"
                       >
                     </px-calendar-picker>
                   </div>
@@ -155,32 +182,39 @@
 <script>
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),
-      displayMode = ['day','month','year'];
-
-
-      // baseDate = ,
-      // blockDatesAfter = '2016-07-01T00:00:00.000Z',
-      // blockDatesBefore = '2016-01-01T00:00:00.000Z',
-      // blockFutureDates = ,
-      // blockPastDates = ,
-      // hideNextButton = ,
-      // hidePreviousButton = ,
-      // preventRangeSelection = ,
-      // shrink = ,
-      // timeZone = ;
-
+      displayMode = ['day','month','year'],
+      blockDatesAfter = ['','2016-07-20T00:00:00.000Z'],
+      blockDatesBefore = ['','2016-07-10T00:00:00.000Z'];
   var optionsArray = [
     {
-      "displayMode":displayMode[0]
-
+      "displayMode":displayMode[0],
+      "preventRangeSelection":false,
+      "blockFutureDates":false,
+      "blockPastDates":true,
+      "blockDatesBefore":blockDatesBefore[0],
+      "blockDatesAfter":blockDatesAfter[0],
+      "hideNextButton":false,
+      "hidePreviousButton":false
     },
     {
-      "displayMode":displayMode[1]
-
+      "displayMode":displayMode[0],
+      "preventRangeSelection":true,
+      "blockFutureDates":false,
+      "blockPastDates":false,
+      "blockDatesBefore":blockDatesBefore[1],
+      "blockDatesAfter":blockDatesAfter[1],
+      "hideNextButton":true,
+      "hidePreviousButton":true
     },
     {
-      "displayMode":displayMode[2]
-
+      "displayMode":displayMode[1],
+      "preventRangeSelection":false,
+      "blockFutureDates":false,
+      "blockPastDates":false,
+      "blockDatesBefore":blockDatesBefore[0],
+      "blockDatesAfter":blockDatesAfter[0],
+      "hideNextButton":false,
+      "hidePreviousButton":false
     }
   ];
 
@@ -198,12 +232,6 @@ window.addEventListener('WebComponentsReady', function() {
 
 
 <!-- base-date="{{item.baseDate}}"
-block-future-dates="{{item.blockFutureDates}}"
-prevent-range-selection="{{item.preventRangeSelection}}"
-prevent-range-selection="{{item.preventRangeSelection}}"
-block-date-before="{{item.blockDatesBefore}}"
-block-dates-after="{{item.blockDatesAfter}}"
-block-past-dates="{{item.blockPastDates}}"
 hide-next-button="{{item.hideNextButton}}"
 hide-previous-button="{{item.hidePreviousButton}}"
 shrink="{{item.shrink}}" -->
