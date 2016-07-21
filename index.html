@@ -182,6 +182,7 @@
 <script>
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),
+      year = new Date(),
       displayMode = ['day','month','year'],
       blockDatesAfter = ['','2016-07-20T00:00:00.000Z'],
       blockDatesBefore = ['','2016-07-10T00:00:00.000Z'];
@@ -221,9 +222,13 @@ window.addEventListener('WebComponentsReady', function() {
     var indexPlusOne = function(num) {
       return num + 1;
     };
+
+    year = year.getFullYear();
+    
     template.selected = "0";
     template.optionsArray = optionsArray;
     template.indexPlusOne = indexPlusOne;
+    template.year = year;
 });
 </script>
 

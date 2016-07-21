@@ -1,3 +1,7 @@
+v0.3.4
+==================
+* Fixed footer auto year
+
 v0.3.3
 ==================
 * Fixed footer
