@@ -23,7 +23,7 @@
     .container {
       float:left;
       width:250px;
-      margin:20px;
+      margin:30px 20px;
       resize: both;
     }
   </style>
@@ -41,12 +41,9 @@
   		<p>
   			The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
   		</p>
-      <p class="description-text">This counter represents when the px-calendar-picker event/range property of the
-      range field are being fired/updated. The behavior depends on whether the range field uses
-      buttons. It is defined as followed:
-      <br>
-      - If it has buttons then it is fired when the user clicks the apply button AND the date/time is valid<br>
-      - If it doesn't have button then it is fired every time a change is made to the date/time AND the date/time is valid
+      <p class="description-text">
+        This component allows the user to select a date or date range.
+        The main use of this component is to be used in the px-range-panel.
       </p>
   		<div class="flex">
   			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
@@ -118,12 +115,6 @@
               <!-- demo -->
               <div class="flex flex--col">
                 <div class="flex__item demo u-ph+ u-pb+ u-mt++">
-                  <br />
-                  <span id="counter"><strong>px-datetime-range-submitted</strong> fired <strong>0</strong> time</span>
-                  <div>
-                    Current range object: From: <strong>{{item.range.from}}</strong> To: <strong>{{item.range.to}}</strong>
-                  </div>
-                  <br />
                   <div class="container">
                     <px-calendar-picker
                       display-mode="{{item.displayMode}}"
