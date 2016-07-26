@@ -151,6 +151,14 @@ $inuit-enable-list-inline--delimited : true;
   width: 150px;
 }
 
+.container {
+  float:left;
+  width:calculateRem(250px);
+  margin:calculateRem(30px) calculateRem(20px);
+  resize: both;
+  overflow: auto;
+}
+
 @media screen  and (max-width: calculateRem(672px)){
   .mega-demo {
     flex-direction: column;

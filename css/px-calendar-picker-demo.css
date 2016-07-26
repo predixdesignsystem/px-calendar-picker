@@ -1208,6 +1208,13 @@ textarea {
 .footer__img {
   width: 150px; }
 
+.container {
+  float: left;
+  width: 16.6666666667rem;
+  margin: 2rem 1.3333333333rem;
+  resize: both;
+  overflow: auto; }
+
 @media screen and (max-width: 44.8rem) {
   .mega-demo {
     -webkit-flex-direction: column;
