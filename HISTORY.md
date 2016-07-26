@@ -1,3 +1,7 @@
+v0.3.8
+==================
+* added shrink-to-fit=no inside viewport of demo.
+
 v0.3.7
 ==================
 * set the demo container overflow to auto.
