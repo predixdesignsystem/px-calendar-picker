@@ -1146,7 +1146,8 @@ textarea {
       -ms-flex-preferred-size: 26.6666666667rem;
           flex-basis: 26.6666666667rem;
   background: white;
-  border: 1px solid #d1d0d8; }
+  border: 1px solid #d1d0d8;
+  overflow: auto; }
 
 .componentList a {
   color: #2886af; }
@@ -1158,7 +1159,7 @@ textarea {
   margin-left: 0; }
 
 .api {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   max-width: 80rem; }
 
@@ -1172,7 +1173,8 @@ textarea {
 
 .apiContainer {
   background-color: white;
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 80%; }
 
 .footer {
   background-color: #7c7c84; }

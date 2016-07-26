@@ -1,3 +1,7 @@
+v0.3.7
+==================
+* set the demo container overflow to auto.
+
 v0.3.6
 ==================
 * Updated component discription in demo

@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -11,15 +11,18 @@
     "sass",
     "bower_components",
     "node_modules",
-    "test"
+    "test",
+    "OSS_Notice.pdf",
+    ".github",
+    "scripts"
   ],
   "dependencies": {
     "polymer": "^1.5.0",
     "px-theme": "~0.8.0",
     "px-datetime-common": "~0.5.0",
     "polymer-font-awesome": "polymer-font-awesome#~v0.1.0",
-    "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.20",
-    "px-tables-design": "https://github.com/PredixDev/px-tables-design.git#~0.3.0"
+    "px-buttons-design": "~0.4.20",
+    "px-tables-design": "~0.3.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~v1.1.0",
@@ -30,14 +33,14 @@
     "polymer-font-awesome": "~0.1.5",
     "px-tabs": "~0.4.0",
     "ace-widget": "LostInBrittany/ace-widget#~1.0.13",
-    "px-api-viewer": "https://github.com/PredixDev/px-api-viewer.git",
+    "px-api-viewer": "~0.0.3",
     "px-clipboard": "^0.0.4",
-    "px-demo-snippet": "https://github.com/predixdev/px-demo-snippet.git",
+    "px-demo-snippet": "~0.0.11",
     "px-headings-design": "^0.2.14",
     "px-actionable-text-icons-design": "^0.0.3",
     "px-toggle-design": "^0.2.12",
     "px-list-inline-design": "^0.2.11",
     "px-code-design": "^0.2.11",
-    "px-dropdown": "https://github.com/PredixDev/px-dropdown.git#^0.10.1"
+    "px-dropdown": "^0.10.1"
   }
 }
