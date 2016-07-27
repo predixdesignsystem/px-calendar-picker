@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -30,7 +30,7 @@
     "px-forms-design": "#~0.3.15",
     "px-tables-design": "#~0.3.12",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-    "polymer-font-awesome": "~0.1.5",
+    "polymer-font-awesome": "px-polymer-font-awesome#^0.1.8",
     "px-tabs": "~0.4.0",
     "ace-widget": "LostInBrittany/ace-widget#~1.0.13",
     "px-api-viewer": "~0.0.3",
