@@ -1,6 +1,10 @@
+v0.3.12
+==================
+* added readme image and link 
+
 v0.3.11
 ==================
-* added github link 
+* added github link
 
 v0.3.10
 ==================
