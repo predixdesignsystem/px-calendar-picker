@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -26,22 +26,23 @@
     "px-tables-design": "~0.3.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#~v1.1.0",
-    "px-starter-kit-design": "#~0.5.4",
+    "px-starter-kit-design": "~0.4.0",
+    "px-slider": "~0.5.0",
+    "px-spacing-design": "~0.3.4",
+    "px-buttons-design": "~0.4.13",
     "px-forms-design": "#~0.3.15",
-    "px-tables-design": "#~0.3.12",
+    "px-button-group-design": "~0.3.8",
+    "px-typography-design": "~0.3.2",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-    "px-polymer-font-awesome":"^0.1.8",
     "px-tabs": "~0.4.0",
-    "ace-widget": "LostInBrittany/ace-widget#~1.0.13",
-    "px-api-viewer": "~0.0.3",
-    "px-clipboard": "^0.0.9",
-    "px-demo-snippet": "~0.0.11",
+    "px-api-viewer": "^0.0.1",
+    "px-demo-snippet": "^0.1.0",
+    "px-list-inline-design": "^0.2.11",
+    "px-toggle-design": "^0.2.12",
     "px-headings-design": "^0.2.14",
     "px-actionable-text-icons-design": "^0.0.3",
-    "px-toggle-design": "^0.2.12",
-    "px-list-inline-design": "^0.2.11",
-    "px-code-design": "^0.2.11",
-    "px-dropdown": "^0.10.1"
+    "px-code-design": "~0.2.11",
+    "px-dropdown": "^0.10.2",
+    "px-polymer-font-awesome":"^0.1.8"
   }
 }

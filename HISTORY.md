@@ -1,6 +1,10 @@
+v0.3.13
+==================
+* updated mega demo styles and bower px-demo-snippet to ^
+
 v0.3.12
 ==================
-* added readme image and link 
+* added readme image and link
 
 v0.3.11
 ==================

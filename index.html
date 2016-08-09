@@ -29,40 +29,40 @@
     <!-- discription -->
     <div class="hero u-p++ text--shadow">
       <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-calendar-picker" target="_new">
-        <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>
-        View on Github
+        <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
       </a>
-
   		<h1 class="delta">px-calendar-picker</h1>
-  		<p>
-  			The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
-  		</p>
-      <p class="description-text">
-        This component allows the user to select a date or date range.
-        The main use of this component is to be used in the px-range-panel.
-      </p>
+      <div class="description-text">
+    		<p>
+    			The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
+    		</p>
+        <p>
+          This component allows the user to select a date or date range.
+          The main use of this component is to be used in the px-range-panel.
+        </p>
+      </div>
   		<div class="flex">
   			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
   			<img class="u-mr--" src="https://img.shields.io/bower/v/px-calendar-picker.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
   			<img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
   		</div>
   	</div>
-    <br />
+
     <!-- mega demo -->
     <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
       <div class="tabContainer u-pt++ u-pl++">
         <px-tab-set selected="{{selected}}" bare no-bottom-border>
           <template is="dom-repeat" items="{{optionsArray}}">
-            <px-tab>Configuration {{indexPlusOne(index)}}</px-tab>
+            <px-tab>Option {{indexPlusOne(index)}}</px-tab>
           </template>
         </px-tab-set>
       </div>
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
-          <section class="tab-page flex flex--right flex--wrap">
-            <div class="mega-demo flex u-pb++">
-            <!-- Properties -->
-            <div class="properties u-ph+ u-pb+ u-mt++ u-mh++" id="properties">
+          <section class="tab-page">
+            <div class="mega-demo flex flex--wrap u-ph++ u-pb++">
+              <!-- Properties -->
+              <div class="properties u-ph+ u-pb+ u-mt+">
               <p class="epsilon">Properties</p>
               <div class="flex u-mb-">
                 <input id="togglePreventRange{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.preventRangeSelection::change}}">
@@ -106,11 +106,12 @@
               <div>More info on date and time format at <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank" class="actionable">momentjs</a></div>
             </div>
 
-            <div class="demoContainer u-mr++" style="overflow-x:auto;">
-              <!-- demo -->
-              <div class="flex flex--col">
-                <div class="flex__item demo u-ph+ u-pb+ u-mt++">
-                  <div class="container">
+            <div class="demoContainer u-mt+">
+                <!-- demo -->
+                <div class="flex flex--col">
+                  <div class="flex__item demo u-p+">
+
+                  <div style="width:250px">
                     <px-calendar-picker
                       display-mode="{{item.displayMode}}"
                       block-future-dates="{{item.blockFutureDates}}"
@@ -190,8 +191,8 @@ window.addEventListener('WebComponentsReady', function() {
       "blockPastDates":false,
       "blockDatesBefore":blockDatesBefore[1],
       "blockDatesAfter":blockDatesAfter[1],
-      "hideNextButton":true,
-      "hidePreviousButton":true
+      "hideNextButton":false,
+      "hidePreviousButton":false
     },
     {
       "displayMode":displayMode[1],
