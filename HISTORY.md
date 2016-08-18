@@ -1,3 +1,7 @@
+v0.3.14
+==================
+* added overflow to demoContainer and removed flex__wrap from mega-demo
+
 v0.3.13
 ==================
 * updated mega demo styles and bower px-demo-snippet to ^
