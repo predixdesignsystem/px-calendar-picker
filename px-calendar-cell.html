@@ -13,11 +13,15 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     </px-calendar-cell>
 
 -->
+
+<link rel="import" href="css/px-calendar-picker-styles.html">
+
 <dom-module id="px-calendar-cell">
-  <link rel="import" type="css" href="css/px-calendar-picker.css"/>
   <template>
+    <style include="px-calendar-picker-styles"></style>
+    <style include="px-theme-styles"></style>
     <div class$="{{cellStyles}}">
-      <button class$="{{btnStyles}}" value="{{displayedValue}}" on-tap="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{displayedValue}}</button>
+      <button class$="{{btnStyles}} btn--calendar-cell" value="{{displayedValue}}" on-tap="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{displayedValue}}</button>
     </div>
   </template>
 </dom-module>

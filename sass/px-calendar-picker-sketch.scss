@@ -158,6 +158,10 @@ button[hidden] {
   text-transform: uppercase;
 }
 
+.btn--calendar-cell {
+  font-size: $inuit-base-font-size;
+}
+
 .btn--larger {
   width: 100%;
 }

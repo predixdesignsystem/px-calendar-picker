@@ -20,6 +20,12 @@ function runCustomTests() {
       assert.isTrue(cal1.baseDate.isSame(now, 'month'));
     });
 
+    test('Cell font size is 15px', function(){
+      var pc = Polymer.dom(cal1.root).querySelector('px-calendar-cell'),
+          textSize = window.getComputedStyle(Polymer.dom(pc.root).querySelector('button')).fontSize;
+      assert.equal(textSize, '15px', 'Text size of cell should be 15px');
+    });
+
     test('previous/next buttons', function(){
 
       var cal1Buttons = Polymer.dom(cal1.root).querySelectorAll('iron-icon'),
@@ -277,4 +283,4 @@ function runCustomTests() {
       });
     });
   });
-};
+}

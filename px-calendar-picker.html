@@ -19,9 +19,13 @@ The first range date may be before, after, or equal to the second range date, de
 
 @demo demo.html
 -->
+
+<link rel="import" href="css/px-calendar-picker-styles.html">
+
 <dom-module id="px-calendar-picker">
-  <link rel="import" type="css" href="css/px-calendar-picker.css"/>
   <template>
+    <style include="px-calendar-picker-styles"></style>
+    <style include="px-theme-styles"></style>
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">
