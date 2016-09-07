@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.3.14",
+  "version": "0.4.0",
   "main": [
     "px-calendar-picker.html"
   ],
