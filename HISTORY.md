@@ -1,3 +1,7 @@
+v0.4.0
+==================
+* added events 'px-datetime-range-submitted' and 'px-datetime-submitted' to _selectDate(). Added these events to the demo. 
+
 v0.3.14
 ==================
 * added overflow to demoContainer and removed flex__wrap from mega-demo
