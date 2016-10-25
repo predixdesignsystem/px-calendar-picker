@@ -1,6 +1,10 @@
+v0.5.0
+==================
+* added events 'px-datetime-range-submitted' and 'px-datetime-submitted' to _selectDate(). Added these events to the demo.
+
 v0.4.0
 ==================
-* added events 'px-datetime-range-submitted' and 'px-datetime-submitted' to _selectDate(). Added these events to the demo. 
+* latest gulp file
 
 v0.3.14
 ==================
