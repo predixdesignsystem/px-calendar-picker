@@ -112,7 +112,25 @@
                 <!-- demo -->
                 <div class="flex flex--col">
                   <div class="demo u-p+">
+                    <template is="dom-if" if="{{item.preventRangeSelection}}">
+                      <div>
+                        <span id="counter{{indexPlusOne(index)}}"><strong>px-datetime-submitted</strong> fired <strong>0</strong> time(s)</span>
+                      </div>
+                      <div>
+                        <span id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</span>
+                      </div>
+                    </template>
 
+                    <template is="dom-if" if="{{!item.preventRangeSelection}}">
+                      <div>
+                        <span id="counterRange{{indexPlusOne(index)}}"><strong>px-datetime-range-submitted</strong> fired <strong>0</strong> time(s)</span>
+                      </div>
+                      <div>
+                        <span id="rangeString{{indexPlusOne(index)}}">Current range object:</span>
+                      </div>
+                    </template>
+                  <br />
+                  <br />
                   <div style="width:250px">
                     <px-calendar-picker
                       display-mode="{{item.displayMode}}"
@@ -173,8 +191,11 @@ window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),
       year = new Date(),
       displayMode = ['day','month','year'],
-      blockDatesAfter = ['','2016-07-20T00:00:00.000Z'],
-      blockDatesBefore = ['','2016-07-10T00:00:00.000Z'];
+      blockDatesAfter = ['','2017-11-20T00:00:00.000Z'],
+      blockDatesBefore = ['','2016-10-10T00:00:00.000Z'],
+      counter = 0,
+      counterRange = 0;
+
   var optionsArray = [
     {
       "displayMode":displayMode[0],
@@ -213,6 +234,40 @@ window.addEventListener('WebComponentsReady', function() {
     };
 
     year = year.getFullYear();
+
+    document.addEventListener('px-datetime-submitted', function(evt) {
+      counter++;
+      for(var i=1; i<=optionsArray.length; i++) {
+        var span = document.getElementById('counter'+i);
+        if(span){
+          span.innerHTML = '<strong>px-datetime-submitted</strong> fired <strong>' + counter + '</strong> time(s)';
+        }
+      }
+
+      for(var i=1; i<=optionsArray.length; i++) {
+        var span2 = document.getElementById('dateTimeString'+i);
+        if(span2){
+          span2.innerHTML = 'Current dateTime object: <strong>' + evt.detail.dateTime + '</strong>';
+        }
+      }
+    });
+
+    document.addEventListener('px-datetime-range-submitted', function(evt) {
+      counterRange++;
+      for(var i=1; i<=optionsArray.length; i++) {
+        var span = document.getElementById('counterRange'+i);
+        if(span){
+          span.innerHTML = '<strong>px-datetime-range-submitted</strong> fired <strong>' + counterRange + '</strong> time(s)';
+        }
+      }
+
+      for(var i=1; i<=optionsArray.length; i++) {
+        var span2 = document.getElementById('rangeString'+i);
+        if(span2){
+          span2.innerHTML = 'Current range object: From: <strong>' + evt.detail.range.from + '</strong> To: <strong>' + evt.detail.range.to + '</strong>';
+        }
+      }
+    });
 
     template.selected = "0";
     template.optionsArray = optionsArray;
