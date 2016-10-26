@@ -1,3 +1,7 @@
+v0.5.1
+==================
+* push pull resquest for added events
+
 v0.5.0
 ==================
 * added events 'px-datetime-range-submitted' and 'px-datetime-submitted' to _selectDate(). Added these events to the demo.
