@@ -1,3 +1,7 @@
+v0.5.2
+==================
+* fixing bug of px-datetime-submitted & px-datetime-range-submitted being fired too often by updating events to 'px-calendar-selected' & 'px-datetime-range-submitted' events
+
 v0.5.1
 ==================
 * push pull resquest for added events

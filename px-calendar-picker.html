@@ -77,7 +77,7 @@ The first range date may be before, after, or equal to the second range date, de
   Polymer({
 
     is: 'px-calendar-picker',
-    behaviors: [pxDatetimeRangeBehavior, pxDatetimeBehavior],
+    behaviors: [pxDatetimeRangeBehavior],
 
     properties: {
 
@@ -236,6 +236,15 @@ The first range date may be before, after, or equal to the second range date, de
       _valuesDisplayed: {
         type: Array,
         value: function() { return [];}
+      },
+      /**
+       *
+       *
+       * @default false;
+       */
+      waitToFire: {
+        type: Boolean,
+        value: false
       }
     },
     observers: ['_renderCurrent(_currentDisplayMode)'],
@@ -366,6 +375,21 @@ The first range date may be before, after, or equal to the second range date, de
       this.set('_valuesDisplayed', newValues);
 
     },
+    /**
+      * px-calendar-range-selected event. This event is fired when the user selects a range in the calendar & 'preventRangeSelection' is false
+      *
+      * @event px-calendar-range-selected
+      * @param {object} range - {from, to} the ISO 8601 Strings representing the date/time chosen by the user
+      * @param {object} momentObjs - {from, to}: the moment.js objects representing the date/time chosen by the user
+      */
+    /**
+      * px-calendar-selected event. This event is fired when the user selects a date in the calendar & 'preventRangeSelection' is true
+      *
+      * @event px-calendar-selected
+      * @param {object} range - {from, to} the ISO 8601 Strings representing the date/time chosen by the user
+      * @param {object} momentObjs - {from, to}: the moment.js objects representing the date/time chosen by the user
+      */
+
 
     _selectDate: function(newSelectedDate) {
 
@@ -378,16 +402,11 @@ The first range date may be before, after, or equal to the second range date, de
           this.set('toMoment', this.fromMoment);
           this.set('fromMoment', this._preserveTime(this.fromMoment, newSelectedDate));
 
-          //retro fitting calendar to fire common events. Another way to do this is to convert calendar to the events that were created in datetime commmon.
-          this.fire('px-datetime-range-submitted', {range: {from: this.fromMoment.toISOString(), to: this.toMoment.toISOString()}, momentObjs: {from: this.fromMoment, to: this.toMoment}});
-
         } else {
           this.set('toMoment', this._preserveTime(this.toMoment, newSelectedDate));
-
-          //retro fitting calendar to fire common events. Another way to do this is to convert calendar to the events that were created in datetime commmon.
-          this.fire('px-datetime-range-submitted', {range: {from: this.fromMoment.toISOString(), to: this.toMoment.toISOString()}, momentObjs: {from: this.fromMoment, to: this.toMoment}});
-
         }
+        
+        this.fire('px-calendar-range-selected', {range: {from: this.fromMoment.toISOString(), to: this.toMoment.toISOString()}, momentObjs: {from: this.fromMoment, to: this.toMoment}});
       }
       else {
         this.set('toMoment', null);
@@ -396,8 +415,7 @@ The first range date may be before, after, or equal to the second range date, de
         if(this.preventRangeSelection) {
           this.set('singleSelectedDate', this.fromMoment.toISOString());
 
-          //retro fitting calendar to fire common events. Another way to do this is to convert calendar to the events that were created in datetime commmon.
-          this.fire('px-datetime-submitted', {dateTime: this.fromMoment.toISOString(), momentObj: this.fromMoment});
+          this.fire('px-calendar-selected', {dateTime: this.fromMoment.toISOString(), momentObj: this.fromMoment});
 
         }
       }
