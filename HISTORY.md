@@ -1,3 +1,7 @@
+v0.5.3
+==================
+* updated to px-polymer-font-awesome
+
 v0.5.2
 ==================
 * fixing bug of 'px-datetime-submitted' & 'px-datetime-range-submitted' being fired too often by updating events to 'px-calendar-selected' & 'px-calendar-range-selected' events

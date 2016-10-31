@@ -2,7 +2,7 @@
 <link rel="import" href="px-calendar-cell.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
-<link rel="import" href="../polymer-font-awesome/polymer-font-awesome.html"/>
+<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-imports.html" />
 
 <!--
@@ -31,13 +31,13 @@ The first range date may be before, after, or equal to the second range date, de
       <div class="caption">
         <button on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
-            <iron-icon icon="polymer-font-awesome:fa-angle-left" class="fa-angle"></iron-icon>
+            <iron-icon icon="fa:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
         </button>
         <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, baseDate)}}</span>
         <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
-            <iron-icon icon="polymer-font-awesome:fa-angle-right" class="fa-angle"></iron-icon>
+            <iron-icon icon="fa:fa-angle-right" class="fa-angle"></iron-icon>
           </template>
         </button>
       </div>
@@ -405,7 +405,7 @@ The first range date may be before, after, or equal to the second range date, de
         } else {
           this.set('toMoment', this._preserveTime(this.toMoment, newSelectedDate));
         }
-        
+
         this.fire('px-calendar-range-selected', {range: {from: this.fromMoment.toISOString(), to: this.toMoment.toISOString()}, momentObjs: {from: this.fromMoment, to: this.toMoment}});
       }
       else {
