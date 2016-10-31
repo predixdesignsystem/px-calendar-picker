@@ -148,7 +148,9 @@
                 <div>
                   <px-demo-snippet
                     element-properties={{item}}
-                    element-name="px-calendar-picker">
+                    element-name="px-calendar-picker"
+                    links-includes="[[linksIncludes]]"
+                    parent-component="[<div style='width:250px'></div>]">
                   </px-demo-snippet>
                 </div>
               </div>
@@ -205,7 +207,8 @@ window.addEventListener('WebComponentsReady', function() {
       "blockDatesBefore":blockDatesBefore[0],
       "blockDatesAfter":blockDatesAfter[0],
       "hideNextButton":false,
-      "hidePreviousButton":false
+      "hidePreviousButton":false,
+      "parentComponent": ["<div style='width:250px'>","</div>"],
     },
     {
       "displayMode":displayMode[0],
@@ -215,7 +218,8 @@ window.addEventListener('WebComponentsReady', function() {
       "blockDatesBefore":blockDatesBefore[1],
       "blockDatesAfter":blockDatesAfter[1],
       "hideNextButton":false,
-      "hidePreviousButton":false
+      "hidePreviousButton":false,
+      "parentComponent": ["<div style='width:250px'>","</div>"],
     },
     {
       "displayMode":displayMode[1],
@@ -225,7 +229,8 @@ window.addEventListener('WebComponentsReady', function() {
       "blockDatesBefore":blockDatesBefore[0],
       "blockDatesAfter":blockDatesAfter[0],
       "hideNextButton":false,
-      "hidePreviousButton":false
+      "hidePreviousButton":false,
+      "parentComponent": ["<div style='width:250px'>","</div>"],
     }
   ];
 
@@ -273,6 +278,7 @@ window.addEventListener('WebComponentsReady', function() {
     template.optionsArray = optionsArray;
     template.indexPlusOne = indexPlusOne;
     template.year = year;
+    template.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html','px-polymer-font-awesome/polymer-font-awesome.html'];
 });
 </script>
 

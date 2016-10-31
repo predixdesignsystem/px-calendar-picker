@@ -35,8 +35,8 @@ function runCustomTests() {
       assert.isTrue(cal1Buttons.length === 2);
       assert.isTrue(cal2Buttons.length === 1);
       assert.isTrue(cal3Buttons.length === 1);
-      assert.equal(cal2Buttons[0].icon, 'polymer-font-awesome:fa-angle-right');
-      assert.equal(cal3Buttons[0].icon, 'polymer-font-awesome:fa-angle-left');
+      assert.equal(cal2Buttons[0].icon, 'fa:fa-angle-right');
+      assert.equal(cal3Buttons[0].icon, 'fa:fa-angle-left');
     });
   });
 

@@ -1,3 +1,7 @@
+v0.5.4
+==================
+* fixed tests and codepen
+
 v0.5.3
 ==================
 * updated to px-polymer-font-awesome
