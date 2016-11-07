@@ -1,3 +1,7 @@
+v0.5.5
+==================
+* updated dependencies
+
 v0.5.4
 ==================
 * fixed tests and codepen
@@ -16,7 +20,7 @@ v0.5.1
 
 v0.5.0
 ==================
-* added events 'px-datetime-range-submitted' and 'px-datetime-submitted' to _selectDate(). Added these events to the demo.
+* added events 'px-datetime-range-submitted' and 'px-datetime-submitted' to \_selectDate(). Added these events to the demo.
 
 v0.4.0
 ==================

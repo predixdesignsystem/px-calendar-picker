@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -21,7 +21,7 @@
     "polymer": "^1.6.1",
     "px-theme": "~1.1.2",
     "px-datetime-common": "~0.6.1",
-    "polymer-font-awesome": "polymer-font-awesome#~v0.1.0",
+    "px-polymer-font-awesome": "^0.1.9",
     "px-buttons-design": "~0.4.20",
     "px-tables-design": "~0.3.13"
   },
@@ -42,7 +42,6 @@
     "px-headings-design": "^0.2.14",
     "px-actionable-text-icons-design": "^0.1.0",
     "px-code-design": "~0.2.11",
-    "px-dropdown": "^0.12.1",
-    "px-polymer-font-awesome": "^0.1.9"
+    "px-dropdown": "^0.12.1"
   }
 }
