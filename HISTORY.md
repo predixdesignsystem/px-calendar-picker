@@ -1,3 +1,8 @@
+
+v0.5.7
+==================
+* bower updating px-demo-snippet
+
 v0.5.6
 ==================
 * fixed same date different time bug by px-date-selected sending a clone instead of event.detail
