@@ -1,3 +1,7 @@
+v0.5.6
+==================
+* fixed same date different time bug by px-date-selected sending a clone instead of event.detail
+
 v0.5.5
 ==================
 * updated dependencies

@@ -271,13 +271,14 @@ The first range date may be before, after, or equal to the second range date, de
     },
 
     _cellClicked: function(e) {
-      var momentDate = e.detail;
+      var momentDate = e.detail,
+          copy = e.detail.clone();
 
       if(this._currentDisplayMode === 'year') {
         if(this.displayMode === 'year') {
           //we want to select this year.
           this._selectDate(momentDate);
-          this.fire('px-date-selected', momentDate)
+          this.fire('px-date-selected', copy);
         }
         else {
           //go to 'month' mode
@@ -289,7 +290,7 @@ The first range date may be before, after, or equal to the second range date, de
         if(this.displayMode === 'month') {
           //we want to select this month.
           this._selectDate(momentDate);
-          this.fire('px-date-selected', momentDate)
+          this.fire('px-date-selected', copy);
         }
         else {
           //go to 'day' mode
@@ -299,7 +300,7 @@ The first range date may be before, after, or equal to the second range date, de
         }
       }else {
         this._selectDate(momentDate);
-        this.fire('px-date-selected', momentDate)
+        this.fire('px-date-selected', copy);
       }
     },
 
