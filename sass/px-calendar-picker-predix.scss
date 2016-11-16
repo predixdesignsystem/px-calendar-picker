@@ -20,8 +20,8 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
 
 .btn--bare{
   &:hover {
-    background-color: $primary-blue;
-    color: $white;
+    background-color: var(--px-calendar-background-color--hover, $primary-blue-hover);
+    color: var(--px-calendar-text-color--hover, $white);
   }
   &:hover, &:focus {
     outline: none;
@@ -30,36 +30,38 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
 
 .is-selected {
   .btn--bare {
-    background-color: $select-blue-default;
-    color: $white;
+    background-color: var(--px-calendar-background-color--selected, $select-blue-default);
+    color: var(--px-calendar-text-color--selected, $white);
     &:hover {
-      background-color: $select-blue-hover;
-      color: $white;
+      background-color: var(--px-calendar-background-color--selected--hover, $select-blue-hover);
+      color: var(--px-calendar-text-color--selected, $white);
     }
     &:active {
-      background-color: $select-blue-pressed;
+      background-color: var(--px-calendar-background-color--selected--pressed, $select-blue-pressed);
     }
   }
 }
 
 .caption_btn {
-  color: $primary-blue;
+  color: var(--px-calendar-background-color, $primary-blue);
   &:hover {
     background-color: inherit;
-    color: $primary-blue-hover;
+    color: var(--px-calendar-background-color--hover, $primary-blue-hover);
   }
   &:active {
     background-color: inherit;
-    color: $primary-blue-pressed;
+    color: var(--px-calendar-background-color--pressed, $primary-blue-pressed);
   }
   &:focus {
     background-color: inherit;
-    color: $primary-blue;
+    color: var(--px-calendar-background-color, $primary-blue);
   }
 }
 
+$px-calendar-alt-background-color : var(--px-calendar-alt-background-color, $gray3);
+
 .is-between, .is-selected {
-  background-color: $gray3;
+  background-color: $px-calendar-alt-background-color;
 }
 
 .is-selected-only, .is-start.is-end.is-selected {
@@ -67,11 +69,11 @@ common/abstract rules go in px-rangepicker-sketch.scss, not in this file.
 }
 
 .is-selected.is-end:not(.is-selected-only):not(.is-start) {
-  background-image: linear-gradient(to right, $gray3, $gray3 50%, transparent 50%, transparent 100%);
+  background-image: linear-gradient(to right, $px-calendar-alt-background-color, $px-calendar-alt-background-color 50%, transparent 50%, transparent 100%);
   background-color: inherit;
 }
 
 .is-selected.is-start:not(.is-selected-only):not(.is-end) {
-  background-image: linear-gradient(to left, $gray3, $gray3 50%, transparent 50%, transparent 100%);
+  background-image: linear-gradient(to left, $px-calendar-alt-background-color, $px-calendar-alt-background-color 50%, transparent 50%, transparent 100%);
   background-color: inherit;
 }
