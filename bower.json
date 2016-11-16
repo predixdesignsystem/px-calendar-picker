@@ -1,13 +1,13 @@
 {
     "name": "px-calendar-picker",
-    "version": "0.5.8",
+    "version": "0.5.9",
     "main": [
         "px-calendar-picker.html"
     ],
     "ignore": [
         ".*",
         "npm-debug.log",
-        "Gruntfile.js",
+        "gulpfile.js",
         "sass",
         "bower_components",
         "node_modules",
