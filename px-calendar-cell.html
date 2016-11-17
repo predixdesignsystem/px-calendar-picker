@@ -19,7 +19,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 <dom-module id="px-calendar-cell">
   <template>
     <style include="px-calendar-picker-styles"></style>
-    <style include="px-theme-styles"></style>
+    
     <div class$="{{cellStyles}}">
       <button class$="{{btnStyles}} btn--calendar-cell" value="{{displayedValue}}" on-tap="_selectDate" disabled="{{isDisabled}}" hidden$="{{!isValidDate}}">{{displayedValue}}</button>
     </div>
