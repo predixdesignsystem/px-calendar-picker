@@ -1,3 +1,7 @@
+v0.5.16
+==================
+* changing all devDeps to ^
+
 v0.5.15
 ==================
 * Update px-theme to 2.0.1 and update test fixtures
