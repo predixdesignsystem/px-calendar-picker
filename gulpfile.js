@@ -62,8 +62,13 @@ gulp.task('sass', function() {
 gulp.task('demosass', function() {
   return gulp.src(['./sass/*-demo.scss'])
     .pipe(buildCSS())
+    .pipe(stylemod({
+      moduleId: function(file) {
+        return path.basename(file.path, path.extname(file.path)) + '-styles';
+      }
+    }))
     .pipe(gulp.dest('css'))
-    .pipe(browserSync.stream({match: '**/*.css'}));
+    .pipe(browserSync.stream({match: '**/*.html'}));
 });
 
 gulp.task('watch', function() {
