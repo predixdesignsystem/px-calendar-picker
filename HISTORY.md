@@ -1,3 +1,7 @@
+v0.6.2
+==================
+* added missing css variables for theming and themed demo.scss
+
 v0.6.1
 ==================
 * Update missed design depndencies
