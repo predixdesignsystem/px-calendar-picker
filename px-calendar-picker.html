@@ -34,7 +34,7 @@ The first range date may be before, after, or equal to the second range date, de
             <iron-icon icon="fa:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="caption_text actionable">{{_getCurrentTitle(_currentDisplayMode, baseDate)}}</span>
+        <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, baseDate)}}</span>
         <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="fa:fa-angle-right" class="fa-angle"></iron-icon>
