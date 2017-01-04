@@ -22,11 +22,6 @@
   <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
   <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <style is="custom-style">
-    :root {
-    }
-
-  </style>
   </head>
 
 <body>
@@ -35,30 +30,32 @@
   <!-- allow use of Polymer bindings in main document -->
   <template id="just-for-demo" is="dom-bind" >
     <!-- discription -->
-    <div class="doc-header u-p++ text--shadow">
-      <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-calendar-picker" target="_new">
-        <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
-      </a>
-  		<h1 class="delta">px-calendar-picker</h1>
-      <div class="doc-description">
-    		<p>
-    			The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
-    		</p>
-        <p>
-          This component allows the user to select a date or date range.
-          The main use of this component is to be used in the px-range-panel.
-        </p>
+    <div class="doc-container--center doc-u-pb+++ u-pt++ text--shadow">
+      <div>
+        <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-calendar-picker" target="_new">
+          <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
+        </a>
+        <h1 class="delta">px-calendar-picker</h1>
+        <div class="doc-text-width--max">
+          <p>
+            The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
+          </p>
+          <p>
+            This component allows the user to select a date or date range.
+            The main use of this component is to be used in the px-range-panel.
+          </p>
+        </div>
+        <div class="flex">
+          <img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
+          <img class="u-mr--" src="https://img.shields.io/bower/v/px-calendar-picker.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
+          <img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
+        </div>
       </div>
-  		<div class="flex">
-  			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
-  			<img class="u-mr--" src="https://img.shields.io/bower/v/px-calendar-picker.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
-  			<img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
-  		</div>
   	</div>
 
-    <!-- mega demo -->
+    <!-- demo -->
     <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
-      <div class="doc-tab-container u-pt++ u-pl++">
+      <div class="doc-interactive-background u-pt++ u-pl++">
         <px-tab-set selected="{{selected}}" bare no-bottom-border>
           <template is="dom-repeat" items="{{optionsArray}}">
             <px-tab>Option {{indexPlusOne(index)}}</px-tab>
@@ -68,7 +65,7 @@
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
           <section class="tab-page">
-            <div class="doc-demo-background flex u-ph++ u-pb++">
+            <div class="doc-interactive-background flex u-ph++ u-pb++">
               <!-- Properties -->
               <div class="doc-properties-container u-ph+ u-pb+ u-mt+">
               <p class="epsilon">Properties</p>
@@ -114,10 +111,10 @@
               <div>More info on date and time format at <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank" class="actionable">momentjs</a></div>
             </div>
 
-            <div class="doc-demo-container u-mt+">
+            <div class="doc-demo-code-container u-mt+">
                 <!-- demo -->
                 <div class="flex flex--col">
-                  <div class="doc-demo-sub-container u-p+">
+                  <div class="doc-demo-container u-p+">
                     <template is="dom-if" if="{{item.preventRangeSelection}}">
                       <div>
                         <span id="counter{{indexPlusOne(index)}}"><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</span>
@@ -163,7 +160,7 @@
             </div>
           </div>
           <div class="doc-api-container">
-            <div class="flex flex--col doc-api-sub-container u-mt++" >
+            <div class="flex flex--col doc-container--center u-mt++" >
               <div>
                 <px-api-viewer source="px-calendar-picker"></px-api-viewer>
               </div>
