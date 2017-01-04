@@ -22,7 +22,11 @@
   <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
   <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+  <style is="custom-style">
+    :root {
+    }
 
+  </style>
   </head>
 
 <body>
@@ -31,12 +35,12 @@
   <!-- allow use of Polymer bindings in main document -->
   <template id="just-for-demo" is="dom-bind" >
     <!-- discription -->
-    <div class="hero u-p++ text--shadow">
+    <div class="doc-header u-p++ text--shadow">
       <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-calendar-picker" target="_new">
         <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
       </a>
   		<h1 class="delta">px-calendar-picker</h1>
-      <div class="description-text">
+      <div class="doc-description">
     		<p>
     			The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
     		</p>
@@ -54,7 +58,7 @@
 
     <!-- mega demo -->
     <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
-      <div class="tabContainer u-pt++ u-pl++">
+      <div class="doc-tab-container u-pt++ u-pl++">
         <px-tab-set selected="{{selected}}" bare no-bottom-border>
           <template is="dom-repeat" items="{{optionsArray}}">
             <px-tab>Option {{indexPlusOne(index)}}</px-tab>
@@ -64,9 +68,9 @@
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
           <section class="tab-page">
-            <div class="mega-demo flex u-ph++ u-pb++">
+            <div class="doc-demo-background flex u-ph++ u-pb++">
               <!-- Properties -->
-              <div class="properties u-ph+ u-pb+ u-mt+">
+              <div class="doc-properties-container u-ph+ u-pb+ u-mt+">
               <p class="epsilon">Properties</p>
               <div class="flex u-mb-">
                 <input id="togglePreventRange{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.preventRangeSelection::change}}">
@@ -110,10 +114,10 @@
               <div>More info on date and time format at <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank" class="actionable">momentjs</a></div>
             </div>
 
-            <div class="demoContainer u-mt+">
+            <div class="doc-demo-container u-mt+">
                 <!-- demo -->
                 <div class="flex flex--col">
-                  <div class="demo u-p+">
+                  <div class="doc-demo-sub-container u-p+">
                     <template is="dom-if" if="{{item.preventRangeSelection}}">
                       <div>
                         <span id="counter{{indexPlusOne(index)}}"><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</span>
@@ -158,8 +162,8 @@
               </div>
             </div>
           </div>
-          <div class="apiContainer">
-            <div class="flex flex--col api u-mt++" >
+          <div class="doc-api-container">
+            <div class="flex flex--col doc-api-sub-container u-mt++" >
               <div>
                 <px-api-viewer source="px-calendar-picker"></px-api-viewer>
               </div>
@@ -169,20 +173,20 @@
       </template>
     </px-tab-pages>
   </div>
-  <footer class="footer flex flex--center">
-    <div class="footer__container u-pv++">
+  <footer class="doc-footer flex flex--center">
+    <div class="doc-footer__container u-pv++">
       <div>
         <a href="https://ge.com/digital" >
-          <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
+          <img src="monogram-wdmk.png" alt="GE Monogram" class="doc-footer__img">
         </a>
       </div>
-      <div class="footer__list">
+      <div class="doc-footer__list">
         <ul class="list-inline list-inline--delimited">
           <li>
-            <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
+            <a href="http://predix.io/legal" class="doc-footer__list--lnk">Legal</a>
           </li>
           <li>
-            <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
+            <a href="mailto:info@predix.io" class="doc-footer__list--lnk">Contact Us</a>
           </li>
           <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
         </ul>
