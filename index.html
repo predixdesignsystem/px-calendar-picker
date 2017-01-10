@@ -4,16 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=1">
   <title>px-calendar-picker Demo</title>
+
+  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../polymer/polymer.html">
+
   <link rel="import" href="css/px-calendar-picker-demo-styles.html" />
   <style include="px-calendar-picker-demo-styles" is="custom-style"></style>
+  
+  <link rel="import" href="../px-api-viewer/px-api-viewer.html" />
 
-  <link rel="import" href="../px-theme/px-theme-styles.html">
+  <link rel="import" href="../px-dark-demo-theme/px-dark-demo-theme-styles.html">
+  <link rel="import" href="../px-dark-theme/px-dark-theme-styles.html">
+  <style include="px-dark-demo-theme-styles" is="custom-style"></style>
   <style include="px-theme-styles" is="custom-style"></style>
 
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-
-  <link rel="import" href="../px-api-viewer/px-api-viewer.html" />
+  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
   <link rel="import" href="../px-tabs/px-tab-set.html" />
   <link rel="import" href="../px-dropdown/px-dropdown.html" />
   <link rel="import" href="px-calendar-picker.html"/>
@@ -21,22 +27,23 @@
 
   <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
   <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
-  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  </head>
 
+</head>
+   
+  
 <body>
 
   <!-- Wrap elements with auto-binding template to -->
   <!-- allow use of Polymer bindings in main document -->
   <template id="just-for-demo" is="dom-bind" >
     <!-- discription -->
-    <div class="doc-container--center doc-u-pb+++ u-pt++ text--shadow">
+    <div class="demo-layout--center demo-u-pb+++ u-pt++ text--shadow">
       <div>
         <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-calendar-picker" target="_new">
           <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
         </a>
         <h1 class="delta">px-calendar-picker</h1>
-        <div class="doc-text-width--max">
+        <div class="demo-text-width--max">
           <p>
             The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
           </p>
@@ -53,9 +60,9 @@
       </div>
   	</div>
 
-    <!-- demo -->
+    <!-- demo container -->
     <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
-      <div class="doc-interactive-background u-pt++ u-pl++">
+      <div class="demo-background--interactive u-pt++ u-pl++">
         <px-tab-set selected="{{selected}}" bare no-bottom-border>
           <template is="dom-repeat" items="{{optionsArray}}">
             <px-tab>Option {{indexPlusOne(index)}}</px-tab>
@@ -65,9 +72,9 @@
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
           <section class="tab-page">
-            <div class="doc-interactive-background flex u-ph++ u-pb++">
+            <div class="demo-background--interactive flex u-ph++ u-pb++">
               <!-- Properties -->
-              <div class="doc-properties-container u-ph+ u-pb+ u-mt+">
+              <div class="demo-properties-container u-ph+ u-pb+ u-mt+">
               <p class="epsilon">Properties</p>
               <div class="flex u-mb-">
                 <input id="togglePreventRange{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.preventRangeSelection::change}}">
@@ -106,15 +113,15 @@
                   </px-dropdown>
                 </div>
               </div>
-              <div class="u-mb-">Block dates before: <input id="blockDatesAfter" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesBefore::input}}" /></div>
+              <div class="u-mb-">Block dates before: <input id="blockDatesBefore" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesBefore::input}}" /></div>
               <div class="u-mb-">Block dates after: <input id="blockDatesAfter" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesAfter::input}}" /></div>
               <div>More info on date and time format at <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank" class="actionable">momentjs</a></div>
             </div>
 
-            <div class="doc-demo-code-container u-mt+">
+            <div class="demo-component-code-container u-mt+">
                 <!-- demo -->
                 <div class="flex flex--col">
-                  <div class="doc-demo-container u-p+">
+                  <div class="demo-component-container u-p+">
                     <template is="dom-if" if="{{item.preventRangeSelection}}">
                       <div>
                         <span id="counter{{indexPlusOne(index)}}"><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</span>
@@ -150,17 +157,16 @@
                 </div>
                 <div>
                   <px-demo-snippet
-                    element-properties={{item}}
+                    element-properties="{{item}}"
                     element-name="px-calendar-picker"
-                    links-includes="[[linksIncludes]]"
-                    parent-component="[<div style='width:250px'></div>]">
+                    links-includes="[[linksIncludes]]">
                   </px-demo-snippet>
                 </div>
               </div>
             </div>
           </div>
-          <div class="doc-api-container">
-            <div class="flex flex--col doc-container--center u-mt++" >
+          <div class="demo-background--api">
+            <div class="flex flex--col demo-layout--center u-pt++" >
               <div>
                 <px-api-viewer source="px-calendar-picker"></px-api-viewer>
               </div>
@@ -170,20 +176,20 @@
       </template>
     </px-tab-pages>
   </div>
-  <footer class="doc-footer flex flex--center">
-    <div class="doc-footer__container u-pv++">
+  <footer class="demo-background--footer flex flex--center">
+    <div class="demo-footer__container u-pv++">
       <div>
         <a href="https://ge.com/digital" >
-          <img src="monogram-wdmk.png" alt="GE Monogram" class="doc-footer__img">
+          <img src="monogram-wdmk.png" alt="GE Monogram" class="demo-footer__img">
         </a>
       </div>
-      <div class="doc-footer__list">
+      <div class="demo-footer__list">
         <ul class="list-inline list-inline--delimited">
           <li>
-            <a href="http://predix.io/legal" class="doc-footer__list--lnk">Legal</a>
+            <a href="http://predix.io/legal" class="demo-footer__list--lnk">Legal</a>
           </li>
           <li>
-            <a href="mailto:info@predix.io" class="doc-footer__list--lnk">Contact Us</a>
+            <a href="mailto:info@predix.io" class="demo-footer__list--lnk">Contact Us</a>
           </li>
           <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
         </ul>

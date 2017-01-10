@@ -1,5 +1,11 @@
 v0.6.2
 ==================
+* converted doc- to demo-
+* removed demosass from gulp
+* added sass imports to demo.scss
+
+v0.6.2
+==================
 * added missing css variables for theming and themed demo.scss
 
 v0.6.1
