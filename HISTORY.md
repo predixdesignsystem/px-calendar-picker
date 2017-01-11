@@ -1,3 +1,7 @@
+v0.6.3
+==================
+* changing ghp.sh to account for Alpha releases
+
 v0.6.2
 ==================
 * added missing css variables for theming and themed demo.scss
