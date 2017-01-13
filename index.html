@@ -1,301 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=1">
-  <title>px-calendar-picker Demo</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Predix UI</title>
 
-  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../polymer/polymer.html">
+    <!--
+      Fast bootstrapping of the webcomponents-lite library. Only loads the library
+      if the browser doesn't natively support web components.
+    -->
+    <script type="text/javascript">
+    (function() {
+      'use strict';
 
-  <link rel="import" href="css/px-calendar-picker-demo-styles.html" />
-  <style include="px-calendar-picker-demo-styles" is="custom-style"></style>
-  
-  <link rel="import" href="../px-api-viewer/px-api-viewer.html" />
-
-  <link rel="import" href="../px-dark-demo-theme/px-dark-demo-theme-styles.html">
-  <link rel="import" href="../px-dark-theme/px-dark-theme-styles.html">
-  <style include="px-dark-demo-theme-styles" is="custom-style"></style>
-  <style include="px-theme-styles" is="custom-style"></style>
-
-  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <link rel="import" href="../px-tabs/px-tab-set.html" />
-  <link rel="import" href="../px-dropdown/px-dropdown.html" />
-  <link rel="import" href="px-calendar-picker.html"/>
-  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-
-  <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
-  <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
-
-</head>
-   
-  
-<body>
-
-  <!-- Wrap elements with auto-binding template to -->
-  <!-- allow use of Polymer bindings in main document -->
-  <template id="just-for-demo" is="dom-bind" >
-    <!-- discription -->
-    <div class="demo-layout--center demo-u-pb+++ u-pt++ text--shadow">
-      <div>
-        <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-calendar-picker" target="_new">
-          <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github
-        </a>
-        <h1 class="delta">px-calendar-picker</h1>
-        <div class="demo-text-width--max">
-          <p>
-            The	<code>px-calendar-picker</code> component includes various elements used for structuring responsive layouts.
-          </p>
-          <p>
-            This component allows the user to select a date or date range.
-            The main use of this component is to be used in the px-range-panel.
-          </p>
-        </div>
-        <div class="flex">
-          <img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Travis" onerror="this.style.display='none'"/>
-          <img class="u-mr--" src="https://img.shields.io/bower/v/px-calendar-picker.svg?style=flat-square" alt="Bower" onerror="this.style.display='none'"/>
-          <img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-calendar-picker.svg?style=flat-square" alt="Issues" onerror="this.style.display='none'"/>
-        </div>
-      </div>
-  	</div>
-
-    <!-- demo container -->
-    <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
-      <div class="demo-background--interactive u-pt++ u-pl++">
-        <px-tab-set selected="{{selected}}" bare no-bottom-border>
-          <template is="dom-repeat" items="{{optionsArray}}">
-            <px-tab>Option {{indexPlusOne(index)}}</px-tab>
-          </template>
-        </px-tab-set>
-      </div>
-      <px-tab-pages selected="{{selected}}">
-        <template is="dom-repeat" items="{{optionsArray}}">
-          <section class="tab-page">
-            <div class="demo-background--interactive flex u-ph++ u-pb++">
-              <!-- Properties -->
-              <div class="demo-properties-container u-ph+ u-pb+ u-mt+">
-              <p class="epsilon">Properties</p>
-              <div class="flex u-mb-">
-                <input id="togglePreventRange{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.preventRangeSelection::change}}">
-                <label for$="togglePreventRange{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Prevent Range Selection</div>
-              </div>
-              <div class="flex u-mb-">
-                <input id="toggleFutureDates{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.blockFutureDates::change}}">
-                <label for$="toggleFutureDates{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Block future dates</div>
-              </div>
-              <div class="flex u-mb-">
-                <input id="togglePastDates{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.blockPastDates::change}}">
-                <label for$="togglePastDates{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Block past dates</div>
-              </div>
-              <div class="flex u-mb-">
-                <input id="toggleHideNext{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.hideNextButton::change}}">
-                <label for$="toggleHideNext{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Hide next button</div>
-              </div>
-              <div class="flex u-mb-">
-                <input id="toggleHidePrevious{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.hidePreviousButton::change}}">
-                <label for$="toggleHidePrevious{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Hide previous button</div>
-              </div>
-              <div class="u-mb-">Display mode:
-                <div style="width: 100%;">
-                  <px-dropdown id="displayMode{{indexPlusOne(index)}}" value="{{item.displayMode}}" display-value="{{item.displayMode}}" bound-target="properties">
-                    <px-dropdown-content
-                      items='[
-                        {"key":"one", "val": "day"},
-                        {"key":"two", "val": "month"},
-                        {"key":"three", "val": "year"}]'>
-                    </px-dropdown-content>
-                  </px-dropdown>
-                </div>
-              </div>
-              <div class="u-mb-">Block dates before: <input id="blockDatesBefore" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesBefore::input}}" /></div>
-              <div class="u-mb-">Block dates after: <input id="blockDatesAfter" class="text-input" type="text" placeholder="ISO 8601 String" value="{{item.blockDatesAfter::input}}" /></div>
-              <div>More info on date and time format at <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank" class="actionable">momentjs</a></div>
-            </div>
-
-            <div class="demo-component-code-container u-mt+">
-                <!-- demo -->
-                <div class="flex flex--col">
-                  <div class="demo-component-container u-p+">
-                    <template is="dom-if" if="{{item.preventRangeSelection}}">
-                      <div>
-                        <span id="counter{{indexPlusOne(index)}}"><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</span>
-                      </div>
-                      <div>
-                        <span id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</span>
-                      </div>
-                    </template>
-
-                    <template is="dom-if" if="{{!item.preventRangeSelection}}">
-                      <div>
-                        <span id="counterRange{{indexPlusOne(index)}}"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</span>
-                      </div>
-                      <div>
-                        <span id="rangeString{{indexPlusOne(index)}}">Current range object:</span>
-                      </div>
-                    </template>
-                  <br />
-                  <br />
-                  <div style="width:250px">
-                    <px-calendar-picker
-                      display-mode="{{item.displayMode}}"
-                      block-future-dates="{{item.blockFutureDates}}"
-                      block-past-dates="{{item.blockPastDates}}"
-                      prevent-range-selection="{{item.preventRangeSelection}}"
-                      block-dates-before="{{item.blockDatesBefore}}"
-                      block-dates-after="{{item.blockDatesAfter}}"
-                      hide-next-button="{{item.hideNextButton}}"
-                      hide-previous-button="{{item.hidePreviousButton}}"
-                      >
-                    </px-calendar-picker>
-                  </div>
-                </div>
-                <div>
-                  <px-demo-snippet
-                    element-properties="{{item}}"
-                    element-name="px-calendar-picker"
-                    links-includes="[[linksIncludes]]">
-                  </px-demo-snippet>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="demo-background--api">
-            <div class="flex flex--col demo-layout--center u-pt++" >
-              <div>
-                <px-api-viewer source="px-calendar-picker"></px-api-viewer>
-              </div>
-            </div>
-          </div>
-        </section>
-      </template>
-    </px-tab-pages>
-  </div>
-  <footer class="demo-background--footer flex flex--center">
-    <div class="demo-footer__container u-pv++">
-      <div>
-        <a href="https://ge.com/digital" >
-          <img src="monogram-wdmk.png" alt="GE Monogram" class="demo-footer__img">
-        </a>
-      </div>
-      <div class="demo-footer__list">
-        <ul class="list-inline list-inline--delimited">
-          <li>
-            <a href="http://predix.io/legal" class="demo-footer__list--lnk">Legal</a>
-          </li>
-          <li>
-            <a href="mailto:info@predix.io" class="demo-footer__list--lnk">Contact Us</a>
-          </li>
-          <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-</template>
-<script>
-window.addEventListener('WebComponentsReady', function() {
-  var template = document.querySelector('template[is=dom-bind]'),
-      year = new Date(),
-      displayMode = ['day','month','year'],
-      blockDatesAfter = ['','2017-11-20T00:00:00.000Z'],
-      blockDatesBefore = ['','2016-10-10T00:00:00.000Z'],
-      counter = 0,
-      counterRange = 0;
-
-  var optionsArray = [
-    {
-      "displayMode":displayMode[0],
-      "preventRangeSelection":false,
-      "blockFutureDates":false,
-      "blockPastDates":true,
-      "blockDatesBefore":blockDatesBefore[0],
-      "blockDatesAfter":blockDatesAfter[0],
-      "hideNextButton":false,
-      "hidePreviousButton":false,
-      "parentComponent": ["<div style='width:250px'>","</div>"],
-    },
-    {
-      "displayMode":displayMode[0],
-      "preventRangeSelection":true,
-      "blockFutureDates":false,
-      "blockPastDates":false,
-      "blockDatesBefore":blockDatesBefore[1],
-      "blockDatesAfter":blockDatesAfter[1],
-      "hideNextButton":false,
-      "hidePreviousButton":false,
-      "parentComponent": ["<div style='width:250px'>","</div>"],
-    },
-    {
-      "displayMode":displayMode[1],
-      "preventRangeSelection":false,
-      "blockFutureDates":false,
-      "blockPastDates":false,
-      "blockDatesBefore":blockDatesBefore[0],
-      "blockDatesAfter":blockDatesAfter[0],
-      "hideNextButton":false,
-      "hidePreviousButton":false,
-      "parentComponent": ["<div style='width:250px'>","</div>"],
-    }
-  ];
-
-    var indexPlusOne = function(num) {
-      return num + 1;
-    };
-
-    year = year.getFullYear();
-
-    document.addEventListener('px-calendar-selected', function(evt) {
-      counter++;
-      for(var i=1; i<=optionsArray.length; i++) {
-        var span = document.getElementById('counter'+i);
-        if(span){
-          span.innerHTML = '<strong>px-calendar-selected</strong> fired <strong>' + counter + '</strong> time(s)';
+      var onload = function() {
+        // For native Imports, manually fire WebComponentsReady so user code
+        // can use the same code path for native and polyfill'd imports.
+        if (!window.HTMLImports) {
+          document.dispatchEvent(
+            new CustomEvent('WebComponentsReady', {bubbles: true})
+          );
         }
+      };
+
+      var webComponentsSupported = (
+        'registerElement' in document
+        && 'import' in document.createElement('link')
+        && 'content' in document.createElement('template')
+      );
+
+      if (!webComponentsSupported) {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '../webcomponentsjs/webcomponents-lite.min.js';
+        script.onload = onload;
+        document.head.appendChild(script);
+      } else {
+        onload();
       }
+    })();
+    </script>
 
-      for(var i=1; i<=optionsArray.length; i++) {
-        var span2 = document.getElementById('dateTimeString'+i);
-        if(span2){
-          span2.innerHTML = 'Current dateTime object: <strong>' + evt.detail.dateTime + '</strong>';
-        }
+    <!--
+      Load the Polymer library.
+    -->
+    <link rel="import" href="../polymer/polymer.html" />
+
+    <!--
+      Asynchronously import the px-catalog element, which is the entrypoint
+      for our application.
+    -->
+    <link
+        async
+        id="main-element-import"
+        rel="import"
+        href="demo/index.html">
+
+    <!--
+      Load the app icon and manifest for Android devices.
+    -->
+    <link defer rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!--
+      Basic page styles.
+    -->
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
       }
-    });
+    </style>
+  </head>
 
-    document.addEventListener('px-calendar-range-selected', function(evt) {
-      counterRange++;
-      for(var i=1; i<=optionsArray.length; i++) {
-        var span = document.getElementById('counterRange'+i);
-        if(span){
-          span.innerHTML = '<strong>px-calendar-range-selected</strong> fired <strong>' + counterRange + '</strong> time(s)';
-        }
-      }
+  <body>
+    <!-- Elements wait on the page and are upgraded after demo/index.html is loaded. -->
+    <local-element-demo></local-element-demo>
 
-      for(var i=1; i<=optionsArray.length; i++) {
-        var span2 = document.getElementById('rangeString'+i);
-        if(span2){
-          span2.innerHTML = 'Current range object: From: <strong>' + evt.detail.range.from + '</strong> To: <strong>' + evt.detail.range.to + '</strong>';
-        }
-      }
-    });
-
-    template.selected = "0";
-    template.optionsArray = optionsArray;
-    template.indexPlusOne = indexPlusOne;
-    template.year = year;
-    template.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html','px-polymer-font-awesome/polymer-font-awesome.html'];
-});
-</script>
-
-</body>
+    <!--
+      Attempt to register a service worker with the correct scope. Fail quietly
+      if this doesn't work, but log the result to the console.
+    -->
+    <script type="text/javascript">
+      // if ('serviceWorker' in navigator) {
+      //   navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+      //     // Registration was successful
+      //     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      //   }).catch(function(err) {
+      //     // registration failed :(
+      //     console.log('ServiceWorker registration failed: ', err);
+      //   });
+      // }
+    </script>
+  </body>
 </html>
-
-
-<!-- base-date="{{item.baseDate}}"
-hide-next-button="{{item.hideNextButton}}"
-hide-previous-button="{{item.hidePreviousButton}}"
-shrink="{{item.shrink}}" -->
