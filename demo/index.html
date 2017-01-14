@@ -46,15 +46,16 @@
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
-        <template is="dom-if" if="{{props.preventRangeSelection.value}}">
+        <!--Figure out how to make this work with the new demo-->
+        <!--<template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
           <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p id="counterRange{{indexPlusOne(index)}}"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="rangeString{{indexPlusOne(index)}}">Current range object:</p>
-        </template>
+          <p id="counterRange"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</p>
+          <p id="rangeString">Current range object:</p>
+        </template>-->
 
         <div style="width:250px">
           <px-calendar-picker
@@ -62,8 +63,6 @@
               block-future-dates="{{props.blockFutureDates.value}}"
               block-past-dates="{{props.blockPastDates.value}}"
               prevent-range-selection="{{props.preventRangeSelection.value}}"
-              block-dates-before="{{props.blockDatesBefore.value}}"
-              block-dates-after="{{props.blockDatesAfter.value}}"
               hide-next-button="{{props.hideNextButton.value}}"
               hide-previous-button="{{props.hidePreviousButton.value}}">
           </px-calendar-picker>
@@ -79,7 +78,7 @@
     </px-demo-interactive>
 
     <!-- API Viewer -->
-    <px-demo-api-viewer source="px-demo"></px-demo-api-viewer>
+    <px-demo-api-viewer source="px-calendar-picker"></px-demo-api-viewer>
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
@@ -105,67 +104,6 @@
        * Note that `value` for each property is the default that will be set
        * unless a config from `configs` is applied by default.
        *
-       * @example
-       *
-       * `demoProps` is an object containing multipe objects. Each sub-object has
-       * should have a key with the name of the configurable property, and a set
-       * of values that describe that property. At a high level, you might have:
-       *
-       * ```
-       *     {
-       *       preventRangeSelection: { ... },
-       *       displayMode: { ... },
-       *       blockDatesBefore: { ... }
-       *     }
-       * ```
-       *
-       * Each sub-object should contain information about the configurable property's
-       * `type` (a reference to the JavaScript literal), a default value, and a set
-       * of additional keys that describe the input it can be changed with.
-       * The following inputs types are currently available:
-       *
-       * - 'toggle' - A toggle switch input to set Boolean values
-       * - 'text' - A simple single-line text input to set String or stringified Array/Object values
-       * - 'dropdown' - A dropdown picker that can be used to select any kind of value from a list of available options
-       *
-       * Full examples for each input:
-       *
-       * ```
-       *     {
-       *       preventRangeSelection: {
-       *         type: Boolean,
-       *         value: false,
-       *         inputType: 'toggle'
-       *       },
-       *       displayMode: {
-       *         type: String,
-       *         value: 'day',
-       *         inputType: 'dropdown',
-       *         inputChoices: ['day', 'month', 'year']
-       *       },
-       *       blockDatesBefore: {
-       *         type: String,
-       *         value: '2016-10-10T00:00:00.000Z',
-       *         inputType: 'text',
-       *         inputPlaceholder: 'ISO 8601 String'
-       *       }
-       *     }
-       * ```
-       *
-       * By default, the configurable property names are converted from camelCase
-       * to Title Case and used as input labels (e.g. 'displayMode' -> 'Display Mode').
-       * Labels can be set manually through the key `inputLabel`:
-       *
-       * ```
-       *     {
-       *       preventRangeSelection: {
-       *         type: Boolean,
-       *         value: false,
-       *         inputType: 'toggle',
-       *         inputLabel: "Stop range selection"
-       *       }
-       *     }
-       * ```
        *
        * @property demoProps
        * @type {Object}
@@ -181,35 +119,6 @@
        * as a set of tabs the user can click that will automatically change
        * the `props` to specific values.
        *
-       * @example
-       *
-       * Each config is an object. Its keys should be the names of the configurable
-       * properties defined in your `demoProps` above. Each key's value should
-       * be the new prop value for the configuration. You can also include these
-       * optional keys:
-       *
-       * - `configName` - a String value that will be used for the title of the tab
-       * - `configReset` - a Boolean, if `true` resets all props (even those not specified in the config) when this config is selected. Defaults to `false`.
-       *
-       * Example of two configs:
-       *
-       * ```
-       *     [
-       *       {
-       *         configName: "Basic",
-       *         preventRangeSelection: true,
-       *         displayMode: 'year',
-       *         blockDatesBefore: '2016-10-10T00:00:00.000Z'
-       *       },
-       *       {
-       *         configName: "Advanced",
-       *         preventRangeSelection: false,
-       *         displayMode: 'day',
-       *         blockDatesBefore: '2010-10-10T00:00:00.000Z'
-       *       }
-       *     ]
-       * ```
-       *
        * @property demoProps
        * @type {Array}
        */
@@ -220,13 +129,11 @@
             { configName: "Default",
               configReset: true },
 
-            { configName: "Future dates with ranges",
+            { configName: "Future dates",
               displayMode: this.demoProps.displayMode.inputChoices[0],
               preventRangeSelection: false,
               blockFutureDates: false,
               blockPastDates: true,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
               hideNextButton: false,
               hidePreviousButton: false,
               parentComponent: ["<div style='width:250px'>", "</div>"] },
@@ -236,8 +143,6 @@
               preventRangeSelection: true,
               blockFutureDates: false,
               blockPastDates: false,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
               hideNextButton: false,
               hidePreviousButton: false,
               parentComponent: ["<div style='width:250px'>", "</div>"] },
@@ -247,8 +152,6 @@
               preventRangeSelection: false,
               blockFutureDates: false,
               blockPastDates: false,
-              blockDatesBefore: '',
-              blockDatesAfter: '',
               hideNextButton: false,
               hidePreviousButton: false,
               parentComponent: ["<div style='width:250px'>", "</div>"] }
@@ -275,7 +178,7 @@
 
       blockPastDates: {
         type: Boolean,
-        defaultValue: true,
+        defaultValue: false,
         inputType: 'toggle'
       },
 
@@ -296,29 +199,13 @@
         defaultValue: 'day',
         inputType: 'dropdown',
         inputChoices: ['day', 'month', 'year']
-      },
-
-      blockDatesBefore: {
-        type: String,
-        defaultValue: '2016-10-10T00:00:00.000Z',
-        inputType: 'text',
-        inputPlaceholder: 'ISO 8601 String'
-      },
-
-      blockDatesAfter: {
-        type: String,
-        defaultValue: '2022-10-10T00:00:00.000Z',
-        inputType: 'text',
-        inputPlaceholder: 'ISO 8601 String'
       }
     },
 
     ready: function () {
 
-        // this.counter = 0;
-        // this.counterRange = 0;
-
-      // year = year.getFullYear();
+      // this.counter = 0;
+      // this.counterRange = 0;
 
       // document.addEventListener('px-calendar-selected', function (evt) {
       //   counter++;
@@ -328,7 +215,7 @@
       //       span.innerHTML = '<strong>px-calendar-selected</strong> fired <strong>' + counter + '</strong> time(s)';
       //     }
       //   }
-      //
+      
       //   for (var i = 1; i <= optionsArray.length; i++) {
       //     var span2 = this.$$('#dateTimeString' + i);
       //     if (span2) {
@@ -336,7 +223,7 @@
       //     }
       //   }
       // });
-      //
+      
       // document.addEventListener('px-calendar-range-selected', function (evt) {
       //   counterRange++;
       //   for (var i = 1; i <= optionsArray.length; i++) {
@@ -345,7 +232,7 @@
       //       span.innerHTML = '<strong>px-calendar-range-selected</strong> fired <strong>' + counterRange + '</strong> time(s)';
       //     }
       //   }
-      //
+      
       //   for (var i = 1; i <= optionsArray.length; i++) {
       //     var span2 = this.$$('#rangeString' + i);
       //     if (span2) {
