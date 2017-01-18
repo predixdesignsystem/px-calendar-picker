@@ -1,8 +1,16 @@
-v0.6.3
+v0.6.5
 ==================
 * converted doc- to demo-
 * removed demosass from gulp
 * added sass imports to demo.scss
+
+v0.6.4
+==================
+* Update colors design to pick up new colors
+
+v0.6.3
+==================
+* changing ghp.sh to account for Alpha releases
 
 v0.6.2
 ==================
