@@ -11,12 +11,6 @@
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
 
-<!-- Light theme -->
-<link rel="import" href="../../px-theme/px-theme-styles.html">
-<!-- Dark theme -->
- <!--<link rel="import" href="../../px-dark-theme/px-dark-theme-styles.html"> -->
- <!--<link rel="import" href="../../px-dark-demo-theme/px-dark-demo-theme-styles.html"> -->
-
 <!-- Imports for this componnent -->
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
 <link rel="import" href="../px-calendar-picker.html" />
@@ -24,12 +18,12 @@
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
-    <!-- Light theme -->
+    <!-- Some of these theme files will fail to load. That is OK. That's how
+         we expose dynamic theming. -->
     <style include="px-theme-styles" is="custom-style"></style>
-    <!-- Dark theme -->
-    <!--<style include="px-dark-theme-styles" is="custom-style"></style>-->
-    <!--<style include="px-dark-demo-theme-styles" is="custom-style"></style>-->
+    <style include="px-dark-theme-styles" is="custom-style"></style>
+    <style include="px-dark-demo-theme-styles" is="custom-style"></style>
+    <style include="px-demo-styles" is="custom-style"></style>
 
     <!-- Header -->
     <px-demo-header
@@ -48,7 +42,7 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <!--Figure out how to make this work with the new demo-->
-        <!--<template is="dom-if" if="{{props.preventRangeSelection.value}}">
+        <template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
           <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
         </template>
@@ -56,7 +50,7 @@
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
           <p id="counterRange"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</p>
           <p id="rangeString">Current range object:</p>
-        </template>-->
+        </template>
 
         <div style="width:250px">
           <px-calendar-picker
