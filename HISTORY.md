@@ -1,7 +1,3 @@
-v0.6.6
-==================
-* adding index-dark-theme.html
-
 v0.6.5
 ==================
 * converted doc- to demo-
