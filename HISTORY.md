@@ -1,5 +1,6 @@
 v0.6.5
 ==================
+* added index-dark-theme.html
 * converted doc- to demo-
 * removed demosass from gulp
 * added sass imports to demo.scss
