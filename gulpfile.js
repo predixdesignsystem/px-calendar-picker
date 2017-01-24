@@ -43,7 +43,7 @@ function buildCSS(){
 }
 
 gulp.task('sass', function() {
-  return gulp.src(['./sass/*.scss', '!./sass/*sketch.scss',])
+  return gulp.src(['./sass/*.scss', '!./sass/*sketch.scss'])
     .pipe(buildCSS())
     .pipe(gulpif(/.*predix/,
       $.rename(function(path){
