@@ -10,12 +10,30 @@ Element that renders a calendar for the given year and month, and highlights/sel
 
 The first range date may be before, after, or equal to the second range date, depending on the order of the user's clicks.
 
-##### Usage
+#### Usage
 
     <px-calendar display-month-year="{{...}}"
                  first-range-date="{{...}}"
                  second-range-date="{{...}}">
     </px-calendar>
+
+#### Styling
+The following custom properties are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--px-calendar-text-color` | Default text color for dates on the calendar  | `$black`
+`--px-calendar-text-color--hover` | Text color for dates when hovered  | `$white`
+`--px-calendar-text-color--selected` | Text color for dates when selected | `$white`
+`--px-calendar-labels--text-color` | Text color for month and year  | `$gray8`
+`--px-calendar-sub-labels--text-color` | Text color for days of the week | `$gray8`
+`--px-calendar-background-color` | Fill color for the next/previous chevrons | `$primary-blue`
+`--px-calendar-background-color--hover` | Background color for dates when hovered | `$primary-blue-hover`
+`--px-calendar-background-color--pressed` | Background color for dates when pressed | `$primary-blue-pressed`
+`--px-calendar-background-color--selected` | Background color for dates when selected | `$select-blue-default`
+`--px-calendar-background-color--selected--hover` | Background color for dates when selected & hovered | `$select-blue-hover`
+`--px-calendar-background-color--selected--pressed` | Background color for dates when selected & pressed | `$select-blue-pressed`
+`--px-calendar-alt-background-color` | Background color for the range between start and end dates | `$gray3`
 
 @demo demo.html
 -->
@@ -25,7 +43,7 @@ The first range date may be before, after, or equal to the second range date, de
 <dom-module id="px-calendar-picker">
   <template>
     <style include="px-calendar-picker-styles"></style>
-    
+
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">

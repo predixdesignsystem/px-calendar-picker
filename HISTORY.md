@@ -1,3 +1,7 @@
+v0.6.7
+==================
+* added styling section to API documentation
+
 v0.6.6
 ==================
 * moved theming style includes and updated ghp.sh
