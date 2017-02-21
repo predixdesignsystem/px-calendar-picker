@@ -1,3 +1,8 @@
+v0.6.8
+==================
+* fixed CodePen imports
+* added missing button type to prevent page reload
+
 v0.6.7
 ==================
 * added styling section to API documentation

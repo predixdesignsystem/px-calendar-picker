@@ -47,13 +47,13 @@ Custom property | Description | Default
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption">
-        <button on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
+        <button type="button" on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
             <iron-icon icon="fa:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
         </button>
         <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, baseDate)}}</span>
-        <button id=btnNextMonth on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
+        <button id=btnNextMonth type="button" on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="fa:fa-angle-right" class="fa-angle"></iron-icon>
           </template>
