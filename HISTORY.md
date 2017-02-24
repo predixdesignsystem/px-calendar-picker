@@ -1,3 +1,7 @@
+v0.6.9
+==================
+* add link to Moment documentation
+
 v0.6.8
 ==================
 * fixed CodePen imports
