@@ -1,3 +1,7 @@
+v0.6.10
+==================
+* fix event fired label behavior
+
 v0.6.9
 ==================
 * add link to Moment documentation

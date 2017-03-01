@@ -38,13 +38,16 @@
       <px-demo-component>
         <!--Figure out how to make this work with the new demo-->
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
+          <p><strong>px-calendar-selected</strong> fired <strong>{{chosenConfig._calendarEventCounter}}</strong> time(s)</p>
+          <p>Current dateTime object: <strong>{{dateTimeObject}}</strong></p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p id="counterRange"><strong>px-calendar-range-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="rangeString">Current range object:</p>
+          <p><strong>px-calendar-range-selected</strong> fired <strong>{{chosenConfig._calendarRangeEventCounter}}</strong> time(s)</p>
+          <p>Current range object:
+          <template is="dom-if" if="{{rangeToObject}}">
+            <strong>{{rangeFromObject}}</strong> To: <strong>{{rangeToObject}}</strong></p>
+          </template>
         </template>
 
         <div style="width:250px">
@@ -104,12 +107,44 @@
       },
 
       /**
+      * The dateTime object selected by the user
+      * @property dateTimeObject
+      * @type {Object}
+      */
+      dateTimeObject: {
+        type: String,
+        value: ""
+      },
+
+      /**
+      * The "from" dateTime object selected by the user
+      *@property rangeFromObject
+      * @type {Object}
+      */
+      rangeFromObject: {
+        type: String,
+        value: ""
+      },
+
+      /**
+      * The "to" dateTime object selected by the user
+      * @property rangeToObject
+      * @type {Object}
+      */
+      rangeToObject: {
+        type: String,
+        value: ""
+      },
+
+      chosenConfig: {},
+
+      /**
        * An array of pre-configured `props` that can be used to provide the user
        * with a set of common examples. These configs will be made available
        * as a set of tabs the user can click that will automatically change
        * the `props` to specific values.
        *
-       * @property demoProps
+       * @property configs
        * @type {Array}
        */
       configs: {
@@ -117,7 +152,9 @@
         value: function(){
           return [
             { configName: "Default",
-              configReset: true },
+              configReset: true,
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0  },
 
             { configName: "Future dates",
               displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -126,7 +163,9 @@
               blockPastDates: true,
               hideNextButton: false,
               hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] },
+              parentComponent: ["<div style='width:250px'>", "</div>"],
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0 },
 
             { configName: "No ranges",
               displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -135,7 +174,9 @@
               blockPastDates: false,
               hideNextButton: false,
               hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] },
+              parentComponent: ["<div style='width:250px'>", "</div>"],
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0 },
 
             { configName: "Show months",
               displayMode: this.demoProps.displayMode.inputChoices[1],
@@ -144,7 +185,9 @@
               blockPastDates: false,
               hideNextButton: false,
               hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"] }
+              parentComponent: ["<div style='width:250px'>", "</div>"],
+            _calendarEventCounter: 0,
+            _calendarRangeEventCounter: 0 }
           ]
         }
       }
@@ -192,9 +235,29 @@
       }
     },
 
+    listeners: {
+      'px-calendar-selected' : 'pxCalendarSelected',
+      'px-calendar-range-selected' : 'pxCalendarRangeSelected'
+    },
+
     ready: function () {
 
       this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
-    }
+    },
+
+    pxCalendarSelected: function(evt) {
+      if (!this.chosenConfig || (typeof this.chosenConfig._calendarEventCounter !== "number")) return;
+      this.chosenConfig._calendarEventCounter++;
+      this.dateTimeObject = evt.detail.dateTime;
+      this.notifyPath("chosenConfig._calendarEventCounter");
+    },
+
+    pxCalendarRangeSelected: function(evt) {
+      if (!this.chosenConfig || (typeof this.chosenConfig._calendarRangeEventCounter !== "number")) return;
+      this.chosenConfig._calendarRangeEventCounter++;
+      this.rangeFromObject = evt.detail.range.from;
+      this.rangeToObject = evt.detail.range.to;
+      this.notifyPath("chosenConfig._calendarRangeEventCounter");
+    },
   });
 </script>
