@@ -41,7 +41,7 @@ v0.6.2
 
 v0.6.1
 ==================
-* Update missed design depndencies
+* Update missed design dependencies
 
 v0.6.0
 ==================

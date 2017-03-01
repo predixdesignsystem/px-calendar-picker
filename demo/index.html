@@ -22,8 +22,8 @@
 
     <!-- Header -->
     <px-demo-header
-        module-name="px-calendar-picker"
-        description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or date range. The main use of this component is to be used in the px-range-panel.">
+    module-name="px-calendar-picker"
+    description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or date range. The main use of this component is to be used in the px-range-panel.">
     </px-demo-header>
 
     <!-- Interactive -->
@@ -36,7 +36,6 @@
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
-        <!--Figure out how to make this work with the new demo-->
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p><strong>px-calendar-selected</strong> fired <strong>{{chosenConfig._calendarEventCounter}}</strong> time(s)</p>
           <p>Current dateTime object: <strong>{{dateTimeObject}}</strong></p>
@@ -45,28 +44,29 @@
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
           <p><strong>px-calendar-range-selected</strong> fired <strong>{{chosenConfig._calendarRangeEventCounter}}</strong> time(s)</p>
           <p>Current range object:
-          <template is="dom-if" if="{{rangeToObject}}">
-            <strong>{{rangeFromObject}}</strong> To: <strong>{{rangeToObject}}</strong></p>
-          </template>
+            <template is="dom-if" if="{{rangeToObject}}">
+              <strong>{{rangeFromObject}}</strong> To: <strong>{{rangeToObject}}</strong>
+            </template>
+          </p>
         </template>
 
         <div style="width:250px">
           <px-calendar-picker
-              display-mode="{{props.displayMode.value}}"
-              block-future-dates="{{props.blockFutureDates.value}}"
-              block-past-dates="{{props.blockPastDates.value}}"
-              prevent-range-selection="{{props.preventRangeSelection.value}}"
-              hide-next-button="{{props.hideNextButton.value}}"
-              hide-previous-button="{{props.hidePreviousButton.value}}">
+          display-mode="{{props.displayMode.value}}"
+          block-future-dates="{{props.blockFutureDates.value}}"
+          block-past-dates="{{props.blockPastDates.value}}"
+          prevent-range-selection="{{props.preventRangeSelection.value}}"
+          hide-next-button="{{props.hideNextButton.value}}"
+          hide-previous-button="{{props.hidePreviousButton.value}}">
           </px-calendar-picker>
         </div>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
       <px-demo-component-snippet
-          element-properties="{{props}}"
-          element-name="px-calendar-picker"
-          links-includes="[[linksIncludes]]">
+      element-properties="{{props}}"
+      element-name="px-calendar-picker"
+      links-includes="[[linksIncludes]]">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
@@ -77,187 +77,191 @@
     <px-demo-footer></px-demo-footer>
 
   </template>
-
 </dom-module>
+
 <script>
-  Polymer({
-    is: 'local-element-demo',
+Polymer({
+  is: 'local-element-demo',
 
-    properties: {
+  properties: {
 
-      /**
-       * Note: The actual data/values for `props` are placed in `this.demoProps`
-       * to create a static reference that Polymer shouldn't overwrite.
-       *
-       * On object containing all the properties the user can configure for this
-       * demo. Usually a pretty similar copy of the component's `properties` block
-       * with some additional sugar added to describe what kind of input the
-       * user will be shown and how that input should be configured.
-       *
-       * Note that `value` for each property is the default that will be set
-       * unless a config from `configs` is applied by default.
-       *
-       *
-       * @property demoProps
-       * @type {Object}
-       */
-      props: {
-        type: Object,
-        value: function(){ return this.demoProps; }
-      },
-
-      /**
-      * The dateTime object selected by the user
-      * @property dateTimeObject
-      * @type {Object}
-      */
-      dateTimeObject: {
-        type: String,
-        value: ""
-      },
-
-      /**
-      * The "from" dateTime object selected by the user
-      *@property rangeFromObject
-      * @type {Object}
-      */
-      rangeFromObject: {
-        type: String,
-        value: ""
-      },
-
-      /**
-      * The "to" dateTime object selected by the user
-      * @property rangeToObject
-      * @type {Object}
-      */
-      rangeToObject: {
-        type: String,
-        value: ""
-      },
-
-      chosenConfig: {},
-
-      /**
-       * An array of pre-configured `props` that can be used to provide the user
-       * with a set of common examples. These configs will be made available
-       * as a set of tabs the user can click that will automatically change
-       * the `props` to specific values.
-       *
-       * @property configs
-       * @type {Array}
-       */
-      configs: {
-        type: Array,
-        value: function(){
-          return [
-            { configName: "Default",
-              configReset: true,
-            _calendarEventCounter: 0,
-            _calendarRangeEventCounter: 0  },
-
-            { configName: "Future dates",
-              displayMode: this.demoProps.displayMode.inputChoices[0],
-              preventRangeSelection: false,
-              blockFutureDates: false,
-              blockPastDates: true,
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"],
-            _calendarEventCounter: 0,
-            _calendarRangeEventCounter: 0 },
-
-            { configName: "No ranges",
-              displayMode: this.demoProps.displayMode.inputChoices[0],
-              preventRangeSelection: true,
-              blockFutureDates: false,
-              blockPastDates: false,
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"],
-            _calendarEventCounter: 0,
-            _calendarRangeEventCounter: 0 },
-
-            { configName: "Show months",
-              displayMode: this.demoProps.displayMode.inputChoices[1],
-              preventRangeSelection: false,
-              blockFutureDates: false,
-              blockPastDates: false,
-              hideNextButton: false,
-              hidePreviousButton: false,
-              parentComponent: ["<div style='width:250px'>", "</div>"],
-            _calendarEventCounter: 0,
-            _calendarRangeEventCounter: 0 }
-          ]
-        }
-      }
+    /**
+    * Note: The actual data/values for `props` are placed in `this.demoProps`
+    * to create a static reference that Polymer shouldn't overwrite.
+    *
+    * On object containing all the properties the user can configure for this
+    * demo. Usually a pretty similar copy of the component's `properties` block
+    * with some additional sugar added to describe what kind of input the
+    * user will be shown and how that input should be configured.
+    *
+    * Note that `value` for each property is the default that will be set
+    * unless a config from `configs` is applied by default.
+    *
+    *
+    * @property demoProps
+    * @type {Object}
+    */
+    props: {
+      type: Object,
+      value: function(){ return this.demoProps; }
     },
 
     /**
-     * A reference for `this.props`. Read the documentation there.
-     */
-    demoProps: {
-      preventRangeSelection: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
+    * The dateTime object representing the date selected by the user
+    * @property dateTimeObject
+    * @type {Object}
+    */
+    dateTimeObject: {
+      type: String,
+      value: ""
+    },
 
-      blockFutureDates: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
+    /**
+    * The dateTime object representing the "from" date selected by the user
+    *@property rangeFromObject
+    * @type {Object}
+    */
+    rangeFromObject: {
+      type: String,
+      value: ""
+    },
 
-      blockPastDates: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
+    /**
+    * The dateTime object representing the "to" date selected by the user
+    * @property rangeToObject
+    * @type {Object}
+    */
+    rangeToObject: {
+      type: String,
+      value: ""
+    },
 
-      hideNextButton: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
+    /**
+    * The config object currently selected by the user
+    * @property chosenConfig
+    * @type {Object}
+    */
+    chosenConfig: {},
 
-      hidePreviousButton: {
-        type: Boolean,
-        defaultValue: false,
-        inputType: 'toggle'
-      },
+    /**
+    * An array of pre-configured `props` that can be used to provide the user
+    * with a set of common examples. These configs will be made available
+    * as a set of tabs the user can click that will automatically change
+    * the `props` to specific values.
+    *
+    * @property configs
+    * @type {Array}
+    */
+    configs: {
+      type: Array,
+      value: function(){
+        return [
+          { configName: "Default",
+          configReset: true,
+          _calendarEventCounter: 0,
+          _calendarRangeEventCounter: 0  },
 
-      displayMode: {
-        type: String,
-        defaultValue: 'day',
-        inputType: 'dropdown',
-        inputChoices: ['day', 'month', 'year']
+          { configName: "Future dates",
+          displayMode: this.demoProps.displayMode.inputChoices[0],
+          preventRangeSelection: false,
+          blockFutureDates: false,
+          blockPastDates: true,
+          hideNextButton: false,
+          hidePreviousButton: false,
+          parentComponent: ["<div style='width:250px'>", "</div>"],
+          _calendarEventCounter: 0,
+          _calendarRangeEventCounter: 0 },
+
+          { configName: "No ranges",
+          displayMode: this.demoProps.displayMode.inputChoices[0],
+          preventRangeSelection: true,
+          blockFutureDates: false,
+          blockPastDates: false,
+          hideNextButton: false,
+          hidePreviousButton: false,
+          parentComponent: ["<div style='width:250px'>", "</div>"],
+          _calendarEventCounter: 0,
+          _calendarRangeEventCounter: 0 },
+
+          { configName: "Show months",
+          displayMode: this.demoProps.displayMode.inputChoices[1],
+          preventRangeSelection: false,
+          blockFutureDates: false,
+          blockPastDates: false,
+          hideNextButton: false,
+          hidePreviousButton: false,
+          parentComponent: ["<div style='width:250px'>", "</div>"],
+          _calendarEventCounter: 0,
+          _calendarRangeEventCounter: 0 }
+        ]
       }
+    }
+  },
+
+  /**
+  * A reference for `this.props`. Read the documentation there.
+  */
+  demoProps: {
+    preventRangeSelection: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
     },
 
-    listeners: {
-      'px-calendar-selected' : 'pxCalendarSelected',
-      'px-calendar-range-selected' : 'pxCalendarRangeSelected'
+    blockFutureDates: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
     },
 
-    ready: function () {
-
-      this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
+    blockPastDates: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
     },
 
-    pxCalendarSelected: function(evt) {
-      if (!this.chosenConfig || (typeof this.chosenConfig._calendarEventCounter !== "number")) return;
-      this.chosenConfig._calendarEventCounter++;
-      this.dateTimeObject = evt.detail.dateTime;
-      this.notifyPath("chosenConfig._calendarEventCounter");
+    hideNextButton: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
     },
 
-    pxCalendarRangeSelected: function(evt) {
-      if (!this.chosenConfig || (typeof this.chosenConfig._calendarRangeEventCounter !== "number")) return;
-      this.chosenConfig._calendarRangeEventCounter++;
-      this.rangeFromObject = evt.detail.range.from;
-      this.rangeToObject = evt.detail.range.to;
-      this.notifyPath("chosenConfig._calendarRangeEventCounter");
+    hidePreviousButton: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
     },
-  });
+
+    displayMode: {
+      type: String,
+      defaultValue: 'day',
+      inputType: 'dropdown',
+      inputChoices: ['day', 'month', 'year']
+    }
+  },
+
+  listeners: {
+    'px-calendar-selected' : 'pxCalendarSelected',
+    'px-calendar-range-selected' : 'pxCalendarRangeSelected'
+  },
+
+  ready: function () {
+    this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
+  },
+
+  pxCalendarSelected: function(evt) {
+    if (!this.chosenConfig || (typeof this.chosenConfig._calendarEventCounter !== "number")) return;
+    this.chosenConfig._calendarEventCounter++;
+    this.dateTimeObject = evt.detail.dateTime;
+    this.notifyPath("chosenConfig._calendarEventCounter");
+  },
+
+  pxCalendarRangeSelected: function(evt) {
+    if (!this.chosenConfig || (typeof this.chosenConfig._calendarRangeEventCounter !== "number")) return;
+    this.chosenConfig._calendarRangeEventCounter++;
+    this.rangeFromObject = evt.detail.range.from;
+    this.rangeToObject = evt.detail.range.to;
+    this.notifyPath("chosenConfig._calendarRangeEventCounter");
+  },
+});
 </script>
