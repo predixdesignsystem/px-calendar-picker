@@ -1,3 +1,7 @@
+v0.6.11
+==================
+* fixed chevron placement per design feedback
+
 v0.6.10
 ==================
 * fix event fired label behavior
