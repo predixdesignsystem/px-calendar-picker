@@ -23,7 +23,7 @@
     <!-- Header -->
     <px-demo-header
     module-name="px-calendar-picker"
-    description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or date range. The main use of this component is to be used in the px-range-panel.">
+    description="The px-calendar-picker component includes various elements used for structuring responsive layouts. This component allows the user to select a date or a date range. The main use of this component is to be used in the px-range-panel.">
     </px-demo-header>
 
     <!-- Interactive -->
@@ -37,17 +37,13 @@
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-selected</strong> fired <strong>{{chosenConfig._calendarEventCounter}}</strong> time(s)</p>
-          <p>Current dateTime object: <strong>{{dateTimeObject}}</strong></p>
+          <p class=u-mb0>Event fired: <strong>px-calendar-selected</strong></p>
+          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p><strong>px-calendar-range-selected</strong> fired <strong>{{chosenConfig._calendarRangeEventCounter}}</strong> time(s)</p>
-          <p>Current range object:
-            <template is="dom-if" if="{{rangeToObject}}">
-              <strong>{{rangeFromObject}}</strong> To: <strong>{{rangeToObject}}</strong>
-            </template>
-          </p>
+          <p class=u-mb0>Event fired: <strong>px-calendar-range-selected</strong></p>
+          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
         <div style="width:250px">
@@ -107,43 +103,6 @@ Polymer({
     },
 
     /**
-    * The dateTime object representing the date selected by the user
-    * @property dateTimeObject
-    * @type {Object}
-    */
-    dateTimeObject: {
-      type: String,
-      value: ""
-    },
-
-    /**
-    * The dateTime object representing the "from" date selected by the user
-    *@property rangeFromObject
-    * @type {Object}
-    */
-    rangeFromObject: {
-      type: String,
-      value: ""
-    },
-
-    /**
-    * The dateTime object representing the "to" date selected by the user
-    * @property rangeToObject
-    * @type {Object}
-    */
-    rangeToObject: {
-      type: String,
-      value: ""
-    },
-
-    /**
-    * The config object currently selected by the user
-    * @property chosenConfig
-    * @type {Object}
-    */
-    chosenConfig: {},
-
-    /**
     * An array of pre-configured `props` that can be used to provide the user
     * with a set of common examples. These configs will be made available
     * as a set of tabs the user can click that will automatically change
@@ -157,9 +116,7 @@ Polymer({
       value: function(){
         return [
           { configName: "Default",
-          configReset: true,
-          _calendarEventCounter: 0,
-          _calendarRangeEventCounter: 0  },
+          configReset: true},
 
           { configName: "Future dates",
           displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -168,9 +125,7 @@ Polymer({
           blockPastDates: true,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"],
-          _calendarEventCounter: 0,
-          _calendarRangeEventCounter: 0 },
+          parentComponent: ["<div style='width:250px'>", "</div>"]},
 
           { configName: "No ranges",
           displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -179,9 +134,7 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"],
-          _calendarEventCounter: 0,
-          _calendarRangeEventCounter: 0 },
+          parentComponent: ["<div style='width:250px'>", "</div>"]},
 
           { configName: "Show months",
           displayMode: this.demoProps.displayMode.inputChoices[1],
@@ -190,9 +143,7 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"],
-          _calendarEventCounter: 0,
-          _calendarRangeEventCounter: 0 }
+          parentComponent: ["<div style='width:250px'>", "</div>"]}
         ]
       }
     }
@@ -240,28 +191,9 @@ Polymer({
     }
   },
 
-  listeners: {
-    'px-calendar-selected' : 'pxCalendarSelected',
-    'px-calendar-range-selected' : 'pxCalendarRangeSelected'
-  },
-
   ready: function () {
     this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
-  },
+  }
 
-  pxCalendarSelected: function(evt) {
-    if (!this.chosenConfig || (typeof this.chosenConfig._calendarEventCounter !== "number")) return;
-    this.chosenConfig._calendarEventCounter++;
-    this.dateTimeObject = evt.detail.dateTime;
-    this.notifyPath("chosenConfig._calendarEventCounter");
-  },
-
-  pxCalendarRangeSelected: function(evt) {
-    if (!this.chosenConfig || (typeof this.chosenConfig._calendarRangeEventCounter !== "number")) return;
-    this.chosenConfig._calendarRangeEventCounter++;
-    this.rangeFromObject = evt.detail.range.from;
-    this.rangeToObject = evt.detail.range.to;
-    this.notifyPath("chosenConfig._calendarRangeEventCounter");
-  },
 });
 </script>
