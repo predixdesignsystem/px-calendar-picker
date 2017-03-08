@@ -21,13 +21,13 @@ Node, npm and bower are necessary to install the component and dependencies. web
 First, install the component via bower on the command line.
 
 ```
-bower install px-datetime-picker --save
+bower install px-calendar-picker --save
 ```
 
 Second, import the component to your application with the following tag in your head.
 
 ```
-<link rel="import" href="/bower_components/Px-Datetime-Picker/Px-Datetime-Picker.html"/>
+<link rel="import" href="/bower_components/Px-Calendar-Picker/Px-Calendar-Picker.html"/>
 ```
 
 Finally, use the component in your application:
