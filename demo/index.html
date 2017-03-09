@@ -67,7 +67,7 @@
     </px-demo-interactive>
 
     <!-- API Viewer -->
-    <px-demo-api-viewer source="px-calendar-picker"></px-demo-api-viewer>
+    <px-demo-api-viewer source="px-calendar-picker" hide="[[hideEvents]]"></px-demo-api-viewer>
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
@@ -102,6 +102,11 @@ Polymer({
       value: function(){ return this.demoProps; }
     },
 
+    hideEvents: {
+      type: Array,
+      value: ["px-datetime-range-submitted"]
+    },
+
     /**
     * An array of pre-configured `props` that can be used to provide the user
     * with a set of common examples. These configs will be made available
@@ -116,7 +121,7 @@ Polymer({
       value: function(){
         return [
           { configName: "Default",
-          configReset: true},
+          configReset: true },
 
           { configName: "Future dates",
           displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -125,7 +130,7 @@ Polymer({
           blockPastDates: true,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"]},
+          parentComponent: ["<div style='width:250px'>", "</div>"] },
 
           { configName: "No ranges",
           displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -134,7 +139,7 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"]},
+          parentComponent: ["<div style='width:250px'>", "</div>"] },
 
           { configName: "Show months",
           displayMode: this.demoProps.displayMode.inputChoices[1],
@@ -143,7 +148,7 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"]}
+          parentComponent: ["<div style='width:250px'>", "</div>"] }
         ]
       }
     }
