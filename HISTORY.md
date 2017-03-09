@@ -1,3 +1,8 @@
+v0.6.14
+==================
+* remove irrelevant Event documentation coming in from pxDatetimeRangeBehavior
+* add Cloud Flare cache reset
+
 v0.6.13
 ==================
 * update documentation
