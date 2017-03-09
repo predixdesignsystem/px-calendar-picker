@@ -1,6 +1,10 @@
+v0.6.13
+==================
+* update documentation
+
 v0.6.12
 ==================
-* update event fired label 
+* update event fired label
 
 v0.6.11
 ==================

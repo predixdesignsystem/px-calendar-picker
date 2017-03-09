@@ -114,9 +114,9 @@ Custom property | Description | Default
       },
       /**
        *  What the calendar should display:
-       *  'day': calendar displays all days of a month
-       *  'month': calendar displays all months in a year
-       *  'year': calendar displays a 10 years range
+       *  - 'day': calendar displays all days of a month
+       *  - 'month': calendar displays all months in a year
+       *  - 'year': calendar displays a 10 years range
        *
        *  @default 'day'
        */
@@ -127,9 +127,9 @@ Custom property | Description | Default
       },
       /**
        *  What the calendar should display:
-       *  'day': calendar displays all days of a month
-       *  'month': calendar displays all months in a year
-       *  'year': calendar displays a 10 years range
+       *  - 'day': calendar displays all days of a month
+       *  - 'month': calendar displays all months in a year
+       *  - 'year': calendar displays a 10 year range
        *
        *  Can internally change when the user clicks the title and changes the mode
        *
@@ -143,12 +143,12 @@ Custom property | Description | Default
       /**
        * (optional)
        *
-       * By default, the calendar will allow the user to select a range by clicking on 2
-       * different date. If set this will only allow the user select a single date
-       * each time he clicks.
+       * By default, the calendar will allow the user to select a date range by clicking on two
+       * different dates. If this property is set, the user will only be able to select a single date
+       * each time she clicks.
        *
-       * If set then the 'singleSelectedDate' property will refelect the selected date. Otherwise
-       * the 'range' property should be observed
+       * If this property is set, then the 'singleSelectedDate' property will reflect the selected date. Otherwise
+       * the 'range' property should be observed and will reflect the selected date range.
        *
        * @default false
        */
@@ -160,7 +160,7 @@ Custom property | Description | Default
        * (optional)
        *
        * Reflects the selected date in ISO8601 string if the calendar is preventing range selection.
-       * Otherwise the 'range' property should be observed
+       * Otherwise the 'range' property should be observed.
        *
        * @default ''
        */
@@ -171,7 +171,7 @@ Custom property | Description | Default
       /**
        * (optional)
        *
-       * hides the 'previous' button on the caption
+       * Hides the 'previous' button on the calendar.
        *
        * @default false
        */
@@ -182,7 +182,7 @@ Custom property | Description | Default
       /**
        * (optional)
        *
-       * hides the 'next' button on the caption
+       * Hides the 'next' button on the calendar.
        *
        * @default false
        */
@@ -193,8 +193,8 @@ Custom property | Description | Default
       /**
        * (optional)
        *
-       * blocks the selection/drill down navigation for any dates before this one.
-       * Does not apply if empty. ISO8601 string
+       * Blocks the selection/drill down navigation for any dates before this one.
+       * Does not apply if empty. ISO8601 string.
        *
        * @default ''
        */
@@ -212,8 +212,8 @@ Custom property | Description | Default
       /**
        * (optional)
        *
-       * blocks the selection/drill down navigation for any dates before this one.
-       * Does not apply if empty. ISO8601 string
+       * Blocks the selection/drill down navigation for any dates after this one.
+       * Does not apply if empty. ISO8601 string.
        *
        * @default ''
        */
@@ -224,8 +224,8 @@ Custom property | Description | Default
       /**
        * (optional)
        *
-       * if set allows the calendar picker to shrink rather than have a constant size,
-       * typically the height would shrink when choosing months or years
+       * If set, allows the calendar picker to shrink rather than have a constant size.
+       * Typically the height would shrink when choosing months or years
        *
        */
       shrink: {
@@ -397,7 +397,7 @@ Custom property | Description | Default
 
     },
     /**
-      * px-calendar-range-selected event. This event is fired when the user selects a range in the calendar & 'preventRangeSelection' is false
+      * This event is fired when the user selects a range in the calendar & 'preventRangeSelection' is false
       *
       * @event px-calendar-range-selected
       * @param {object} range - {from, to} the ISO 8601 Strings representing the date/time chosen by the user
