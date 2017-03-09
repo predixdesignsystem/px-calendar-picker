@@ -397,18 +397,18 @@ Custom property | Description | Default
 
     },
     /**
-      * This event is fired when the user selects a range in the calendar & 'preventRangeSelection' is false
+      * This event is fired when the user selects a date range in the calendar & 'preventRangeSelection' is false
       *
       * @event px-calendar-range-selected
-      * @param {object} range - {from, to} the ISO 8601 Strings representing the date/time chosen by the user
-      * @param {object} momentObjs - {from, to}: the moment.js objects representing the date/time chosen by the user
+      * @param {object} range - {from, to} : the ISO 8601 Strings representing the date/time range selected by the user
+      * @param {object} momentObjs - {from, to} : the moment.js objects representing the date/time range selected by the user
       */
     /**
-      * px-calendar-selected event. This event is fired when the user selects a date in the calendar & 'preventRangeSelection' is true
+      * This event is fired when the user selects a date in the calendar & 'preventRangeSelection' is true
       *
       * @event px-calendar-selected
-      * @param {object} range - {from, to} the ISO 8601 Strings representing the date/time chosen by the user
-      * @param {object} momentObjs - {from, to}: the moment.js objects representing the date/time chosen by the user
+      * @param {object} dateTime : the ISO 8601 String representing the date/time selected by the user
+      * @param {object} momentObj : the moment.js object representing the date/time selected by the user
       */
 
 
