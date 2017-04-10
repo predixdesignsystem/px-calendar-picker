@@ -1,3 +1,7 @@
+v0.6.15
+==================
+* update documentation
+
 v0.6.14
 ==================
 * remove irrelevant Event documentation coming in from pxDatetimeRangeBehavior

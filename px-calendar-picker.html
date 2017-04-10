@@ -6,18 +6,20 @@
 <link rel="import" href="../px-datetime-common/px-datetime-imports.html" />
 
 <!--
-The datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
+All datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
 
-Element that renders a calendar for the given year and month, and highlights/selects the dates within the range given by the first/second range date.
-
-The first range date may be before, after, or equal to the second range date, depending on the order of the user's clicks.
+This element renders a calendar for a given decade, year, or month, based on `display-mode` and `base-date`.
+A user can either select a range of dates or a single date, based on the `prevent-range-selection` property.
+User-selected values can be read out from the `range` or `single-selected-date` properties accordingly.
+A single date or range can be pre-set by manually setting either `from-moment` (single date) or `from-moment` and `to-moment` (range) using valid Moment.js objects.
 
 #### Usage
 
-    <px-calendar display-month-year="{{...}}"
-                 first-range-date="{{...}}"
-                 second-range-date="{{...}}">
-    </px-calendar>
+    <px-calendar-picker from-moment={...} prevent-range-selection single-selected-date={...}>
+    </px-calendar-picker>
+
+    <px-calendar-picker from-moment={...} to-moment={...} range={...}>
+    </px-calendar-picker>
 
 #### Styling
 The following custom properties are available for styling:
