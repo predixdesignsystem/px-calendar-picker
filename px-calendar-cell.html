@@ -30,7 +30,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
   Polymer({
 
     is: 'px-calendar-cell',
-    behaviors: [pxDatetimeRangeBehavior],
+    behaviors: [
+      PxDatetimeBehavior.blockDates,
+      PxDatetimeBehavior.rangeMoments],
 
     properties: {
 
@@ -199,7 +201,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     _isStartOfWeekOrMonth: function() {
       switch(this.displayMode) {
         case 'day':
-          return this.displayDate.date() === 1 || this.displayDate.weekday() == 0;
+          return this.displayDate.date() === 1 || this.displayDate.weekday() === 0;
         case 'month':
           return this.displayDate.month() === 0 || this.displayDate.month() === 4 || this.displayDate.month() === 8
         case 'year':
@@ -210,7 +212,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     _isEndOfWeekOrMonth: function() {
       switch(this.displayMode) {
         case 'day':
-          return this.displayDate.date() == this.displayDate.daysInMonth() || this.displayDate.weekday() == 6;
+          return this.displayDate.date() === this.displayDate.daysInMonth() || this.displayDate.weekday() === 6;
         case 'month':
           return this.displayDate.month() === 3 || this.displayDate.month() === 7 || this.displayDate.month() === 11
         case 'year':

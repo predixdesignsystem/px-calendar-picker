@@ -56,7 +56,7 @@ Custom property | Description | Default
             <iron-icon icon="fa:fa-angle-left" class="fa-angle"></iron-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="caption_text">{{_getCurrentTitle(_currentDisplayMode, baseDate)}}</span>
+        <span on-tap="_onNextDisplayMode" class="caption_text">[[_title]]</span>
         <button id=btnNextMonth type="button" on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="fa:fa-angle-right" class="fa-angle"></iron-icon>
@@ -69,7 +69,7 @@ Custom property | Description | Default
           <div class="tr">
             <!-- Sunday -> Saturday -->
             <template is="dom-repeat" items="{{daysOfTheWeek}}" as="dayOfTheWeek">
-              <div class="th caps u-pt0">{{dayOfTheWeek}}</div>
+              <div class="th caps u-pt0">[[dayOfTheWeek]]</div>
             </template>
           </div>
         </template>
@@ -267,9 +267,14 @@ Custom property | Description | Default
       waitToFire: {
         type: Boolean,
         value: false
+      },
+      _title: {
+        type: String
       }
     },
-    observers: ['_renderCurrent(_currentDisplayMode)'],
+    observers: ['_renderCurrent(_currentDisplayMode)',
+                '_localeChanged(language)',
+                '_getCurrentTitle(_currentDisplayMode, baseDate)'],
     ready: function() {
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
@@ -277,6 +282,17 @@ Custom property | Description | Default
       this.addEventListener('px-cell-date-selected', handler);
       this.toMoment = null;
       this.fromMoment = null;
+    },
+
+    _localeChanged: function() {
+      if(Px.moment && this.baseDate && this._currentDisplayMode) {
+        this.daysOfTheWeek = this._getDaysOfTheWeek();
+        //reset base date so it picks up new moment locale
+        //get moment locale and update the base date
+        this.set('baseDate', this.baseDate.locale(Px.moment.locale()));
+        this._getCurrentTitle(this._currentDisplayMode, this.baseDate);
+        this._renderCurrent();
+      }
     },
 
     _timeZoneChanged: function() {
@@ -367,11 +383,11 @@ Custom property | Description | Default
     _getCurrentTitle: function(_currentDisplayMode, baseDate) {
 
       if(_currentDisplayMode === 'day') {
-        return baseDate.format('MMMM') + ' ' + baseDate.format('YYYY');
+        this.set('_title', baseDate.format('MMMM') + ' ' + baseDate.format('YYYY'));
       }else if(_currentDisplayMode === 'month') {
-        return baseDate.format('YYYY');
+        this.set('_title',baseDate.format('YYYY'));
       }else {
-        return baseDate.format('YYYY') + ' - ' + baseDate.clone().add(9, 'years').format('YYYY');
+        this.set('_title',baseDate.format('YYYY') + ' - ' + baseDate.clone().add(9, 'years').format('YYYY'));
       }
     },
 
@@ -481,18 +497,24 @@ Custom property | Description | Default
       var numberOfDaysInMonth = this.baseDate.daysInMonth(),
           dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
           numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
-          daysBeforeMonthStartsCount = 0,
+          daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
+          emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
           date = 1,
           month = [];
 
+      //make sure we have enough space to display the first day
+      if(emptyCellsCount < 0) {
+        emptyCellsCount += 7;
+      }
+
+
+
+      var week = [];
+      for(var j = 0; j< emptyCellsCount; j++) {
+        week.push(Px.moment(null)); // push empty cells on before the 1st of the month
+      }
+
       for (var weekCount = 0; weekCount < numberOfWeeks; weekCount++) {
-
-        var week = [];
-
-        while (daysBeforeMonthStartsCount < dayBeginningOfMonth) {
-          week.push(Px.moment(null)); // push empty cells on before the 1st of the month
-          daysBeforeMonthStartsCount++;
-        }
 
         while (week.length < 7) {
           if (date <= numberOfDaysInMonth) {
@@ -504,6 +526,7 @@ Custom property | Description | Default
           }
         }
         month.push(week);
+        week = [];
       }
       return month;
     },
