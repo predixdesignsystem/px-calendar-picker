@@ -1,4 +1,4 @@
-v1.0.0
+v0.7.0
 ==================
 * added localization through resources, language, formats and Px.moment.changeLocale()
 

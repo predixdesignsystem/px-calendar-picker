@@ -1,6 +1,6 @@
 {
   "name": "px-calendar-picker",
-  "version": "1.0.0",
+  "version": "0.7.0",
   "main": [
     "px-calendar-picker.html"
   ],
@@ -27,11 +27,11 @@
   ],
   "dependencies": {
     "polymer": "^1.6.1",
-    "px-theme": "^3.0.0",
-    "px-datetime-common": "^1.0.0",
-    "px-polymer-font-awesome": "^2.0.0",
-    "px-buttons-design": "^2.0.0",
-    "px-tables-design": "^2.0.0"
+    "px-theme": "^2.0.1",
+    "px-datetime-common": "^0.8.0",
+    "px-polymer-font-awesome": "^1.1.0",
+    "px-buttons-design": "^1.1.0",
+    "px-tables-design": "^1.1.0"
   },
   "devDependencies": {
     "px-starter-kit-design": "^1.0.0",
