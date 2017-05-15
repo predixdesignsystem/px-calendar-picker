@@ -5,6 +5,7 @@
     "px-calendar-picker.html"
   ],
   "ignore": [
+    "*.enc",
     ".*",
     "node_modules",
     "bower_components",
