@@ -2,7 +2,7 @@
 <link rel="import" href="px-calendar-cell.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
-<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
 
 <!--
 All datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
@@ -52,13 +52,13 @@ Custom property | Description | Default
       <div class="caption">
         <button type="button" on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
-            <iron-icon icon="fa:fa-angle-left" class="fa-angle"></iron-icon>
+            <iron-icon icon="px:chevron-left" class="fa-angle"></iron-icon>
           </template>
         </button>
         <span on-tap="_onNextDisplayMode" class="caption_text">[[_title]]</span>
         <button id=btnNextMonth type="button" on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
           <template is="dom-if" if="{{!hideNextButton}}">
-            <iron-icon icon="fa:fa-angle-right" class="fa-angle"></iron-icon>
+            <iron-icon icon="px:chevron-right" class="fa-angle"></iron-icon>
           </template>
         </button>
       </div>
