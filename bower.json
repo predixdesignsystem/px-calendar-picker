@@ -27,14 +27,16 @@
   ],
   "dependencies": {
     "polymer": "^1.6.1",
-    "px-theme": "^3.0.0",
     "px-datetime-common": "^1.0.0",
-    "px-polymer-font-awesome": "^2.0.0",
-    "px-buttons-design": "^2.0.0",
-    "px-tables-design": "^2.0.0"
+    "px-polymer-font-awesome": "^2.0.0"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^1.0.0",
-    "px-demo": "^2.0.0"
+    "px-theme": "^3.0.0",
+    "px-demo": "^2.0.0",
+    "px-buttons-design": "^2.0.0",
+    "px-tables-design": "^2.0.0",
+    "px-box-sizing-design": "^1.0.0",
+    "px-normalize-design": "^1.0.0",
+    "px-actionable-design": "^2.0.0"
   }
 }

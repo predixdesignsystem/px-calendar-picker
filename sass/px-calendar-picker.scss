@@ -1,0 +1,147 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+// Generic
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+
+// Base
+$inuit-enable-table--no-cells: true;
+@import "px-tables-design/_base.tables.scss";
+
+// Objects
+$inuit-enable-btn--bare: true;
+$inuit-enable-btn--disabled: true;
+@import "px-buttons-design/_objects.buttons.scss";
+@import 'px-actionable-design/_objects.actionable.scss';
+
+// Component
+
+button[hidden] {
+  visibility: hidden;
+}
+
+.constantsize {
+  min-width: calculateRem(210px);
+  min-height: calculateRem(230px);
+}
+
+.caption {
+  margin-bottom: $inuit-base-spacing-unit;
+  text-align: center;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  --iron-icon-width: 1rem;
+  --iron-icon-height: 1rem;
+  margin-bottom: 2px;
+}
+
+.tr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.th.th.th {
+  @extend th;
+  text-align: center;
+  flex:1;
+}
+
+.td {
+  @extend td;
+  flex: 1;
+}
+
+.table {
+  .th, .td {
+    box-sizing: content-box;
+  }
+}
+
+.calendar-cell {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-right: $inuit-base-spacing-unit--tiny;
+  padding-left: $inuit-base-spacing-unit--tiny;
+}
+
+.is-today button {
+  border: 1px solid $select-default !important;
+}
+
+.btn--bare {
+  height: auto;
+  width: 100%;
+  line-height: calculateRem(26px);
+  text-transform: uppercase;
+  color: var(--px-calendar-text-color, black);
+  border: 1px solid transparent !important;
+  &:hover {
+    background-color: var(--px-calendar-background-color--hover, lightgray);
+    color: var(--px-calendar-text-color--hover, black);
+  }
+  &:hover, &:focus {
+    outline: none;
+  }
+  &:active{
+    background-color: var(--px-calendar-background-color--pressed, blue);
+    color: var(--px-calendar-text-color--selected, white);
+  }
+}
+
+.is-selected {
+  .btn--bare {
+    background-color: var(--px-calendar-background-color--selected, blue);
+    color: var(--px-calendar-text-color--selected, white);
+    &:hover {
+      background-color: var(--px-calendar-background-color--selected--hover, darkblue);
+      color: var(--px-calendar-text-color--selected, white);
+    }
+    &:active {
+      background-color: var(--px-calendar-background-color--selected--pressed, navy);
+    }
+  }
+}
+
+.caps {
+  color: var(--px-calendar-sub-labels--text-color, gray);
+}
+
+$px-calendar-alt-background-color : var(--px-calendar-alt-background-color, cyan);
+
+.is-between, .is-selected {
+  background-color: $px-calendar-alt-background-color;
+}
+
+.is-selected-only, .is-start.is-end.is-selected {
+  background-color: inherit;
+}
+
+.is-selected.is-end:not(.is-selected-only):not(.is-start) {
+  background-image: linear-gradient(to right, $px-calendar-alt-background-color, $px-calendar-alt-background-color 50%, transparent 50%, transparent 100%);
+  background-color: inherit;
+}
+
+.is-selected.is-start:not(.is-selected-only):not(.is-end) {
+  background-image: linear-gradient(to left, $px-calendar-alt-background-color, $px-calendar-alt-background-color 50%, transparent 50%, transparent 100%);
+  background-color: inherit;
+}
+
+
+// Trumps
+$inuit-enable-margins--none: true;
+$inuit-enable-margins--small: true;
+$inuit-enable-paddings--none: true;
+@import "px-spacing-design/_trumps.spacing.scss";

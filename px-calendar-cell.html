@@ -93,10 +93,6 @@ Element that renders a calendar cell for a given date (and for non-date cells in
             btnStyles = 'btn btn--bare',
             isDisabled = false;
 
-        if(_this.displayMode === 'month' || _this.displayMode === 'year') {
-          btnStyles += ' btn--larger'
-        }
-
         _this.set('isValidDate', _this.displayDate.isValid());
 
         if (!_this.isValidDate) {

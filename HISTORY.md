@@ -3,6 +3,7 @@ v1.0.0
 * updated dependencies for design refresh
 * added localization through resources, language, formats and Px.moment.changeLocale()
 * added new icons
+* component redesign
 
 v0.6.15
 ==================

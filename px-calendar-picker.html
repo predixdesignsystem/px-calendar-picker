@@ -12,7 +12,7 @@ A user can either select a range of dates or a single date, based on the `preven
 User-selected values can be read out from the `range` or `single-selected-date` properties accordingly.
 A single date or range can be pre-set by manually setting either `from-moment` (single date) or `from-moment` and `to-moment` (range) using valid Moment.js objects.
 
-#### Usage
+### Usage
 
     <px-calendar-picker from-moment={...} prevent-range-selection single-selected-date={...}>
     </px-calendar-picker>
@@ -20,23 +20,22 @@ A single date or range can be pre-set by manually setting either `from-moment` (
     <px-calendar-picker from-moment={...} to-moment={...} range={...}>
     </px-calendar-picker>
 
-#### Styling
+### Styling
 The following custom properties are available for styling:
 
-Custom property | Description | Default
-----------------|-------------|----------
-`--px-calendar-text-color` | Default text color for dates on the calendar  | `$black`
-`--px-calendar-text-color--hover` | Text color for dates when hovered  | `$white`
-`--px-calendar-text-color--selected` | Text color for dates when selected | `$white`
-`--px-calendar-labels--text-color` | Text color for month and year  | `$gray8`
-`--px-calendar-sub-labels--text-color` | Text color for days of the week | `$gray8`
-`--px-calendar-background-color` | Fill color for the next/previous chevrons | `$primary-blue`
-`--px-calendar-background-color--hover` | Background color for dates when hovered | `$primary-blue-hover`
-`--px-calendar-background-color--pressed` | Background color for dates when pressed | `$primary-blue-pressed`
-`--px-calendar-background-color--selected` | Background color for dates when selected | `$select-blue-default`
-`--px-calendar-background-color--selected--hover` | Background color for dates when selected & hovered | `$select-blue-hover`
-`--px-calendar-background-color--selected--pressed` | Background color for dates when selected & pressed | `$select-blue-pressed`
-`--px-calendar-alt-background-color` | Background color for the range between start and end dates | `$gray3`
+Custom property | Description
+----------------|-------------
+`--px-calendar-text-color` | Default text color for dates on the calendar
+`--px-calendar-text-color--hover` | Text color for dates when hovered
+`--px-calendar-text-color--selected` | Text color for dates when selected
+`--px-calendar-sub-labels--text-color` | Text color for days of the week
+`--px-calendar-background-color` | Fill color for the next/previous chevrons
+`--px-calendar-background-color--hover` | Background color for dates when hovered
+`--px-calendar-background-color--pressed` | Background color for dates when pressed
+`--px-calendar-background-color--selected` | Background color for dates when selected
+`--px-calendar-background-color--selected--hover` | Background color for dates when selected & hovered
+`--px-calendar-background-color--selected--pressed` | Background color for dates when selected & pressed
+`--px-calendar-alt-background-color` | Background color for the range between start and end dates
 
 @demo demo.html
 -->
@@ -49,16 +48,16 @@ Custom property | Description | Default
 
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
-      <div class="caption">
-        <button type="button" on-tap="_onPrevious" class="btn btn--bare u--mr- caption_btn">
+      <div class="caption u-ph-">
+        <button type="button" on-tap="_onPrevious" class="actionable actionable--action u-ml-">
           <template is="dom-if" if="{{!hidePreviousButton}}">
-            <iron-icon icon="px:chevron-left" class="fa-angle"></iron-icon>
+            <iron-icon icon="px:arrow-left" class="arrow"></iron-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="caption_text">[[_title]]</span>
-        <button id=btnNextMonth type="button" on-tap="_onNext" class="btn btn--bare u--ml- caption_btn">
+        <span on-tap="_onNextDisplayMode" class="actionable actionable--action">[[_title]]</span>
+        <button id=btnNextMonth type="button" on-tap="_onNext" class="actionable actionable--action u-mr-">
           <template is="dom-if" if="{{!hideNextButton}}">
-            <iron-icon icon="px:chevron-right" class="fa-angle"></iron-icon>
+            <iron-icon icon="px:arrow-right" class="arrow"></iron-icon>
           </template>
         </button>
       </div>
@@ -68,7 +67,7 @@ Custom property | Description | Default
           <div class="tr">
             <!-- Sunday -> Saturday -->
             <template is="dom-repeat" items="{{daysOfTheWeek}}" as="dayOfTheWeek">
-              <div class="th caps u-pt0">[[dayOfTheWeek]]</div>
+              <div class="th caps u-p0">[[dayOfTheWeek]]</div>
             </template>
           </div>
         </template>
@@ -76,7 +75,7 @@ Custom property | Description | Default
           <!-- 1 week per row -->
           <div class="tr">
             <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
-                <div class="td">
+                <div class="td u-p0">
                   <px-calendar-cell display-date="{{date}}"
                                     from-moment="[[fromMoment]]"
                                     to-moment="[[toMoment]]"
