@@ -1,10 +1,9 @@
-Px-Calendar-picker [![Build Status](https://travis-ci.org/PredixDev/px-calendar-picker.svg?branch=master)](https://travis-ci.org/PredixDev/px-calendar-picker)
+# px-calendar-picker [![Build Status](https://travis-ci.org/PredixDev/px-calendar-picker.svg?branch=master)](https://travis-ci.org/PredixDev/px-calendar-picker)
 -----------------------------------------------
-[![px-calendar-picker demo](px-calendar-picker.png?raw=true)](https://github.com/PredixDev/px-calendar-picker)
 
 ## Overview
 
-A calendar for picking dates; NOT a display calendar :)
+Px-calendar-picker is a calendar for selecting dates, NOT a display calendar :)
 
 ## Usage
 
