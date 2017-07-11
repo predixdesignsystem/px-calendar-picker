@@ -4,11 +4,12 @@
 <!--
 Element that renders a calendar cell for a given date (and for non-date cells in the calendar).
 
-##### Usage
+### Usage
 
-    <px-calendar-cell display-date="{{...}}"
-                      first-range-date="{{...}}"
-                      second-range-date="{{...}}">
+    <px-calendar-cell
+      display-date="{{...}}"
+      first-range-date="{{...}}"
+      second-range-date="{{...}}">
     </px-calendar-cell>
 
 -->
@@ -31,7 +32,8 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     is: 'px-calendar-cell',
     behaviors: [
       PxDatetimeBehavior.blockDates,
-      PxDatetimeBehavior.rangeMoments],
+      PxDatetimeBehavior.rangeMoments
+    ],
 
     properties: {
 
@@ -97,7 +99,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
         if (!_this.isValidDate) {
           // if the cell is a blank cell of calendar (before/after start of month)
-          cellStyles += ' is-empty';
+          cellStyles += ' ';
           _this.set('displayedValue', '');
         }
         else {
@@ -185,7 +187,6 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     _isSingleSelected: function() {
-
       var singleFrom = this.fromMoment && (!this.toMoment || !this.toMoment.isValid())
        && this.displayDate.isSame(this.fromMoment, this.displayMode),
           singleTo = this.toMoment && (!this.fromMoment || !this.fromMoment.isValid())

@@ -52,7 +52,8 @@
           block-past-dates="{{props.blockPastDates.value}}"
           prevent-range-selection="{{props.preventRangeSelection.value}}"
           hide-next-button="{{props.hideNextButton.value}}"
-          hide-previous-button="{{props.hidePreviousButton.value}}">
+          hide-previous-button="{{props.hidePreviousButton.value}}"
+          shrink="{{props.shrink.value}}">
           </px-calendar-picker>
         </div>
       </px-demo-component>
@@ -129,6 +130,7 @@ Polymer({
           blockPastDates: true,
           hideNextButton: false,
           hidePreviousButton: false,
+          shrink: false,
           parentComponent: ["<div style='width:250px'>", "</div>"] },
 
           { configName: "No ranges",
@@ -138,6 +140,7 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
+          shrink: false,
           parentComponent: ["<div style='width:250px'>", "</div>"] },
 
           { configName: "Show months",
@@ -147,6 +150,7 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
+          shrink: false,
           parentComponent: ["<div style='width:250px'>", "</div>"] }
         ]
       }
@@ -187,6 +191,12 @@ Polymer({
       inputType: 'toggle'
     },
 
+    shrink: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
     displayMode: {
       type: String,
       defaultValue: 'day',
@@ -196,7 +206,7 @@ Polymer({
   },
 
   ready: function () {
-    this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
+    this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/px-icon-set.html'];
   }
 
 });

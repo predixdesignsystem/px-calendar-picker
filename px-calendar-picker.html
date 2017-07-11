@@ -49,13 +49,13 @@ Custom property | Description
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
       <div class="caption u-ph-">
-        <button type="button" on-tap="_onPrevious" class="actionable actionable--action u-ml-">
+        <button type="button" on-tap="_onPrevious" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
             <iron-icon icon="px:arrow-left" class="arrow"></iron-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="actionable actionable--action">[[_title]]</span>
-        <button id=btnNextMonth type="button" on-tap="_onNext" class="actionable actionable--action u-mr-">
+        <span on-tap="_onNextDisplayMode" class="actionable actionable--action title-color">[[_title]]</span>
+        <button id="btnNextMonth" type="button" on-tap="_onNext" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <iron-icon icon="px:arrow-right" class="arrow"></iron-icon>
           </template>
@@ -72,18 +72,18 @@ Custom property | Description
           </div>
         </template>
         <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week" strip-whitespace>
-          <!-- 1 week per row -->
           <div class="tr">
             <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
                 <div class="td u-p0">
-                  <px-calendar-cell display-date="{{date}}"
-                                    from-moment="[[fromMoment]]"
-                                    to-moment="[[toMoment]]"
-                                    block-future-dates="{{blockFutureDates}}"
-                                    block-past-dates="{{blockPastDates}}"
-                                    display-mode="{{_currentDisplayMode}}"
-                                    block-dates-after="[[_momentBlockDatesAfter]]"
-                                    block-dates-before="[[_momentBlockDatesBefore]]">
+                  <px-calendar-cell
+                      display-date="{{date}}"
+                      from-moment="[[fromMoment]]"
+                      to-moment="[[toMoment]]"
+                      block-future-dates="{{blockFutureDates}}"
+                      block-past-dates="{{blockPastDates}}"
+                      display-mode="{{_currentDisplayMode}}"
+                      block-dates-after="[[_momentBlockDatesAfter]]"
+                      block-dates-before="[[_momentBlockDatesBefore]]">
                   </px-calendar-cell>
                 </div>
             </template>
@@ -301,7 +301,7 @@ Custom property | Description
       var base = "table table--no-cells text--center ";
 
       if(!shrink) {
-        base += "constantsize "
+        base += "constantSize "
       }
       return base;
     },
@@ -429,8 +429,6 @@ Custom property | Description
 
 
     _selectDate: function(newSelectedDate) {
-
-      // debugger;
       if (!this.preventRangeSelection && this.fromMoment && !this.toMoment) {
         // treat the click as the second date - the range is selected!
 
@@ -570,7 +568,6 @@ Custom property | Description
     },
 
     _baseDateChanged: function(newDate, oldDate) {
-
       //rerender if we're in day mode and changed month or if we changed year
       if(this._currentDisplayMode === 'day' &&
          (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
