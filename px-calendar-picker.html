@@ -56,7 +56,7 @@ Custom property | Description
 
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
-      <div class="caption u-ph-">
+      <div class="caption">
         <button type="button" on-tap="_onPrevious" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
             <iron-icon icon="px:arrow-left" class="arrow"></iron-icon>
@@ -75,14 +75,14 @@ Custom property | Description
           <div class="tr">
             <!-- Sunday -> Saturday -->
             <template is="dom-repeat" items="{{daysOfTheWeek}}" as="dayOfTheWeek">
-              <div class="th caps u-p0">[[dayOfTheWeek]]</div>
+              <div class="th caps">[[dayOfTheWeek]]</div>
             </template>
           </div>
         </template>
         <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week" strip-whitespace>
           <div class="tr">
             <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
-                <div class="td u-p0">
+                <div class="td">
                   <px-calendar-cell
                       display-date="{{date}}"
                       from-moment="[[fromMoment]]"

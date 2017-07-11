@@ -76,7 +76,7 @@ button[hidden] {
 .btn--bare {
   height: auto;
   width: 100%;
-  line-height: calculateRem(26px);
+  line-height: calculateRem(28px);
   text-transform: uppercase;
   color: var(--px-calendar-text-color, black);
   border: 1px solid transparent !important;
@@ -117,7 +117,3 @@ button[hidden] {
 }
 
 // Trumps
-$inuit-enable-margins--none: true;
-$inuit-enable-margins--small: true;
-$inuit-enable-paddings--none: true;
-@import "px-spacing-design/_trumps.spacing.scss";
