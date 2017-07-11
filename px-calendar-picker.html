@@ -14,21 +14,29 @@ A single date or range can be pre-set by manually setting either `from-moment` (
 
 ### Usage
 
-    <px-calendar-picker from-moment={...} prevent-range-selection single-selected-date={...}>
+    <px-calendar-picker
+      from-moment={...}
+      prevent-range-selection
+      single-selected-date={...}>
     </px-calendar-picker>
 
-    <px-calendar-picker from-moment={...} to-moment={...} range={...}>
+    <px-calendar-picker
+      from-moment={...}
+      to-moment={...}
+      range={...}>
     </px-calendar-picker>
 
 ### Styling
 The following custom properties are available for styling:
 
 Custom property | Description
-----------------|-------------
+:----------------|:-------------
 `--px-calendar-text-color` | Default text color for dates on the calendar
 `--px-calendar-text-color--hover` | Text color for dates when hovered
 `--px-calendar-text-color--selected` | Text color for dates when selected
+`--px-calendar-title-color` | Color for the title and arrows
 `--px-calendar-sub-labels--text-color` | Text color for days of the week
+`--px-calendar-today-border` | Border color for today's date
 `--px-calendar-background-color` | Fill color for the next/previous chevrons
 `--px-calendar-background-color--hover` | Background color for dates when hovered
 `--px-calendar-background-color--pressed` | Background color for dates when pressed
@@ -117,8 +125,6 @@ Custom property | Description
        *  - 'day': calendar displays all days of a month
        *  - 'month': calendar displays all months in a year
        *  - 'year': calendar displays a 10 years range
-       *
-       *  @default 'day'
        */
       displayMode: {
         type: String,
@@ -132,8 +138,6 @@ Custom property | Description
        *  - 'year': calendar displays a 10 year range
        *
        *  Can internally change when the user clicks the title and changes the mode
-       *
-       * @default day
        */
       _currentDisplayMode: {
         type: String,
@@ -149,8 +153,6 @@ Custom property | Description
        *
        * If this property is set, then the 'singleSelectedDate' property will reflect the selected date. Otherwise
        * the 'range' property should be observed and will reflect the selected date range.
-       *
-       * @default false
        */
       preventRangeSelection: {
         type: Boolean,
@@ -161,8 +163,6 @@ Custom property | Description
        *
        * Reflects the selected date in ISO8601 string if the calendar is preventing range selection.
        * Otherwise the 'range' property should be observed.
-       *
-       * @default ''
        */
       singleSelectedDate: {
         type: String,
@@ -172,8 +172,6 @@ Custom property | Description
        * (optional)
        *
        * Hides the 'previous' button on the calendar.
-       *
-       * @default false
        */
       hidePreviousButton: {
         type: Boolean,
@@ -183,8 +181,6 @@ Custom property | Description
        * (optional)
        *
        * Hides the 'next' button on the calendar.
-       *
-       * @default false
        */
       hideNextButton: {
         type: Boolean,
@@ -195,8 +191,6 @@ Custom property | Description
        *
        * Blocks the selection/drill down navigation for any dates before this one.
        * Does not apply if empty. ISO8601 string.
-       *
-       * @default ''
        */
       blockDatesBefore: {
         type: String,
@@ -214,8 +208,6 @@ Custom property | Description
        *
        * Blocks the selection/drill down navigation for any dates after this one.
        * Does not apply if empty. ISO8601 string.
-       *
-       * @default ''
        */
       blockDatesAfter: {
         type:String,
@@ -226,7 +218,6 @@ Custom property | Description
        *
        * If set, allows the calendar picker to shrink rather than have a constant size.
        * Typically the height would shrink when choosing months or years
-       *
        */
       shrink: {
         type: Boolean,
@@ -235,7 +226,6 @@ Custom property | Description
       /*
       * Whether the calendar picker is currently at the selection level: showing days
       * in day mode, choosing month in month mode or showing years in year mode.
-      *
       */
       isAtSelectionLevel: {
         type: Boolean,
@@ -249,7 +239,7 @@ Custom property | Description
         computed: '_convertISOtoMoment(blockDatesAfter)'
       },
       /**
-       *  The values currently displayed in the calendar cells, days, months or years
+       * The values currently displayed in the calendar cells, days, months or years
        *
        * @default []
        */
@@ -258,14 +248,13 @@ Custom property | Description
         value: function() { return [];}
       },
       /**
-       *
-       *
-       * @default false;
        */
       waitToFire: {
         type: Boolean,
         value: false
       },
+      /**
+       */
       _title: {
         type: String
       }
@@ -366,7 +355,6 @@ Custom property | Description
     },
 
     /**
-     *
      * Change the display mode after the user clicked the title
      */
     _onNextDisplayMode: function() {

@@ -49,8 +49,6 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        *  'day': day number
        *  'month': month
        *  'year': year
-       *
-       *  @default 'day'
        */
       displayMode: {
         type: String,
@@ -58,14 +56,12 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       },
       /**
        * blocks the selection/navigation for any dates after this one.
-       *
        */
       blockDatesAfter: {
         type:Object
       },
       /**
        * blocks the selection/navigation for any dates before this one.
-       *
        */
       blockDatesBefore: {
         type:Object
@@ -79,17 +75,17 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     ready: function() {
       this._updateDate();
     },
+    /**
+     */
     _updateNeeded: function() {
       this._updateDate();
     },
     /**
-     *
      * Go through each cell and decide if it has a day in that month, is it selected, inbetween selected, etc.
-     *
      */
     _updateDate: function() {
-
       var _this = this;
+
       this.debounce('updateDate', function() {
         var cellStyles = 'calendar-cell',
             btnStyles = 'btn btn--bare',
