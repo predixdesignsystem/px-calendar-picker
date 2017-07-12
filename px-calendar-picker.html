@@ -2,7 +2,8 @@
 <link rel="import" href="px-calendar-cell.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
-<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
+<link rel="import" href="../px-icon-set/px-icon-set.html"/>
+<link rel="import" href="../px-icon-set/px-icon.html"/>
 
 <!--
 All datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
@@ -59,13 +60,13 @@ Custom property | Description
       <div class="caption">
         <button type="button" on-tap="_onPrevious" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
-            <iron-icon icon="px:arrow-left" class="arrow"></iron-icon>
+            <px-icon icon="px:arrow-left" class="arrow"></px-icon>
           </template>
         </button>
         <span on-tap="_onNextDisplayMode" class="actionable actionable--action title-color">[[_title]]</span>
         <button id="btnNextMonth" type="button" on-tap="_onNext" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hideNextButton}}">
-            <iron-icon icon="px:arrow-right" class="arrow"></iron-icon>
+            <px-icon icon="px:arrow-right" class="arrow"></px-icon>
           </template>
         </button>
       </div>
