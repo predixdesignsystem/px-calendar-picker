@@ -262,7 +262,8 @@ Custom property | Description
     },
     observers: ['_renderCurrent(_currentDisplayMode)',
                 '_localeChanged(language)',
-                '_getCurrentTitle(_currentDisplayMode, baseDate)'],
+                '_getCurrentTitle(_currentDisplayMode, baseDate)',
+                '_timeZoneChanged(timeZone)'],
     ready: function() {
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
@@ -562,6 +563,8 @@ Custom property | Description
          (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
         this._renderCurrent();
       } else if(newDate.isAfter(oldDate, 'year') || newDate.isBefore(oldDate, 'year')) {
+        this._renderCurrent();
+      } else if (oldDate && newDate && newDate.tz() !== oldDate.tz()){
         this._renderCurrent();
       }
     }
