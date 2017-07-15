@@ -1,3 +1,7 @@
+v0.7.1
+==================
+* part of the timezone time issue fix. px-rangepicker issue #39
+
 v0.7.0
 ==================
 * added localization through resources, language, formats and Px.moment.changeLocale()
