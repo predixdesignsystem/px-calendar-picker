@@ -31,7 +31,7 @@ function runCustomTests() {
       var cal1Buttons = Polymer.dom(cal1.root).querySelectorAll('px-icon'),
           cal2Buttons = Polymer.dom(cal2.root).querySelectorAll('px-icon'),
           cal3Buttons = Polymer.dom(cal3.root).querySelectorAll('px-icon');
-debugger;
+
       assert.isTrue(cal1Buttons.length === 2);
       assert.isTrue(cal2Buttons.length === 1);
       assert.isTrue(cal3Buttons.length === 1);
