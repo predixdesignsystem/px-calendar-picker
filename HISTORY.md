@@ -1,3 +1,7 @@
+v0.7.2
+==================
+* Fix travis WCT version to v5.x.x
+
 v0.7.1
 ==================
 * part of the timezone time issue fix. px-rangepicker issue #39
