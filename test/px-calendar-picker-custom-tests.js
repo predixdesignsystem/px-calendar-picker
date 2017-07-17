@@ -28,15 +28,15 @@ function runCustomTests() {
 
     test('previous/next buttons', function(){
 
-      var cal1Buttons = Polymer.dom(cal1.root).querySelectorAll('iron-icon'),
-          cal2Buttons = Polymer.dom(cal2.root).querySelectorAll('iron-icon'),
-          cal3Buttons = Polymer.dom(cal3.root).querySelectorAll('iron-icon');
-
+      var cal1Buttons = Polymer.dom(cal1.root).querySelectorAll('px-icon'),
+          cal2Buttons = Polymer.dom(cal2.root).querySelectorAll('px-icon'),
+          cal3Buttons = Polymer.dom(cal3.root).querySelectorAll('px-icon');
+debugger;
       assert.isTrue(cal1Buttons.length === 2);
       assert.isTrue(cal2Buttons.length === 1);
       assert.isTrue(cal3Buttons.length === 1);
-      assert.equal(cal2Buttons[0].icon, 'fa:fa-angle-right');
-      assert.equal(cal3Buttons[0].icon, 'fa:fa-angle-left');
+      assert.equal(cal2Buttons[0].icon, 'px:arrow-right');
+      assert.equal(cal3Buttons[0].icon, 'px:arrow-left');
     });
   });
 
