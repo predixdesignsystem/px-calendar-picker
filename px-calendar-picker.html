@@ -479,42 +479,41 @@ Custom property | Description
     },
 
     _constructMonth: function() {
+      if(this.baseDate){
+        var numberOfDaysInMonth = this.baseDate.daysInMonth(),
+            dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
+            numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
+            daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
+            emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
+            date = 1,
+            month = [];
 
-      var numberOfDaysInMonth = this.baseDate.daysInMonth(),
-          dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
-          numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
-          daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
-          emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
-          date = 1,
-          month = [];
-
-      //make sure we have enough space to display the first day
-      if(emptyCellsCount < 0) {
-        emptyCellsCount += 7;
-      }
-
-
-
-      var week = [];
-      for(var j = 0; j< emptyCellsCount; j++) {
-        week.push(Px.moment(null)); // push empty cells on before the 1st of the month
-      }
-
-      for (var weekCount = 0; weekCount < numberOfWeeks; weekCount++) {
-
-        while (week.length < 7) {
-          if (date <= numberOfDaysInMonth) {
-            week.push(this.baseDate.clone().date(date));
-            date++;
-          }
-          else {
-            week.push(Px.moment(null)); // push empty cells on after the last day of the month (to fill the week, extra weeks)
-          }
+        //make sure we have enough space to display the first day
+        if(emptyCellsCount < 0) {
+          emptyCellsCount += 7;
         }
-        month.push(week);
-        week = [];
+
+        var week = [];
+        for(var j = 0; j< emptyCellsCount; j++) {
+          week.push(Px.moment(null)); // push empty cells on before the 1st of the month
+        }
+
+        for (var weekCount = 0; weekCount < numberOfWeeks; weekCount++) {
+
+          while (week.length < 7) {
+            if (date <= numberOfDaysInMonth) {
+              week.push(this.baseDate.clone().date(date));
+              date++;
+            }
+            else {
+              week.push(Px.moment(null)); // push empty cells on after the last day of the month (to fill the week, extra weeks)
+            }
+          }
+          month.push(week);
+          week = [];
+        }
+        return month;
       }
-      return month;
     },
     /**
      * Called when clicking the 'next' arrow
