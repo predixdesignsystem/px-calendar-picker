@@ -60,13 +60,13 @@ Custom property | Description
       <div class="caption">
         <button type="button" on-tap="_onPrevious" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
-            <px-icon icon="pxm:back" class="arrow"></px-icon>
+            <px-icon icon="px-nav:back" class="arrow"></px-icon>
           </template>
         </button>
         <span on-tap="_onNextDisplayMode" class="actionable actionable--action title-color">[[_title]]</span>
         <button id="btnNextMonth" type="button" on-tap="_onNext" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hideNextButton}}">
-            <px-icon icon="pxm:next" class="arrow"></px-icon>
+            <px-icon icon="px-nav:next" class="arrow"></px-icon>
           </template>
         </button>
       </div>
