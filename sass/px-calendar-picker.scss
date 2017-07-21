@@ -23,68 +23,61 @@ $inuit-enable-btn--disabled: true;
 @import 'px-actionable-design/_objects.actionable.scss';
 
 // Component
+$px-calendar-alt-background-color : var(--px-calendar-alt-background-color, cyan);
 
 button[hidden] {
   visibility: hidden;
 }
 
-.constantsize {
+.constantSize {
   min-width: calculateRem(210px);
-  min-height: calculateRem(230px);
+  min-height: calculateRem(260px);
 }
 
 .caption {
-  margin-bottom: $inuit-base-spacing-unit;
-  text-align: center;
+  margin-bottom: $inuit-base-spacing-unit--large;
   text-transform: uppercase;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.title-color {
+  color: var(--px-calendar-title-color, gray);
+}
+
 .arrow {
   --iron-icon-width: 1rem;
   --iron-icon-height: 1rem;
-  margin-bottom: 2px;
+  margin-bottom: 2px; //flex doesn't work inside button tags in some browsers
+}
+
+.nextLastBtn {
+  width: $inuit-base-spacing-unit--huge;
+  height: $inuit-base-spacing-unit--huge;
 }
 
 .tr {
   display: flex;
-  justify-content: space-between;
 }
 
-.th.th.th {
-  @extend th;
+.th {
   text-align: center;
-  flex:1;
+  flex: 1 1 0%;
 }
 
 .td {
-  @extend td;
-  flex: 1;
+  flex: 1 1 0%;
 }
 
-.table {
-  .th, .td {
-    box-sizing: content-box;
-  }
-}
-
-.calendar-cell {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  padding-right: $inuit-base-spacing-unit--tiny;
-  padding-left: $inuit-base-spacing-unit--tiny;
-}
-
-.is-today button {
-  border: 1px solid $select-default !important;
+.is-today button{
+  border: 1px solid var(--px-calendar-today-border, darkcyan) !important;
 }
 
 .btn--bare {
   height: auto;
   width: 100%;
-  line-height: calculateRem(26px);
+  line-height: calculateRem(28px);
   text-transform: uppercase;
   color: var(--px-calendar-text-color, black);
   border: 1px solid transparent !important;
@@ -117,31 +110,11 @@ button[hidden] {
 
 .caps {
   color: var(--px-calendar-sub-labels--text-color, gray);
+  margin-bottom: $inuit-base-spacing-unit--small;
 }
 
-$px-calendar-alt-background-color : var(--px-calendar-alt-background-color, cyan);
-
-.is-between, .is-selected {
+.is-between {
   background-color: $px-calendar-alt-background-color;
 }
 
-.is-selected-only, .is-start.is-end.is-selected {
-  background-color: inherit;
-}
-
-.is-selected.is-end:not(.is-selected-only):not(.is-start) {
-  background-image: linear-gradient(to right, $px-calendar-alt-background-color, $px-calendar-alt-background-color 50%, transparent 50%, transparent 100%);
-  background-color: inherit;
-}
-
-.is-selected.is-start:not(.is-selected-only):not(.is-end) {
-  background-image: linear-gradient(to left, $px-calendar-alt-background-color, $px-calendar-alt-background-color 50%, transparent 50%, transparent 100%);
-  background-color: inherit;
-}
-
-
 // Trumps
-$inuit-enable-margins--none: true;
-$inuit-enable-margins--small: true;
-$inuit-enable-paddings--none: true;
-@import "px-spacing-design/_trumps.spacing.scss";

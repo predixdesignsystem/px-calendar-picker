@@ -45,14 +45,15 @@
           <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
         </template>
 
-        <div style="width:250px">
+        <div style="width:210px">
           <px-calendar-picker
           display-mode="{{props.displayMode.value}}"
           block-future-dates="{{props.blockFutureDates.value}}"
           block-past-dates="{{props.blockPastDates.value}}"
           prevent-range-selection="{{props.preventRangeSelection.value}}"
           hide-next-button="{{props.hideNextButton.value}}"
-          hide-previous-button="{{props.hidePreviousButton.value}}">
+          hide-previous-button="{{props.hidePreviousButton.value}}"
+          shrink="{{props.shrink.value}}">
           </px-calendar-picker>
         </div>
       </px-demo-component>
@@ -129,7 +130,8 @@ Polymer({
           blockPastDates: true,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"] },
+          shrink: false,
+          parentComponent: ["<div style='width:210px'>", "</div>"] },
 
           { configName: "No ranges",
           displayMode: this.demoProps.displayMode.inputChoices[0],
@@ -138,7 +140,8 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"] },
+          shrink: false,
+          parentComponent: ["<div style='width:210px'>", "</div>"] },
 
           { configName: "Show months",
           displayMode: this.demoProps.displayMode.inputChoices[1],
@@ -147,7 +150,8 @@ Polymer({
           blockPastDates: false,
           hideNextButton: false,
           hidePreviousButton: false,
-          parentComponent: ["<div style='width:250px'>", "</div>"] }
+          shrink: false,
+          parentComponent: ["<div style='width:210px'>", "</div>"] }
         ]
       }
     }
@@ -187,6 +191,12 @@ Polymer({
       inputType: 'toggle'
     },
 
+    shrink: {
+      type: Boolean,
+      defaultValue: false,
+      inputType: 'toggle'
+    },
+
     displayMode: {
       type: String,
       defaultValue: 'day',
@@ -196,7 +206,7 @@ Polymer({
   },
 
   ready: function () {
-    this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-polymer-font-awesome/polymer-font-awesome.html'];
+    this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html', 'px-icon-set/px-icon-set.html', 'px-icon-set/px-icon.html'];
   }
 
 });

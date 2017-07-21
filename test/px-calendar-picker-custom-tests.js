@@ -35,8 +35,8 @@ function runCustomTests() {
       assert.isTrue(cal1Buttons.length === 2);
       assert.isTrue(cal2Buttons.length === 1);
       assert.isTrue(cal3Buttons.length === 1);
-      assert.equal(cal2Buttons[0].icon, 'px:arrow-right');
-      assert.equal(cal3Buttons[0].icon, 'px:arrow-left');
+      assert.equal(cal2Buttons[0].icon, 'px-nav:next');
+      assert.equal(cal3Buttons[0].icon, 'px-nav:back');
     });
   });
 
@@ -127,17 +127,18 @@ function runCustomTests() {
               i = 0,
               firstFound = false;
           allCells.forEach(function(cell, index) {
-            var btn = Polymer.dom(cell.root).querySelector('div');
+            var btnDiv = Polymer.dom(cell.root).querySelector('div');
+            var btn = Polymer.dom(cell.root).querySelector('button');
 
-            if((!btn.classList.contains('is-empty') && !firstFound) || i===10) {
-              assert.isTrue(btn.classList.contains('is-selected'));
+            if((!btn.hidden && !firstFound) || i===10) {
+              assert.isTrue(btnDiv.classList.contains('is-selected'));
               firstFound = true;
             } else if(i>0 && i<10) {
-              assert.isTrue(btn.classList.contains('is-between'));
+              assert.isTrue(btnDiv.classList.contains('is-between'));
             }
             else {
-              assert.isFalse(btn.classList.contains('is-between'));
-              assert.isFalse(btn.classList.contains('is-selected'));
+              assert.isFalse(btnDiv.classList.contains('is-between'));
+              assert.isFalse(btnDiv.classList.contains('is-selected'));
             }
 
             if(firstFound) {
@@ -176,31 +177,31 @@ function runCustomTests() {
 
       var listener = function(evt) {
         //we have selected first and 11th day, make sure 11 is the actual result
-        var cal6 = document.getElementById('calendar4'),
-            selectedDate = moment(cal4.singleSelectedDate);
+        var cal4 = document.getElementById('calendar4'),
+            selectedDate = moment.tz(cal4.singleSelectedDate, "America/New_York");
         assert.equal(selectedDate.date(), '11');
         assert.equal(selectedDate.month(), now.month());
         assert.equal(selectedDate.year(), now.year());
-
         flush(function() {
           //make sure only 11th is selected
           var allCells = Polymer.dom(cal4.root).querySelectorAll('px-calendar-cell'),
               i = 0,
               firstFound = false;
           allCells.forEach(function(cell, index) {
-            var btn = Polymer.dom(cell.root).querySelector('div');
+            var btnDiv = Polymer.dom(cell.root).querySelector('div');
+            var btn = Polymer.dom(cell.root).querySelector('button');
 
-            if(!btn.classList.contains('is-empty') && !firstFound) {
+            if(!btn.hidden && !firstFound) {
               firstFound = true;
             }
 
             if(i===10) {
-              assert.isTrue(btn.classList.contains('is-selected'));
+              assert.isTrue(btnDiv.classList.contains('is-selected'));
               firstFound = true;
             }
             else {
-              assert.isFalse(btn.classList.contains('is-between'));
-              assert.isFalse(btn.classList.contains('is-selected'));
+              assert.isFalse(btnDiv.classList.contains('is-between'));
+              assert.isFalse(btnDiv.classList.contains('is-selected'));
             }
 
             if(firstFound) {
@@ -218,7 +219,6 @@ function runCustomTests() {
           firstFound = false;
       allCells.forEach(function(cell, index) {
         var btn = Polymer.dom(cell.root).querySelector('div button');
-
         if(!btn.hidden && !firstFound) {
           btn.click();
           firstFound = true;

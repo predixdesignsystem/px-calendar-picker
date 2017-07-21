@@ -4,11 +4,12 @@
 <!--
 Element that renders a calendar cell for a given date (and for non-date cells in the calendar).
 
-##### Usage
+### Usage
 
-    <px-calendar-cell display-date="{{...}}"
-                      first-range-date="{{...}}"
-                      second-range-date="{{...}}">
+    <px-calendar-cell
+      display-date="{{...}}"
+      first-range-date="{{...}}"
+      second-range-date="{{...}}">
     </px-calendar-cell>
 
 -->
@@ -31,7 +32,8 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     is: 'px-calendar-cell',
     behaviors: [
       PxDatetimeBehavior.blockDates,
-      PxDatetimeBehavior.rangeMoments],
+      PxDatetimeBehavior.rangeMoments
+    ],
 
     properties: {
 
@@ -47,8 +49,6 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        *  'day': day number
        *  'month': month
        *  'year': year
-       *
-       *  @default 'day'
        */
       displayMode: {
         type: String,
@@ -56,14 +56,12 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       },
       /**
        * blocks the selection/navigation for any dates after this one.
-       *
        */
       blockDatesAfter: {
         type:Object
       },
       /**
        * blocks the selection/navigation for any dates before this one.
-       *
        */
       blockDatesBefore: {
         type:Object
@@ -77,17 +75,17 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     ready: function() {
       this._updateDate();
     },
+    /**
+     */
     _updateNeeded: function() {
       this._updateDate();
     },
     /**
-     *
      * Go through each cell and decide if it has a day in that month, is it selected, inbetween selected, etc.
-     *
      */
     _updateDate: function() {
-
       var _this = this;
+
       this.debounce('updateDate', function() {
         var cellStyles = 'calendar-cell',
             btnStyles = 'btn btn--bare',
@@ -97,7 +95,6 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
         if (!_this.isValidDate) {
           // if the cell is a blank cell of calendar (before/after start of month)
-          cellStyles += ' is-empty';
           _this.set('displayedValue', '');
         }
         else {
@@ -185,7 +182,6 @@ Element that renders a calendar cell for a given date (and for non-date cells in
     },
 
     _isSingleSelected: function() {
-
       var singleFrom = this.fromMoment && (!this.toMoment || !this.toMoment.isValid())
        && this.displayDate.isSame(this.fromMoment, this.displayMode),
           singleTo = this.toMoment && (!this.fromMoment || !this.fromMoment.isValid())

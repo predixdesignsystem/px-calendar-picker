@@ -15,21 +15,29 @@ A single date or range can be pre-set by manually setting either `from-moment` (
 
 ### Usage
 
-    <px-calendar-picker from-moment={...} prevent-range-selection single-selected-date={...}>
+    <px-calendar-picker
+      from-moment={...}
+      prevent-range-selection
+      single-selected-date={...}>
     </px-calendar-picker>
 
-    <px-calendar-picker from-moment={...} to-moment={...} range={...}>
+    <px-calendar-picker
+      from-moment={...}
+      to-moment={...}
+      range={...}>
     </px-calendar-picker>
 
 ### Styling
 The following custom properties are available for styling:
 
 Custom property | Description
-----------------|-------------
+:----------------|:-------------
 `--px-calendar-text-color` | Default text color for dates on the calendar
 `--px-calendar-text-color--hover` | Text color for dates when hovered
 `--px-calendar-text-color--selected` | Text color for dates when selected
+`--px-calendar-title-color` | Color for the title and arrows
 `--px-calendar-sub-labels--text-color` | Text color for days of the week
+`--px-calendar-today-border` | Border color for today's date
 `--px-calendar-background-color` | Fill color for the next/previous chevrons
 `--px-calendar-background-color--hover` | Background color for dates when hovered
 `--px-calendar-background-color--pressed` | Background color for dates when pressed
@@ -49,16 +57,16 @@ Custom property | Description
 
     <div class$="{{_getTableClass(shrink)}}" id="calendar">
       <!-- Caption: month+year and previous/next arrows  -->
-      <div class="caption u-ph-">
-        <button type="button" on-tap="_onPrevious" class="actionable actionable--action u-ml-">
+      <div class="caption">
+        <button type="button" on-tap="_onPrevious" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hidePreviousButton}}">
-            <px-icon icon="px:arrow-left" class="arrow"></px-icon>
+            <px-icon icon="px-nav:back" class="arrow"></px-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="actionable actionable--action">[[_title]]</span>
-        <button id=btnNextMonth type="button" on-tap="_onNext" class="actionable actionable--action u-mr-">
+        <span on-tap="_onNextDisplayMode" class="actionable actionable--action title-color">[[_title]]</span>
+        <button id="btnNextMonth" type="button" on-tap="_onNext" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hideNextButton}}">
-            <px-icon icon="px:arrow-right" class="arrow"></px-icon>
+            <px-icon icon="px-nav:next" class="arrow"></px-icon>
           </template>
         </button>
       </div>
@@ -68,23 +76,23 @@ Custom property | Description
           <div class="tr">
             <!-- Sunday -> Saturday -->
             <template is="dom-repeat" items="{{daysOfTheWeek}}" as="dayOfTheWeek">
-              <div class="th caps u-p0">[[dayOfTheWeek]]</div>
+              <div class="th caps">[[dayOfTheWeek]]</div>
             </template>
           </div>
         </template>
         <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week" strip-whitespace>
-          <!-- 1 week per row -->
           <div class="tr">
             <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
-                <div class="td u-p0">
-                  <px-calendar-cell display-date="{{date}}"
-                                    from-moment="[[fromMoment]]"
-                                    to-moment="[[toMoment]]"
-                                    block-future-dates="{{blockFutureDates}}"
-                                    block-past-dates="{{blockPastDates}}"
-                                    display-mode="{{_currentDisplayMode}}"
-                                    block-dates-after="[[_momentBlockDatesAfter]]"
-                                    block-dates-before="[[_momentBlockDatesBefore]]">
+                <div class="td">
+                  <px-calendar-cell
+                      display-date="{{date}}"
+                      from-moment="[[fromMoment]]"
+                      to-moment="[[toMoment]]"
+                      block-future-dates="{{blockFutureDates}}"
+                      block-past-dates="{{blockPastDates}}"
+                      display-mode="{{_currentDisplayMode}}"
+                      block-dates-after="[[_momentBlockDatesAfter]]"
+                      block-dates-before="[[_momentBlockDatesBefore]]">
                   </px-calendar-cell>
                 </div>
             </template>
@@ -118,8 +126,6 @@ Custom property | Description
        *  - 'day': calendar displays all days of a month
        *  - 'month': calendar displays all months in a year
        *  - 'year': calendar displays a 10 years range
-       *
-       *  @default 'day'
        */
       displayMode: {
         type: String,
@@ -133,8 +139,6 @@ Custom property | Description
        *  - 'year': calendar displays a 10 year range
        *
        *  Can internally change when the user clicks the title and changes the mode
-       *
-       * @default day
        */
       _currentDisplayMode: {
         type: String,
@@ -150,8 +154,6 @@ Custom property | Description
        *
        * If this property is set, then the 'singleSelectedDate' property will reflect the selected date. Otherwise
        * the 'range' property should be observed and will reflect the selected date range.
-       *
-       * @default false
        */
       preventRangeSelection: {
         type: Boolean,
@@ -162,8 +164,6 @@ Custom property | Description
        *
        * Reflects the selected date in ISO8601 string if the calendar is preventing range selection.
        * Otherwise the 'range' property should be observed.
-       *
-       * @default ''
        */
       singleSelectedDate: {
         type: String,
@@ -173,8 +173,6 @@ Custom property | Description
        * (optional)
        *
        * Hides the 'previous' button on the calendar.
-       *
-       * @default false
        */
       hidePreviousButton: {
         type: Boolean,
@@ -184,8 +182,6 @@ Custom property | Description
        * (optional)
        *
        * Hides the 'next' button on the calendar.
-       *
-       * @default false
        */
       hideNextButton: {
         type: Boolean,
@@ -196,8 +192,6 @@ Custom property | Description
        *
        * Blocks the selection/drill down navigation for any dates before this one.
        * Does not apply if empty. ISO8601 string.
-       *
-       * @default ''
        */
       blockDatesBefore: {
         type: String,
@@ -215,8 +209,6 @@ Custom property | Description
        *
        * Blocks the selection/drill down navigation for any dates after this one.
        * Does not apply if empty. ISO8601 string.
-       *
-       * @default ''
        */
       blockDatesAfter: {
         type:String,
@@ -227,7 +219,6 @@ Custom property | Description
        *
        * If set, allows the calendar picker to shrink rather than have a constant size.
        * Typically the height would shrink when choosing months or years
-       *
        */
       shrink: {
         type: Boolean,
@@ -236,7 +227,6 @@ Custom property | Description
       /*
       * Whether the calendar picker is currently at the selection level: showing days
       * in day mode, choosing month in month mode or showing years in year mode.
-      *
       */
       isAtSelectionLevel: {
         type: Boolean,
@@ -250,7 +240,7 @@ Custom property | Description
         computed: '_convertISOtoMoment(blockDatesAfter)'
       },
       /**
-       *  The values currently displayed in the calendar cells, days, months or years
+       * The values currently displayed in the calendar cells, days, months or years
        *
        * @default []
        */
@@ -259,21 +249,21 @@ Custom property | Description
         value: function() { return [];}
       },
       /**
-       *
-       *
-       * @default false;
        */
       waitToFire: {
         type: Boolean,
         value: false
       },
+      /**
+       */
       _title: {
         type: String
       }
     },
     observers: ['_renderCurrent(_currentDisplayMode)',
                 '_localeChanged(language)',
-                '_getCurrentTitle(_currentDisplayMode, baseDate)'],
+                '_getCurrentTitle(_currentDisplayMode, baseDate)',
+                '_timeZoneChanged(timeZone)'],
     ready: function() {
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
@@ -302,7 +292,7 @@ Custom property | Description
       var base = "table table--no-cells text--center ";
 
       if(!shrink) {
-        base += "constantsize "
+        base += "constantSize "
       }
       return base;
     },
@@ -367,7 +357,6 @@ Custom property | Description
     },
 
     /**
-     *
      * Change the display mode after the user clicked the title
      */
     _onNextDisplayMode: function() {
@@ -430,8 +419,6 @@ Custom property | Description
 
 
     _selectDate: function(newSelectedDate) {
-
-      // debugger;
       if (!this.preventRangeSelection && this.fromMoment && !this.toMoment) {
         // treat the click as the second date - the range is selected!
 
@@ -492,42 +479,41 @@ Custom property | Description
     },
 
     _constructMonth: function() {
+      if(this.baseDate){
+        var numberOfDaysInMonth = this.baseDate.daysInMonth(),
+            dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
+            numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
+            daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
+            emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
+            date = 1,
+            month = [];
 
-      var numberOfDaysInMonth = this.baseDate.daysInMonth(),
-          dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
-          numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
-          daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
-          emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
-          date = 1,
-          month = [];
-
-      //make sure we have enough space to display the first day
-      if(emptyCellsCount < 0) {
-        emptyCellsCount += 7;
-      }
-
-
-
-      var week = [];
-      for(var j = 0; j< emptyCellsCount; j++) {
-        week.push(Px.moment(null)); // push empty cells on before the 1st of the month
-      }
-
-      for (var weekCount = 0; weekCount < numberOfWeeks; weekCount++) {
-
-        while (week.length < 7) {
-          if (date <= numberOfDaysInMonth) {
-            week.push(this.baseDate.clone().date(date));
-            date++;
-          }
-          else {
-            week.push(Px.moment(null)); // push empty cells on after the last day of the month (to fill the week, extra weeks)
-          }
+        //make sure we have enough space to display the first day
+        if(emptyCellsCount < 0) {
+          emptyCellsCount += 7;
         }
-        month.push(week);
-        week = [];
+
+        var week = [];
+        for(var j = 0; j< emptyCellsCount; j++) {
+          week.push(Px.moment(null)); // push empty cells on before the 1st of the month
+        }
+
+        for (var weekCount = 0; weekCount < numberOfWeeks; weekCount++) {
+
+          while (week.length < 7) {
+            if (date <= numberOfDaysInMonth) {
+              week.push(this.baseDate.clone().date(date));
+              date++;
+            }
+            else {
+              week.push(Px.moment(null)); // push empty cells on after the last day of the month (to fill the week, extra weeks)
+            }
+          }
+          month.push(week);
+          week = [];
+        }
+        return month;
       }
-      return month;
     },
     /**
      * Called when clicking the 'next' arrow
@@ -571,12 +557,13 @@ Custom property | Description
     },
 
     _baseDateChanged: function(newDate, oldDate) {
-
       //rerender if we're in day mode and changed month or if we changed year
       if(this._currentDisplayMode === 'day' &&
          (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
         this._renderCurrent();
       } else if(newDate.isAfter(oldDate, 'year') || newDate.isBefore(oldDate, 'year')) {
+        this._renderCurrent();
+      } else if (oldDate && newDate && newDate.tz() !== oldDate.tz()){
         this._renderCurrent();
       }
     }
