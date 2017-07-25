@@ -3,7 +3,8 @@
 
 ## Overview
 
-Px-calendar-picker is a calendar for selecting dates, NOT a display calendar :)
+`Px-calendar-picker` is a Predix UI component which renders a calendar for a given decade, year, or month, and allows users to select a date or range from the calendar. This component is used in `px-datetime-picker` and `px-datetime-range-panel`.
+Note: `px-calendar-picker` is a calendar for selecting dates, NOT a display calendar.
 
 ## Usage
 
@@ -34,9 +35,6 @@ Finally, use the component in your application:
 ```
 <px-calendar-picker display-mode="day"></px-calendar-picker>
 ```
-
-<br />
-<hr />
 
 ## Documentation
 
