@@ -98,13 +98,6 @@ button[hidden] {
   .btn--bare {
     background-color: var(--px-calendar-background-color--selected, blue);
     color: var(--px-calendar-text-color--selected, white);
-    &:hover {
-      background-color: var(--px-calendar-background-color--selected--hover, darkblue);
-      color: var(--px-calendar-text-color--selected, white);
-    }
-    &:active {
-      background-color: var(--px-calendar-background-color--selected--pressed, navy);
-    }
   }
 }
 
