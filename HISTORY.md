@@ -1,5 +1,9 @@
 v1.0.2
 ==================
+* run-time demo theming
+
+v1.0.2
+==================
 * update demo to use unique name
 
 v1.0.1
