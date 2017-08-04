@@ -23,10 +23,13 @@ $inuit-enable-btn--disabled: true;
 @import 'px-actionable-design/_objects.actionable.scss';
 
 // Component
-$px-calendar-alt-background-color : var(--px-calendar-alt-background-color, cyan);
 
 button[hidden] {
   visibility: hidden;
+}
+
+.calendar-cell .btn--bare {
+  transition: none;
 }
 
 .constantSize {
@@ -94,11 +97,9 @@ button[hidden] {
   }
 }
 
-.is-selected {
-  .btn--bare {
+.is-selected .btn--bare {
     background-color: var(--px-calendar-background-color--selected, blue);
     color: var(--px-calendar-text-color--selected, white);
-  }
 }
 
 .caps {
@@ -107,7 +108,7 @@ button[hidden] {
 }
 
 .is-between {
-  background-color: $px-calendar-alt-background-color;
+  background-color: var(--px-calendar-alt-background-color, cyan);
 }
 
 // Trumps

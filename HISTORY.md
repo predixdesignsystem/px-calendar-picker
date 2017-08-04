@@ -1,4 +1,8 @@
-v1.0.2
+v1.0.4
+==================
+* remove transition effect on calendar cells
+
+v1.0.3
 ==================
 * run-time demo theming
 
