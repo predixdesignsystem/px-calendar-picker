@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
+<link rel="import" href="css/px-calendar-picker-styles.html"/>
 
 <!--
 Element that renders a calendar cell for a given date (and for non-date cells in the calendar).
@@ -12,10 +13,11 @@ Element that renders a calendar cell for a given date (and for non-date cells in
       second-range-date="{{...}}">
     </px-calendar-cell>
 
+
+@element px-calendar-cell
+@homepage index.html
+@demo index.html
 -->
-
-<link rel="import" href="css/px-calendar-picker-styles.html">
-
 <dom-module id="px-calendar-cell">
   <template>
     <style include="px-calendar-picker-styles"></style>
