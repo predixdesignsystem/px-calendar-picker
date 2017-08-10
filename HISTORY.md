@@ -1,3 +1,7 @@
+v1.0.5
+==================
+* Fix comment for analyzer
+
 v1.0.4
 ==================
 * remove transition effect on calendar cells
