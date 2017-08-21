@@ -92,8 +92,8 @@ Custom property | Description
                       block-future-dates="{{blockFutureDates}}"
                       block-past-dates="{{blockPastDates}}"
                       display-mode="{{_currentDisplayMode}}"
-                      block-dates-after="[[_momentBlockDatesAfter]]"
-                      block-dates-before="[[_momentBlockDatesBefore]]">
+                      block-dates-after="[[max]]"
+                      block-dates-before="[[min]]">
                   </px-calendar-cell>
                 </div>
             </template>
@@ -199,7 +199,7 @@ Custom property | Description
         value: ''
       },
       /**
-       * Internal moment reprensentation of blockDatesBefore
+       * Internal moment representation of blockDatesBefore
        */
       _momentBlockDatesBefore: {
         type: Object,
@@ -234,7 +234,7 @@ Custom property | Description
         computed: '_isAtSelectionLevel(_currentDisplayMode, displayMode)'
       },
       /**
-       * Internal moment reprensentation of blockDatesAfter
+       * Internal moment representation of blockDatesAfter
        */
       _momentBlockDatesAfter: {
         type:Object,

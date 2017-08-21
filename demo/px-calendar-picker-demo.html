@@ -9,8 +9,9 @@
 <link rel="import" href="../../px-demo/px-demo-props.html" />
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
 
-<!-- Imports for this componnent -->
+<!-- Imports for this component -->
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
 <link rel="import" href="../px-calendar-picker.html" />
 
@@ -33,6 +34,8 @@
       <!-- Props -->
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
+      <px-demo-code-editor props="{{props}}" config="[[chosenConfig]]" class="flex__item flex__item--msfix"></px-demo-code-editor>
+
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
@@ -53,7 +56,9 @@
           prevent-range-selection="{{props.preventRangeSelection.value}}"
           hide-next-button="{{props.hideNextButton.value}}"
           hide-previous-button="{{props.hidePreviousButton.value}}"
-          shrink="{{props.shrink.value}}">
+          shrink="{{props.shrink.value}}"
+          min="{{props.min.value}}"
+          max="{{props.max.value}}">
           </px-calendar-picker>
         </div>
       </px-demo-component>
@@ -202,6 +207,18 @@ Polymer({
       defaultValue: 'day',
       inputType: 'dropdown',
       inputChoices: ['day', 'month', 'year']
+    },
+
+    min: {
+      type: Object,
+      defaultValue: Px.moment().subtract(1, 'year'),
+      inputType: 'code:JSON'
+    },
+
+    max: {
+      type: Object,
+      defaultValue: Px.moment().add(1, 'year'),
+      inputType: 'code:JSON'
     }
   },
 
