@@ -71,14 +71,23 @@
           <h><strong>Block dates before 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar-picker id="calendarBlockBefore" block-dates-before='2016-05-09T19:25:57.966Z'></px-calendar-picker>
+          <px-calendar-picker id="calendarBlockBefore"></px-calendar-picker>
         </div>
         <div class="container">
           <h><strong>Block dates after 9 may 2016</strong></h>
           <br>
           <br>
-          <px-calendar-picker id="calendarBlockAfter" block-dates-after='2016-05-09T19:25:57.966Z'></px-calendar-picker>
+          <px-calendar-picker id="calendarBlockAfter" max='2016-05-09T19:25:57.966Z'></px-calendar-picker>
         </div>
     </div>
+    <script>
+      window.addEventListener('WebComponentsReady', function(e) {
+        var cal = document.getElementById('calendarBlockBefore'),
+          date = Px.moment('2016-05-09T19:25:57.966Z');
+        cal.set('min', date);
+        cal = document.getElementById('calendarBlockAfter');
+        cal.set('max', date);
+      });
+    </script>
   </body>
 </html>

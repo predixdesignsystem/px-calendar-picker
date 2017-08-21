@@ -1,3 +1,7 @@
+v1.0.7
+==================
+* fix unit tests
+
 v1.0.6
 ==================
 * add min and max date support

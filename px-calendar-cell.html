@@ -60,13 +60,13 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        * blocks the selection/navigation for any dates after this one.
        */
       blockDatesAfter: {
-        type:Object
+        type: Object
       },
       /**
        * blocks the selection/navigation for any dates before this one.
        */
       blockDatesBefore: {
-        type:Object
+        type: Object
       }
     },
 
@@ -114,8 +114,8 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
           if ((_this.blockFutureDates && _this._isPastTodaysDate()) ||
               (_this.blockPastDates && _this._isBeforeTodaysDate()) ||
-              (_this.blockDatesAfter && _this.displayDate.isAfter(_this.blockDatesAfter, 'day')) ||
-              (_this.blockDatesBefore && _this.displayDate.isBefore(_this.blockDatesBefore, 'day'))) {
+              (Object.keys(_this.blockDatesAfter).length > 0 && _this.displayDate.isAfter(_this.blockDatesAfter, 'day')) ||
+              (Object.keys(_this.blockDatesBefore).length > 0 && _this.displayDate.isBefore(_this.blockDatesBefore, 'day'))) {
             btnStyles += ' btn--disabled';
             isDisabled = true;
           }else {
