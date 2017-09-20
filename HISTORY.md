@@ -1,3 +1,7 @@
+v1.0.8
+==================
+* updated css variable documentation
+
 v1.0.7
 ==================
 * fix unit tests
