@@ -24,6 +24,10 @@ $inuit-enable-btn--disabled: true;
 
 // Component
 
+:host {
+  --px-btn-min-width: 0;
+}
+
 button[hidden] {
   visibility: hidden;
 }

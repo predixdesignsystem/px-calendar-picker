@@ -1,3 +1,7 @@
+v1.0.9
+==================
+* override min width for buttons
+
 v1.0.8
 ==================
 * updated css variable documentation
