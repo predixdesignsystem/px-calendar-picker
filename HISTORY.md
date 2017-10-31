@@ -1,3 +1,7 @@
+v1.0.10
+==================
+* add device flags
+
 v1.0.9
 ==================
 * override min width for buttons
