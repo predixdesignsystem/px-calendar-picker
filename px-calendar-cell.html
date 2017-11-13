@@ -44,6 +44,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        */
       displayDate: {
         type: Object,
+        value: function() {
+          return {};
+        },
         observer: '_updateDate'
       },
       /**
@@ -60,13 +63,19 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        * blocks the selection/navigation for any dates after this one.
        */
       blockDatesAfter: {
-        type: Object
+        type: Object,
+        value: function() {
+          return {};
+        }
       },
       /**
        * blocks the selection/navigation for any dates before this one.
        */
       blockDatesBefore: {
-        type: Object
+        type: Object,
+        value: function() {
+          return {};
+        }
       }
     },
 
@@ -86,6 +95,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
      * Go through each cell and decide if it has a day in that month, is it selected, inbetween selected, etc.
      */
     _updateDate: function() {
+      if(this.displayDate === undefined || this.fromMoment === undefined || this.toMoment === undefined || this.displayMode === undefined
+          || this.blockDatesAfter === undefined || this.blockDatesBefore === undefined || this.blockFutureDates === undefined
+          || this.blockPastDates === undefined || this.displayDate === undefined) return;
       var _this = this;
 
       this.debounce('updateDate', function() {
