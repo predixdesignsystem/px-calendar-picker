@@ -44,6 +44,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        */
       displayDate: {
         type: Object,
+        value: function() {
+          return {};
+        },
         observer: '_updateDate'
       },
       /**
@@ -60,13 +63,19 @@ Element that renders a calendar cell for a given date (and for non-date cells in
        * blocks the selection/navigation for any dates after this one.
        */
       blockDatesAfter: {
-        type: Object
+        type: Object,
+        value: function() {
+          return {};
+        }
       },
       /**
        * blocks the selection/navigation for any dates before this one.
        */
       blockDatesBefore: {
-        type: Object
+        type: Object,
+        value: function() {
+          return {};
+        }
       }
     },
 

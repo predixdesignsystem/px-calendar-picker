@@ -288,13 +288,13 @@ Custom property | Description
     },
 
     _displayModeChanged: function () {
-      if (this.displayMode !== undefined) {
+      if(this.displayMode !== undefined) {
         this.set('_currentDisplayMode', this.displayMode);
       }
     },
 
     _currentDisplayModeChanged: function () {
-      if (this._currentDisplayMode === undefined) return;
+
       if (this._currentDisplayMode === 'year') {
         //make sure we display the beginning of the decade
         var year = this.baseDate.year();
