@@ -34,6 +34,6 @@
     }
   },
   "suites": [
-    "test/px-calendar-picker-test-fixture.html"
+    "test/index.html"
   ]
 }

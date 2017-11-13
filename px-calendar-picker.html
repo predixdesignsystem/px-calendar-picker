@@ -1,10 +1,10 @@
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-calendar-cell.html"/>
-<link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html"/>
-<link rel="import" href="../px-datetime-common/px-datetime-behavior.html"/>
-<link rel="import" href="../px-icon-set/px-icon-set.html"/>
-<link rel="import" href="../px-icon-set/px-icon.html"/>
-<link rel="import" href="css/px-calendar-picker-styles.html"/>
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="px-calendar-cell.html" />
+<link rel="import" href="../px-datetime-common/px-datetime-range-behavior.html" />
+<link rel="import" href="../px-datetime-common/px-datetime-behavior.html" />
+<link rel="import" href="../px-icon-set/px-icon-set.html" />
+<link rel="import" href="../px-icon-set/px-icon.html" />
+<link rel="import" href="css/px-calendar-picker-styles.html" />
 
 <!--
 All datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
@@ -69,32 +69,25 @@ Custom property | Description
       </div>
       <!-- Actual Calendar -->
 
-        <template is="dom-if" if="{{_isDayMode(_currentDisplayMode)}}">
-          <div class="tr">
-            <!-- Sunday -> Saturday -->
-            <template is="dom-repeat" items="{{daysOfTheWeek}}" as="dayOfTheWeek">
-              <div class="th caps">[[dayOfTheWeek]]</div>
-            </template>
-          </div>
-        </template>
-        <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week" strip-whitespace>
-          <div class="tr">
-            <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
-                <div class="td">
-                  <px-calendar-cell
-                      display-date="{{date}}"
-                      from-moment="[[fromMoment]]"
-                      to-moment="[[toMoment]]"
-                      block-future-dates="{{blockFutureDates}}"
-                      block-past-dates="{{blockPastDates}}"
-                      display-mode="{{_currentDisplayMode}}"
-                      block-dates-after="[[max]]"
-                      block-dates-before="[[min]]">
-                  </px-calendar-cell>
-                </div>
-            </template>
-          </div>
-        </template>
+      <template is="dom-if" if="{{_isDayMode(_currentDisplayMode)}}">
+        <div class="tr">
+          <!-- Sunday -> Saturday -->
+          <template is="dom-repeat" items="{{daysOfTheWeek}}" as="dayOfTheWeek">
+            <div class="th caps">[[dayOfTheWeek]]</div>
+          </template>
+        </div>
+      </template>
+      <template is="dom-repeat" items="{{_valuesDisplayed}}" as="week" strip-whitespace>
+        <div class="tr">
+          <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
+            <div class="td">
+              <px-calendar-cell display-date="{{date}}" from-moment="[[fromMoment]]" to-moment="[[toMoment]]" block-future-dates="{{blockFutureDates}}"
+                block-past-dates="{{blockPastDates}}" display-mode="{{_currentDisplayMode}}" block-dates-after="[[max]]" block-dates-before="[[min]]">
+              </px-calendar-cell>
+            </div>
+          </template>
+        </div>
+      </template>
     </div>
   </template>
 </dom-module>
@@ -113,7 +106,7 @@ Custom property | Description
       baseDate: {
         type: Object,
         notify: true,
-        value: function() {
+        value: function () {
           return Px.moment.tz(Px.moment(), this.timeZone);
         },
         observer: '_baseDateChanged'
@@ -209,7 +202,7 @@ Custom property | Description
        */
       _valuesDisplayed: {
         type: Array,
-        value: function() { return [];}
+        value: function () { return []; }
       },
       /**
        */
@@ -224,10 +217,10 @@ Custom property | Description
       }
     },
     observers: ['_renderCurrent(_currentDisplayMode)',
-                '_localeChanged(language)',
-                '_getCurrentTitle(_currentDisplayMode, baseDate)',
-                '_timeZoneChanged(timeZone)'],
-    ready: function() {
+      '_localeChanged(language)',
+      '_getCurrentTitle(_currentDisplayMode, baseDate)',
+      '_timeZoneChanged(timeZone)'],
+    ready: function () {
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
       var handler = this._cellClicked.bind(this);
@@ -236,8 +229,8 @@ Custom property | Description
       this.fromMoment = null;
     },
 
-    _localeChanged: function() {
-      if(Px.moment && this.baseDate && this._currentDisplayMode) {
+    _localeChanged: function () {
+      if (Px.moment && this.baseDate && this._currentDisplayMode) {
         this.daysOfTheWeek = this._getDaysOfTheWeek();
         //reset base date so it picks up new moment locale
         //get moment locale and update the base date
@@ -247,25 +240,25 @@ Custom property | Description
       }
     },
 
-    _timeZoneChanged: function() {
+    _timeZoneChanged: function () {
       this.set('baseDate', Px.moment.tz(this.baseDate, this.timeZone));
     },
 
-    _getTableClass: function(shrink) {
+    _getTableClass: function (shrink) {
       var base = "table table--no-cells text--center ";
 
-      if(!shrink) {
+      if (!shrink) {
         base += "constantSize "
       }
       return base;
     },
 
-    _cellClicked: function(e) {
+    _cellClicked: function (e) {
       var momentDate = e.detail,
-          copy = e.detail.clone();
+        copy = e.detail.clone();
 
-      if(this._currentDisplayMode === 'year') {
-        if(this.displayMode === 'year') {
+      if (this._currentDisplayMode === 'year') {
+        if (this.displayMode === 'year') {
           //we want to select this year.
           this._selectDate(momentDate);
           this.fire('px-date-selected', copy);
@@ -276,8 +269,8 @@ Custom property | Description
           this.set('_currentDisplayMode', 'month');
           e.stopPropagation();
         }
-      }else if(this._currentDisplayMode === 'month') {
-        if(this.displayMode === 'month') {
+      } else if (this._currentDisplayMode === 'month') {
+        if (this.displayMode === 'month') {
           //we want to select this month.
           this._selectDate(momentDate);
           this.fire('px-date-selected', copy);
@@ -288,23 +281,25 @@ Custom property | Description
           this.set('_currentDisplayMode', 'day');
           e.stopPropagation();
         }
-      }else {
+      } else {
         this._selectDate(momentDate);
         this.fire('px-date-selected', copy);
       }
     },
 
-    _displayModeChanged: function() {
-      this.set('_currentDisplayMode', this.displayMode);
+    _displayModeChanged: function () {
+      if (this.displayMode !== undefined) {
+        this.set('_currentDisplayMode', this.displayMode);
+      }
     },
 
-    _currentDisplayModeChanged: function() {
-
-      if(this._currentDisplayMode === 'year') {
+    _currentDisplayModeChanged: function () {
+      if (this._currentDisplayMode === undefined) return;
+      if (this._currentDisplayMode === 'year') {
         //make sure we display the beginning of the decade
         var year = this.baseDate.year();
-        for(var i=0; i<10; i++) {
-          if(((year-i) % 10) ===1) {
+        for (var i = 0; i < 10; i++) {
+          if (((year - i) % 10) === 1) {
             break;
           }
         }
@@ -315,34 +310,34 @@ Custom property | Description
       }
     },
 
-    _isDayMode: function(_currentDisplayMode) {
+    _isDayMode: function (_currentDisplayMode) {
       return _currentDisplayMode === 'day';
     },
 
     /**
      * Change the display mode after the user clicked the title
      */
-    _onNextDisplayMode: function() {
-      if(this._currentDisplayMode === 'day') {
+    _onNextDisplayMode: function () {
+      if (this._currentDisplayMode === 'day') {
         this.set('_currentDisplayMode', 'month');
-      }else if(this._currentDisplayMode === 'month') {
+      } else if (this._currentDisplayMode === 'month') {
         this.set('_currentDisplayMode', 'year');
       }
       //else year already, do nothing
     },
 
-    _getCurrentTitle: function(_currentDisplayMode, baseDate) {
+    _getCurrentTitle: function (_currentDisplayMode, baseDate) {
 
-      if(_currentDisplayMode === 'day') {
+      if (_currentDisplayMode === 'day') {
         this.set('_title', baseDate.format('MMMM') + ' ' + baseDate.format('YYYY'));
-      }else if(_currentDisplayMode === 'month') {
-        this.set('_title',baseDate.format('YYYY'));
-      }else {
-        this.set('_title',baseDate.format('YYYY') + ' - ' + baseDate.clone().add(9, 'years').format('YYYY'));
+      } else if (_currentDisplayMode === 'month') {
+        this.set('_title', baseDate.format('YYYY'));
+      } else {
+        this.set('_title', baseDate.format('YYYY') + ' - ' + baseDate.clone().add(9, 'years').format('YYYY'));
       }
     },
 
-    _getDaysOfTheWeek: function() {
+    _getDaysOfTheWeek: function () {
       var day = Px.moment().startOf('week');
       var daysOfWeek = [];
       for (var i = 0; i < 7; i++) {
@@ -352,14 +347,14 @@ Custom property | Description
       return daysOfWeek;
     },
 
-    _renderCurrent: function(_currentDisplayMode) {
+    _renderCurrent: function (_currentDisplayMode) {
 
       var newValues;
-      if(this._currentDisplayMode === 'day') {
+      if (this._currentDisplayMode === 'day') {
         newValues = this._constructMonth();
-      }else if(this._currentDisplayMode === 'month') {
+      } else if (this._currentDisplayMode === 'month') {
         newValues = this._constructYear();
-      }else {
+      } else {
         newValues = this._constructYearRange();
       }
       this.set('_valuesDisplayed', newValues);
@@ -381,11 +376,11 @@ Custom property | Description
       */
 
 
-    _selectDate: function(newSelectedDate) {
+    _selectDate: function (newSelectedDate) {
       if (!this.preventRangeSelection && this.fromMoment && !this.toMoment) {
         // treat the click as the second date - the range is selected!
 
-        if(newSelectedDate.isBefore(this.fromMoment)) {
+        if (newSelectedDate.isBefore(this.fromMoment)) {
           //swap
           this.set('toMoment', this.fromMoment);
           this.set('fromMoment', this._preserveTime(this.fromMoment, newSelectedDate));
@@ -394,29 +389,29 @@ Custom property | Description
           this.set('toMoment', this._preserveTime(this.toMoment, newSelectedDate));
         }
 
-        this.fire('px-calendar-range-selected', {range: {from: this.fromMoment.toISOString(), to: this.toMoment.toISOString()}, momentObjs: {from: this.fromMoment, to: this.toMoment}});
+        this.fire('px-calendar-range-selected', { range: { from: this.fromMoment.toISOString(), to: this.toMoment.toISOString() }, momentObjs: { from: this.fromMoment, to: this.toMoment } });
       }
       else {
         this.set('toMoment', null);
         this.set('fromMoment', this._preserveTime(this.fromMoment, newSelectedDate));
 
-        if(this.preventRangeSelection) {
+        if (this.preventRangeSelection) {
           this.set('singleSelectedDate', this.fromMoment.toISOString());
 
-          this.fire('px-calendar-selected', {dateTime: this.fromMoment.toISOString(), momentObj: this.fromMoment});
+          this.fire('px-calendar-selected', { dateTime: this.fromMoment.toISOString(), momentObj: this.fromMoment });
 
         }
       }
     },
 
-    _constructYear: function() {
+    _constructYear: function () {
       //3 rows of 4 months
       var current = this.baseDate.clone().month(0),
-          months = [];
+        months = [];
 
-      for(var i=0; i<3; i++) {
+      for (var i = 0; i < 3; i++) {
         months[i] = [];
-        for(var j=0; j<4; j++) {
+        for (var j = 0; j < 4; j++) {
           months[i].push(current);
           current = current.clone().add(1, 'months');
         }
@@ -425,14 +420,14 @@ Custom property | Description
       return months;
     },
 
-    _constructYearRange: function() {
+    _constructYearRange: function () {
       //2 rows of 5 years
       var current = this.baseDate.clone(),
-          years = [];
+        years = [];
 
-      for(var i=0; i<2; i++) {
+      for (var i = 0; i < 2; i++) {
         years[i] = [];
-        for(var j=0; j<5; j++) {
+        for (var j = 0; j < 5; j++) {
           years[i].push(current);
           current = current.clone().add(1, 'years');
         }
@@ -441,23 +436,23 @@ Custom property | Description
       return years;
     },
 
-    _constructMonth: function() {
-      if(this.baseDate){
+    _constructMonth: function () {
+      if (this.baseDate) {
         var numberOfDaysInMonth = this.baseDate.daysInMonth(),
-            dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
-            numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
-            daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
-            emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
-            date = 1,
-            month = [];
+          dayBeginningOfMonth = this.baseDate.clone().startOf('month').day(),
+          numberOfWeeks = 6, // will always have 6 weeks to make calendar not change height
+          daysBeforeMonthStartsCount = Px.moment.localeData().firstDayOfWeek(),
+          emptyCellsCount = dayBeginningOfMonth - daysBeforeMonthStartsCount,
+          date = 1,
+          month = [];
 
         //make sure we have enough space to display the first day
-        if(emptyCellsCount < 0) {
+        if (emptyCellsCount < 0) {
           emptyCellsCount += 7;
         }
 
         var week = [];
-        for(var j = 0; j< emptyCellsCount; j++) {
+        for (var j = 0; j < emptyCellsCount; j++) {
           week.push(Px.moment(null)); // push empty cells on before the 1st of the month
         }
 
@@ -481,12 +476,12 @@ Custom property | Description
     /**
      * Called when clicking the 'next' arrow
      */
-    _onNext: function() {
+    _onNext: function () {
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
-      if(this._currentDisplayMode === 'day') {
+      if (this._currentDisplayMode === 'day') {
         newMoment = Px.moment.tz(this.baseDate.add(1, 'months'), this.timeZone);
-      }else if(this._currentDisplayMode === 'month') {
+      } else if (this._currentDisplayMode === 'month') {
         newMoment = Px.moment.tz(this.baseDate.add(1, 'years'), this.timeZone);
       }
       else {
@@ -499,12 +494,12 @@ Custom property | Description
     /**
      * Called when clicking the 'previous' arrow
      */
-    _onPrevious: function() {
+    _onPrevious: function () {
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
-      if(this._currentDisplayMode === 'day') {
+      if (this._currentDisplayMode === 'day') {
         newMoment = Px.moment.tz(this.baseDate.subtract(1, 'months'), this.timeZone);
-      }else if(this._currentDisplayMode === 'month') {
+      } else if (this._currentDisplayMode === 'month') {
         newMoment = Px.moment.tz(this.baseDate.subtract(1, 'years'), this.timeZone);
       }
       else {
@@ -515,18 +510,23 @@ Custom property | Description
       this._renderCurrent();
     },
 
-    _isAtSelectionLevel: function(currentDisplayMode, displayMode) {
+    _isAtSelectionLevel: function (currentDisplayMode, displayMode) {
       return currentDisplayMode === displayMode;
     },
 
-    _baseDateChanged: function(newDate, oldDate) {
+    _baseDateChanged: function (newDate, oldDate) {
+      if (newDate === undefined) {
+        return;
+      }
       //rerender if we're in day mode and changed month or if we changed year
-      if(this._currentDisplayMode === 'day' &&
-         (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
+      else if (this._currentDisplayMode === 'day' &&
+        (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
         this._renderCurrent();
-      } else if(newDate.isAfter(oldDate, 'year') || newDate.isBefore(oldDate, 'year')) {
+      }
+      else if (newDate.isAfter(oldDate, 'year') || newDate.isBefore(oldDate, 'year')) {
         this._renderCurrent();
-      } else if (oldDate && newDate && newDate.tz() !== oldDate.tz()){
+      }
+      else if (oldDate && newDate && newDate.tz() !== oldDate.tz()) {
         this._renderCurrent();
       }
     }

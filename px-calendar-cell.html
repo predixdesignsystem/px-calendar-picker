@@ -86,6 +86,9 @@ Element that renders a calendar cell for a given date (and for non-date cells in
      * Go through each cell and decide if it has a day in that month, is it selected, inbetween selected, etc.
      */
     _updateDate: function() {
+      if(this.displayDate === undefined || this.fromMoment === undefined || this.toMoment === undefined || this.displayMode === undefined
+          || this.blockDatesAfter === undefined || this.blockDatesBefore === undefined || this.blockFutureDates === undefined
+          || this.blockPastDates === undefined || this.displayDate === undefined) return;
       var _this = this;
 
       this.debounce('updateDate', function() {
