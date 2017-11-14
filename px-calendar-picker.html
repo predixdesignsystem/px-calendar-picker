@@ -327,8 +327,9 @@ Custom property | Description
     },
 
     _getCurrentTitle: function (_currentDisplayMode, baseDate) {
-
-      if (_currentDisplayMode === 'day') {
+      if(_currentDisplayMode === undefined || baseDate === null) {
+        return;
+      } else if (_currentDisplayMode === 'day') {
         this.set('_title', baseDate.format('MMMM') + ' ' + baseDate.format('YYYY'));
       } else if (_currentDisplayMode === 'month') {
         this.set('_title', baseDate.format('YYYY'));
@@ -515,7 +516,7 @@ Custom property | Description
     },
 
     _baseDateChanged: function (newDate, oldDate) {
-      if (newDate === undefined) {
+      if (newDate === undefined || newDate === null) {
         return;
       }
       //rerender if we're in day mode and changed month or if we changed year
