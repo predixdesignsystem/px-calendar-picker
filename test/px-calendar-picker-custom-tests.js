@@ -5,7 +5,7 @@ suite('Custom Automation Tests for px-calendar', function() {
     cal1 = fixture('calendar1');
     cal2 = fixture('calendar2');
     cal3 = fixture('calendar3');
-    now = moment();
+    now = Px.moment();
     flush(()=>{
       done();
     });
@@ -42,7 +42,7 @@ suite('test different displayModes', function() {
     cal1 = fixture('calendar1');
     cal2 = fixture('calendar2');
     cal3 = fixture('calendar3');
-    now = moment();
+    now = Px.moment();
     flush(()=>{
       done();
     });
@@ -122,7 +122,7 @@ suite('range vs single date', function() {
   setup(function(done) {
     cal4 = fixture('calendar4');
     cal5 = fixture('calendar5');
-    now = moment();
+    now = Px.moment();
     flush(()=>{
       done();
     });
@@ -132,7 +132,6 @@ suite('range vs single date', function() {
 
     var listener = function(evt) {
       //we have selected first and 11th day
-      assert.equal(cal5.singleSelectedDate,'');
       assert.equal(cal5.fromMoment.date(),1);
       assert.equal(cal5.toMoment.date(),11);
 
@@ -192,7 +191,7 @@ suite('range vs single date', function() {
 
     var listener = function(evt) {
       //we have selected first and 11th day, make sure 11 is the actual result
-      var selectedDate = moment.tz(cal4.singleSelectedDate, "America/New_York");
+      var selectedDate = cal4.fromMoment;
       assert.equal(selectedDate.date(), '11');
       assert.equal(selectedDate.month(), now.month());
       assert.equal(selectedDate.year(), now.year());
@@ -258,7 +257,7 @@ suite('Block dates', function() {
     calBlockAfter = fixture('calendarBlockAfter');
     calBlockBefore.set('min', Px.moment('2016-05-09T19:25:57.966Z'));
     calBlockAfter.set('max', Px.moment('2016-05-09T19:25:57.966Z'));
-    now = moment();
+    now = Px.moment();
     flush(()=>{
       done();
     });
