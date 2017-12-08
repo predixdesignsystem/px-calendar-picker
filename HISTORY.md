@@ -1,3 +1,8 @@
+v2.0.0
+==================
+* updated to work with latest datetime-common
+* removed singleSelectedDate property and setter
+
 v1.1.1
 ==================
 * more null checks
