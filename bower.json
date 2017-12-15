@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "polymer": "#1.9 - 2",
-    "px-datetime-common": "^2.0.0",
+    "px-datetime-common": "allowBlank",
     "px-icon-set": "^2.0.0"
   },
   "devDependencies": {
