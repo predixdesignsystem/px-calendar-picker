@@ -255,8 +255,8 @@ suite('Block dates', function() {
   setup(function(done) {
     calBlockBefore = fixture('calendarBlockBefore');
     calBlockAfter = fixture('calendarBlockAfter');
-    calBlockBefore.set('min', Px.moment('2016-05-09T19:25:57.966Z'));
-    calBlockAfter.set('max', Px.moment('2016-05-09T19:25:57.966Z'));
+    calBlockBefore.set('minDate', Px.moment('2016-05-09T19:25:57.966Z'));
+    calBlockAfter.set('maxDate', Px.moment('2016-05-09T19:25:57.966Z'));
     now = Px.moment();
     flush(()=>{
       done();
