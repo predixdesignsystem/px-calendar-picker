@@ -81,8 +81,15 @@ Custom property | Description
         <div class="tr">
           <template is="dom-repeat" items="{{week}}" as="date" strip-whitespace>
             <div class="td">
-              <px-calendar-cell display-date="{{date}}" from-moment="[[fromMoment]]" to-moment="[[toMoment]]" block-future-dates="{{blockFutureDates}}"
-                block-past-dates="{{blockPastDates}}" display-mode="{{_currentDisplayMode}}" block-dates-after="[[max]]" block-dates-before="[[min]]">
+              <px-calendar-cell
+                display-date="{{date}}"
+                from-moment="[[fromMoment]]"
+                to-moment="[[toMoment]]"
+                block-future-dates="{{blockFutureDates}}"
+                block-past-dates="{{blockPastDates}}"
+                display-mode="{{_currentDisplayMode}}"
+                block-dates-after="[[maxDate]]"
+                block-dates-before="[[minDate]]">
               </px-calendar-cell>
             </div>
           </template>
