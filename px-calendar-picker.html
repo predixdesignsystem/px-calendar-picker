@@ -317,7 +317,7 @@ Custom property | Description
     },
 
     _getCurrentTitle: function (_currentDisplayMode, baseDate) {
-      if(_currentDisplayMode === undefined || baseDate === null) {
+      if(_currentDisplayMode === undefined || baseDate === undefined || baseDate === null) {
         return;
       } else if (_currentDisplayMode === 'day') {
         this.set('_title', baseDate.format('MMMM') + ' ' + baseDate.format('YYYY'));
