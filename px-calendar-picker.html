@@ -111,6 +111,10 @@ Custom property | Description
         },
         observer: '_baseDateChanged'
       },
+
+      _oldBaseDate: {
+        type: Object
+      },
       /**
        *  What the calendar should display:
        *  - 'day': calendar displays all days of a month
@@ -501,21 +505,25 @@ Custom property | Description
       return currentDisplayMode === displayMode;
     },
 
-    _baseDateChanged: function (newDate, oldDate) {
+    _baseDateChanged: function (newDate) {
       if (newDate === undefined || newDate === null) {
         return;
+      } else if(!this._oldBaseDate) {
+        this._renderCurrent();
       }
       //rerender if we're in day mode and changed month or if we changed year
       else if (this._currentDisplayMode === 'day' &&
-        (newDate.isAfter(oldDate, 'month') || newDate.isBefore(oldDate, 'month'))) {
+        (newDate.isAfter(this._oldBaseDate, 'month') || newDate.isBefore(this._oldBaseDate, 'month'))) {
         this._renderCurrent();
       }
-      else if (newDate.isAfter(oldDate, 'year') || newDate.isBefore(oldDate, 'year')) {
+      else if (newDate.isAfter(this._oldBaseDate, 'year') || newDate.isBefore(this._oldBaseDate, 'year')) {
         this._renderCurrent();
       }
-      else if (oldDate && newDate && newDate.tz() !== oldDate.tz()) {
+      else if (this._oldBaseDate && newDate && newDate.tz() !== this._oldBaseDate.tz()) {
         this._renderCurrent();
       }
+
+      this._oldBaseDate = this.baseDate;
     }
   });
 </script>
