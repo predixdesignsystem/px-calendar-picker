@@ -242,7 +242,9 @@ Custom property | Description
     },
 
     _timeZoneChanged: function () {
-      this.set('baseDate', Px.moment.tz(this.baseDate, this.timeZone));
+      if(this.baseDate) {
+        this.set('baseDate', Px.moment.tz(this.baseDate, this.timeZone));
+      }
     },
 
     _getTableClass: function (shrink) {
