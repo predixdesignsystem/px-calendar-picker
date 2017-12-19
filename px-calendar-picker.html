@@ -516,6 +516,11 @@ Custom property | Description
 
     _baseDateChanged: function (newDate) {
       if (newDate === undefined || newDate === null) {
+
+        //make sure baseDate is always defined
+        if(this._oldBaseDate) {
+          this.baseDate = this._oldBaseDate;
+        }
         return;
       } else if(!this._oldBaseDate) {
         this._renderCurrent();
