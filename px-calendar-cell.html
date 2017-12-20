@@ -189,7 +189,7 @@ Element that renders a calendar cell for a given date (and for non-date cells in
 
     _getEndDate: function() {
       var endDate = this.toMoment;
-      if (this.fromMoment.isAfter(this.toMoment, this.displayMode)) {
+      if (this.fromMoment && this.fromMoment.isAfter(this.toMoment, this.displayMode)) {
         endDate = this.fromMoment;
       }
       return endDate;
