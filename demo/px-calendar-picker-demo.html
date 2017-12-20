@@ -214,16 +214,18 @@ Polymer({
     },
 
     minDate: {
-      type: Object,
-      defaultValue: Px.moment().subtract(3, 'month'),
-      inputType: 'code:JSON'
+      type: String,
+      defaultValue: Px.moment().subtract(3, 'month').toISOString(),
+      inputType: 'text',
+      inputPlaceholder: 'ISOString'
     },
 
     maxDate: {
-      type: Object,
-      defaultValue: Px.moment().add(3, 'month'),
-      inputType: 'code:JSON'
-    }
+      type: String,
+      defaultValue: Px.moment().add(3, 'month').toISOString(),
+      inputType: 'text',
+      inputPlaceholder: 'ISOString'
+    },
   },
 
   ready: function () {
