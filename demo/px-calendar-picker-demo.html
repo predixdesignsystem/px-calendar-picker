@@ -43,16 +43,22 @@
       <px-demo-component slot="px-demo-component">
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p class=u-mb0>Event fired: <strong>px-calendar-selected</strong></p>
-          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
+          <p class="zeta u-mt0">See API Reference below for more details</p>
+          <p class="u-mb++">Submitted date: <strong>{{props.fromMoment.value}}</strong></p>
+
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
           <p class=u-mb0>Event fired: <strong>px-calendar-range-selected</strong></p>
-          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
+          <p class="zeta u-mt0">See API Reference below for more details</p>
+          <p class="u-mb++">Submitted range: <strong>{{props.fromMoment.value}}</strong> To: <strong>{{props.toMoment.value}}</strong></p>
+
         </template>
 
         <div style="width:210px">
           <px-calendar-picker
+            from-moment="{{props.fromMoment.value}}"
+            to-moment="{{props.toMoment.value}}"
             display-mode="{{props.displayMode.value}}"
             block-future-dates="{{props.blockFutureDates.value}}"
             block-past-dates="{{props.blockPastDates.value}}"
@@ -71,7 +77,8 @@
         slot="px-demo-component-snippet"
         element-properties="{{props}}"
         element-name="px-calendar-picker"
-        links-includes="[[linksIncludes]]">
+        links-includes="[[linksIncludes]]"
+        suppress-property-values="[[suppressPropertyValues]]">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
@@ -110,6 +117,10 @@ Polymer({
       type: Object,
       value: function(){ return this.demoProps; }
     },
+    suppressPropertyValues: {
+      type: Array,
+      value: function() { return ['toMoment', 'fromMoment']; }
+    },
 
     hideEvents: {
       type: Array,
@@ -142,7 +153,7 @@ Polymer({
           shrink: false,
           parentComponent: ["<div style='width:210px'>", "</div>"] },
 
-          { configName: "No ranges",
+          { configName: "Single date",
           displayMode: this.demoProps.displayMode.inputChoices[0],
           preventRangeSelection: true,
           blockFutureDates: false,
@@ -214,15 +225,27 @@ Polymer({
     },
 
     minDate: {
-      type: Object,
-      defaultValue: Px.moment().subtract(1, 'year'),
-      inputType: 'code:JSON'
+      type: String,
+      defaultValue: Px.moment().subtract(3, 'month').toISOString(),
+      inputType: 'text',
+      inputPlaceholder: 'ISOString'
     },
 
     maxDate: {
+      type: String,
+      defaultValue: Px.moment().add(3, 'month').toISOString(),
+      inputType: 'text',
+      inputPlaceholder: 'ISOString'
+    },
+
+    fromMoment: {
       type: Object,
-      defaultValue: Px.moment().add(1, 'year'),
-      inputType: 'code:JSON'
+      defaultValue: null
+    },
+
+    toMoment: {
+      type: Object,
+      defaultValue: null
     }
   },
 
