@@ -43,16 +43,22 @@
       <px-demo-component slot="px-demo-component">
         <template is="dom-if" if="{{props.preventRangeSelection.value}}">
           <p class=u-mb0>Event fired: <strong>px-calendar-selected</strong></p>
-          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
+          <p class="zeta u-mt0">See API Reference below for more details</p>
+          <p class="u-mb++">Submitted date: <strong>{{props.fromMoment.value}}</strong></p>
+
         </template>
 
         <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
           <p class=u-mb0>Event fired: <strong>px-calendar-range-selected</strong></p>
-          <p class="zeta u-mt0 u-mb++">See API Reference below for more details</p>
+          <p class="zeta u-mt0">See API Reference below for more details</p>
+          <p class="u-mb++">Submitted range: <strong>{{props.fromMoment.value}}</strong> To: <strong>{{props.toMoment.value}}</strong></p>
+
         </template>
 
         <div style="width:210px">
           <px-calendar-picker
+            from-moment="{{props.fromMoment.value}}"
+            to-moment="{{props.toMoment.value}}"
             display-mode="{{props.displayMode.value}}"
             block-future-dates="{{props.blockFutureDates.value}}"
             block-past-dates="{{props.blockPastDates.value}}"
@@ -71,7 +77,8 @@
         slot="px-demo-component-snippet"
         element-properties="{{props}}"
         element-name="px-calendar-picker"
-        links-includes="[[linksIncludes]]">
+        links-includes="[[linksIncludes]]"
+        suppress-property-values="[[suppressPropertyValues]]">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
@@ -109,6 +116,10 @@ Polymer({
     props: {
       type: Object,
       value: function(){ return this.demoProps; }
+    },
+    suppressPropertyValues: {
+      type: Array,
+      value: function() { return ['toMoment', 'fromMoment']; }
     },
 
     hideEvents: {
@@ -226,6 +237,16 @@ Polymer({
       inputType: 'text',
       inputPlaceholder: 'ISOString'
     },
+
+    fromMoment: {
+      type: Object,
+      defaultValue: null
+    },
+
+    toMoment: {
+      type: Object,
+      defaultValue: null
+    }
   },
 
   ready: function () {
