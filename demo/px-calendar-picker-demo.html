@@ -142,7 +142,7 @@ Polymer({
           shrink: false,
           parentComponent: ["<div style='width:210px'>", "</div>"] },
 
-          { configName: "No ranges",
+          { configName: "Single date",
           displayMode: this.demoProps.displayMode.inputChoices[0],
           preventRangeSelection: true,
           blockFutureDates: false,
@@ -215,13 +215,13 @@ Polymer({
 
     minDate: {
       type: Object,
-      defaultValue: Px.moment().subtract(1, 'year'),
+      defaultValue: Px.moment().subtract(3, 'month'),
       inputType: 'code:JSON'
     },
 
     maxDate: {
       type: Object,
-      defaultValue: Px.moment().add(1, 'year'),
+      defaultValue: Px.moment().add(3, 'month'),
       inputType: 'code:JSON'
     }
   },
