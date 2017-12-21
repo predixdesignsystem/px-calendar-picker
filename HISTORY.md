@@ -1,3 +1,7 @@
+v2.0.2
+==================
+* fix link in docs
+
 v2.0.0
 ==================
 * updated to work with latest datetime-common
