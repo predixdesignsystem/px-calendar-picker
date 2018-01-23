@@ -1,3 +1,7 @@
+v2.0.4
+==================
+* converted the calendar title to a button for accessibility reasons.
+
 v2.0.3
 ==================
 * added `sudo:required` to travis

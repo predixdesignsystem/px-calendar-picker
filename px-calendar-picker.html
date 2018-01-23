@@ -60,7 +60,7 @@ Custom property | Description
             <px-icon icon="px-nav:back" class="arrow"></px-icon>
           </template>
         </button>
-        <span on-tap="_onNextDisplayMode" class="actionable actionable--action title-color">[[_title]]</span>
+        <button on-tap="_onNextDisplayMode" class="actionable actionable--action title-color">[[_title]]</button>
         <button id="btnNextMonth" type="button" on-tap="_onNext" class="actionable actionable--action title-color nextLastBtn">
           <template is="dom-if" if="{{!hideNextButton}}">
             <px-icon icon="px-nav:next" class="arrow"></px-icon>
