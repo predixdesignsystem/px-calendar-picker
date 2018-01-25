@@ -1,3 +1,7 @@
+v2.0.5
+==================
+* Updated to newest px-datetime-common behavior versions
+
 v2.0.4
 ==================
 * converted the calendar title to a button for accessibility reasons.
