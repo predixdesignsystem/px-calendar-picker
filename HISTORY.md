@@ -1,5 +1,9 @@
 v2.0.5
 ==================
+* Fix demo for IE
+
+v2.0.5
+==================
 * Updated to newest px-datetime-common behavior versions
 
 v2.0.4
