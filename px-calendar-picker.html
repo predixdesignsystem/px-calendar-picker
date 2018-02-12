@@ -218,10 +218,12 @@ Custom property | Description
         type: String
       }
     },
-    observers: ['_renderCurrent(_currentDisplayMode)',
+    observers: [
+      '_renderCurrent(_currentDisplayMode)',
       '_localeChanged(language)',
       '_getCurrentTitle(_currentDisplayMode, baseDate)',
-      '_timeZoneChanged(timeZone)'],
+      '_timeZoneChanged(timeZone)'
+    ],
     ready: function () {
       this.daysOfTheWeek = this._getDaysOfTheWeek();
 
@@ -481,12 +483,12 @@ Custom property | Description
       //create a new moment object so Polymer knows the property has changed
       var newMoment;
       if (this._currentDisplayMode === 'day') {
-        newMoment = Px.moment.tz(this.baseDate.add(1, 'months'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate, this.timeZone).add(1, 'months');
       } else if (this._currentDisplayMode === 'month') {
-        newMoment = Px.moment.tz(this.baseDate.add(1, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate, this.timeZone).add(1, 'years');
       }
       else {
-        newMoment = Px.moment.tz(this.baseDate.add(10, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate, this.timeZone).add(10, 'years');
       }
 
       this.set('baseDate', newMoment);
@@ -496,15 +498,15 @@ Custom property | Description
      * Called when clicking the 'previous' arrow
      */
     _onPrevious: function () {
-      //create a new moment object so Polymer knows the property has changed
+      // create a new moment object so Polymer knows the property has changed
       var newMoment;
       if (this._currentDisplayMode === 'day') {
-        newMoment = Px.moment.tz(this.baseDate.subtract(1, 'months'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate, this.timeZone).subtract(1, 'months');
       } else if (this._currentDisplayMode === 'month') {
-        newMoment = Px.moment.tz(this.baseDate.subtract(1, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate, this.timeZone).subtract(1, 'years');
       }
       else {
-        newMoment = Px.moment.tz(this.baseDate.subtract(10, 'years'), this.timeZone);
+        newMoment = Px.moment.tz(this.baseDate, this.timeZone).subtract(10, 'years');
       }
 
       this.set('baseDate', newMoment);

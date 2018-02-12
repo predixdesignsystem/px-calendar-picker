@@ -1,3 +1,7 @@
+v2.0.6
+==================
+* Fixed a referencing error with moments and baseDate
+
 v2.0.5
 ==================
 * Updated to newest px-datetime-common behavior versions
