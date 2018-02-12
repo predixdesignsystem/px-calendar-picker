@@ -1,6 +1,14 @@
-v2.0.6
+v2.0.8
 ==================
 * Fixed a referencing error with moments and baseDate
+
+v2.0.7
+==================
+* reduce icon-set imports
+
+v2.0.6
+==================
+* Fix demo for IE
 
 v2.0.5
 ==================
