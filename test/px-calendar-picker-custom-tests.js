@@ -108,7 +108,7 @@ suite('test different displayModes', function() {
 
     //get next 10 years
     cal3._onNext();
-    assert.isTrue(cal3.baseDate.isAfter(now.clone().add(1, 'years'), 'year'));
+    assert.isTrue(cal3.baseDate.isSame(now.clone().add(1, 'years'), 'year'));
   });
 
   test('change display mode', function(){
@@ -129,7 +129,7 @@ suite('test different displayModes', function() {
 
     //get next 10 year
     cal1._onNext();
-    assert.isTrue(cal1.baseDate.isAfter(now.clone().add(1, 'years'), 'year'));
+    assert.isTrue(cal1.baseDate.isSame(now.clone().add(1, 'years'), 'year'));
   });
 });
 
