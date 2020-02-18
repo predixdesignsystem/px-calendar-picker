@@ -1,3 +1,7 @@
+v2.0.9
+==================
+* Fix px-calendar-cell timeZone undefined
+
 v2.0.8
 ==================
 * Fixed a referencing error with moments and baseDate
